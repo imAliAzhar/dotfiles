@@ -1,0 +1,55 @@
+#define foregroundColor #C6C1A3
+#define backgroundColor #3B303B
+#define tBackgroundColor #e63B303B
+#define cursorsColor    #785F5A
+
+#define accentColor     #785f5a
+#define warningColor    #a95332
+
+!color0 
+#define black          #d4c490
+
+!color1 
+#define red            #aab283 
+
+!color2 
+#define green          #8a9b71
+
+!color3 
+#define yellow         #5c7162 
+
+!color4 
+#define blue           #a1755c 
+
+!color5 
+#define magenta        #895255 
+
+!color6 
+#define cyan           #a95332 
+
+!color7 
+#define white          #6c886f 
+
+!color8 
+#define lightBlack     #c4623d 
+
+!color9 
+#define lightRed       #94643e    
+
+!color10
+#define lightGreen     #b78143      
+
+!color11
+#define lightYellow    #c69459      
+
+!color12
+#define lightBlue      #ae8b6b
+
+!color13
+#define lightMagenta   #818890  
+
+!color14
+#define lightCyan      #d4c490
+
+!color15
+#define lightWhite     #aab283  

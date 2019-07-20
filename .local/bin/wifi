@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# case $1 in
+#     "o")
+#     ssid="CCE Office"
+#     ;;
+#     "h")
+#     ssid="archlinux"
+#     ;;
+# esac
+
+# echo "Connecting to" $ssid
+
+conf="$HOME/.local/share/wpa_supplicant.conf"
+interface="wlp2s0"
+
+sudo killall wpa_supplicant
+sudo wpa_supplicant -B -i $interface -c $conf
+sudo dhclient $interface

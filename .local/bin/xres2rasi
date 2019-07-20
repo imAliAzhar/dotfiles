@@ -1,0 +1,17 @@
+#!/bin/bash
+
+RASI_PATH="$HOME/.config/rofi/globals.rasi"
+
+resources="foreground background tBackground cursorColor accent warning"
+prefix="*."
+
+for res in $resources; do
+  r=$prefix$res
+  xrvar=$(xrdb -query | awk -v reso=$r '$1~reso{print $2}')
+  echo $xrvar
+  sed -i --follow-symlinks "/$res:/c\\$res: $xrvar\;" "$RASI_PATH"
+done
+
+# fnt=$(xrdb -query | awk '/font1/{print $2}')
+# fntsz=$(xrdb -query | awk '/fontsz1/{print $2}')
+# sed -i --follow-symlinks "/font1:/c\font1: \"$fnt $fntsz\"\;" "$RASI_PATH"

@@ -1,0 +1,64 @@
+{
+  "window.menuBarVisibility": "toggle",
+  "workbench.colorTheme": "Horizon",
+  "keyboard.dispatch": "keyCode",
+  //     "vim.insertModeKeyBindings": [
+  //     {
+  //       "before": ["j", "j"],
+  //       "after": ["<Esc>"]
+  //     }
+  //   ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<CR>"],
+      "after": ["o", "<ESC>"]
+    },
+    {
+      "before": ["\\"],
+      "after": ["O", "<ESC>"]
+    },
+    {
+      "before": ["<C-w>"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    }
+  ],
+  "vim.leader": " ",
+  "vim.useSystemClipboard": true,
+  "vim.camelCaseMotion.enable": true,
+  "window.zoomLevel": 1,
+  "editor.fontSize": 18,
+  "workbench.startupEditor": "none",
+  "workbench.useExperimentalGridLayout": true,
+  "workbench.activityBar.visible": false,
+  "workbench.sideBar.location": "right",
+  "breadcrumbs.enabled": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.showIcons": false,
+  "workbench.colorCustomizations": {
+    "focusBorder": "#00ff0000"
+  },
+  "editor.fontLigatures": true,
+  "editor.minimap.enabled": false,
+  "editor.lineNumbers": "relative",
+  "editor.fontFamily": "'Dank Mono', 'EmojiOne'",
+  "workbench.settings.editor": "json",
+    "files.associations": {
+        "**/i3/config": "i3",
+    },
+    "terminal.integrated.fontSize": 17,
+    "explorer.confirmDragAndDrop": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.confirmDelete": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

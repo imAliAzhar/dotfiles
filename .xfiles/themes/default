@@ -1,0 +1,37 @@
+!! Default 16 ANSI Colors
+*.color0:         #000000      
+*.color1:         #800000      
+*.color2:         #008000      
+*.color3:         #808000      
+*.color4:         #000080      
+*.color5:         #800080      
+*.color6:         #008080      
+*.color7:         #C0C0C0      
+!! Light colors
+*.color8:         #808080      
+*.color9:         #FF0000      
+*.color10:        #00FF00      
+*.color11:        #FFFF00      
+*.color12:        #0000FF      
+*.color13:        #FF00FF      
+*.color14:        #00FFFF      
+*.color15:        #FFFFFF      
+
+
+!! black
+!! red
+!! green
+!! yellow
+!! blue
+!! purple
+!! cyan
+!! white
+         
+!! black
+!! red
+!! green
+!! yellow
+!! blue
+!! purple
+!! cyan
+!! white

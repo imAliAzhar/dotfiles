@@ -1,0 +1,328 @@
+#    _ _____                  __ _       
+#   (_)___ /  ___ ___  _ __  / _(_) __ _ 
+#   | | |_ \ / __/ _ \| '_ \| |_| |/ _` |
+#   | |___) | (_| (_) | | | |  _| | (_| |
+#   |_|____/ \___\___/|_| |_|_| |_|\__, |
+#                                  |___/ 
+                               
+
+#  BASIC DEFINATIONS
+#  ==================================================
+font pango:mono 8
+
+set $mod Mod3
+set $win Mod4
+
+set $up k
+set $down j
+set $left h
+set $right l
+
+# start without id (background)
+set $exec                   exec --no-startup-id
+set $exec_always            exec_always --no-startup-id
+
+# set default terminal
+set $term urxvt
+
+# use mouse+$mod to drag floating windows
+floating_modifier $mod
+focus_follows_mouse no
+
+#  TWEAKS
+#  ==================================================
+
+# assign [class="Chromium" instance="github.com"] $ws9
+# assign [class="Chromium" instance="slack.com"] $ws10
+
+
+# COMMENTED OUT FEATURES
+#  ==================================================
+
+#workspace_auto_back_and_forth yes
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+# bindsym $mod+key move scratchpad
+# bindsym $mod+minus scratchpad show
+
+# bindsym $mod+i $exec "i3-msg 'workspace 4; append_layout ~/.config/i3/layouts/four.json'"
+
+
+
+#  ALL KEY BINDINGS
+#  ==================================================
+
+# switch between recent workspaces
+bindsym $mod+Tab                workspace back_and_forth
+bindsym $mod+Shift+Tab          $exec python ~/.config/i3/scripts/focus_next.py     
+
+# cycle windows
+bindsym $win+Tab                $exec python ~/.config/i3/scripts/focus_next.py
+bindsym $win+Shift+Tab          $exec python ~/.config/i3/scripts/focus_prev.py
+
+
+# workspace next/prev
+bindsym $win+Control+Right      workspace next
+bindsym $win+Control+Left       workspace prev
+
+# start a terminal
+bindsym $mod+Return             split h $exec $term
+bindsym $mod+Shift+Return       split v $exec $term
+
+# change focus/toggle tiling & floating windows
+bindsym $mod+space              floating toggle
+bindsym $mod+Shift+space        focus mode_toggle 
+
+# toggle/create dropdown terminal
+bindsym $mod+grave              [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+bindsym $mod+Shift+grave        $exec urxvt -name dropdown;
+
+# stacking layout
+bindsym $mod+q                  layout toggle tabbed splith splitv
+# bindsym $mod+Shift+q
+
+# kill focused window
+bindsym $mod+w                  kill
+# bindsym $mod+Shift+w
+
+# toggle split/exit i3
+bindsym $mod+e                  $exec $term -e ranger
+# bindsym $mod+Shift+e            $exec emojiselector
+
+# start ranger as user/sudo
+bindsym $mod+r                  $exec rofi -show drun -theme bmenu
+bindsym $mod+Shift+r            $exec $term -e sudo ranger /
+
+# tabbed layout
+bindsym $mod+t                  layout tabbed
+# bindsym $mod+Shift+t
+
+# bindsym $mod+y                  $exec chromium --app=https://www.youtube.com/
+# bindsym $mod+Shift+y
+
+# bindsym $mod+u
+# bindsym $mod+Shift+u
+
+bindsym --release  $mod+i                  $exec emojiselector
+# bindsym $mod+Shift+i
+
+# open git(lynx)
+# bindsym $mod+o                  $exec chromium --new-window --app=https://github.com/awan324/lynx/
+# bindsym $mod+Shift+o
+
+# open slack(lynx)
+# bindsym $mod+p                  $exec chromium --new-window --app=https://bese-6fypgroup.slack.com/messages/CBHUHCLNP/
+# bindsym $mod+Shift+P
+
+# focus the parent container
+bindsym $mod+a                  focus parent
+# bindsym $mod+Shift+a
+
+# increase/decrease inner gaps
+bindsym $mod+s			        gaps inner current plus 5
+bindsym $mod+Shift+s		    gaps inner current minus 5
+
+# start program launcher
+# bindsym $mod+d                  $exec rofi -show drun
+# bindsym $mod+Shift+d
+
+# remove gaps/toggle fullscreen mode
+bindsym $mod+f                        fullscreen toggle
+bindsym $mod+shift+f                  gaps inner current set 0; gaps outer current set 0
+
+# bindsym $mod+g
+# bindsym $mod+Shift+g
+
+# bindsym $mod+h
+# bindsym $mod+Shift+h
+
+# next window/workspace
+bindsym $mod+j                  $exec python ~/.config/i3/scripts/focus_next.py
+# bindsym $mod+Shift+j            workspace next
+
+# prev window/workspace
+bindsym $mod+k                  $exec python ~/.config/i3/scripts/focus_prev.py
+# bindsym $mod+Shift+k            workspace prev
+
+bindsym $mod+l                  $exec flash_window
+# bindsym $mod+Shift+l
+
+# bindsym $mod+z
+# bindsym $mod+Shift+z
+
+
+# bindsym $mod+x
+# bindsym $mod+Shift+x
+
+# reload the configuration file
+# bindsym $mod+c
+# bindsym $mod+Shift+c reload
+
+# bindsym $mod+v
+# bindsym $mod+Shift+v
+
+# bindsym $mod+b
+# bindsym $mod+Shift+b
+
+# start chromium/netflix
+bindsym $mod+n                  $exec vivaldi-stable
+# bindsym $mod+Shift+n            $exec chromium --app=https://www.netflix.com/browse
+
+# toggle/create messenger
+# bindsym $mod+m			[instance="messenger"] scratchpad show; [instance="messenger"] move position center
+# bindsym $mod+Shift+m		$exec chromium --new-window --app=https://messenger.com -name messenger;
+
+bindsym $mod+period             $exec code
+# bindsym $mod+Shift+b
+
+
+#  DIRECTIONAL KEYS
+#  ==================================================
+
+bindsym $mod+Shift+$left        resize grow width 1 px or 1 ppt      
+bindsym $mod+Shift+$down        resize grow height 1 px or 1 ppt   
+bindsym $mod+Shift+$up          resize shrink height 1 px or 1 ppt     
+bindsym $mod+Shift+$right       resize shrink width 1 px or 1 ppt    
+
+bindsym $mod+Shift+Left        resize grow width 1 px or 1 ppt      
+bindsym $mod+Shift+Down        resize grow height 1 px or 1 ppt   
+bindsym $mod+Shift+Up          resize shrink height 1 px or 1 ppt     
+bindsym $mod+Shift+Right       resize shrink width 1 px or 1 ppt    
+
+bindsym $mod+Left               move left
+bindsym $mod+Down               move down
+bindsym $mod+Up                 move up
+bindsym $mod+Right              move right
+
+
+#  SETTING UP TTYs
+#  ==================================================
+
+bindsym $mod+F1                 exec chvt 2
+bindsym $mod+Control+F2         exec chvt 2
+bindsym $mod+Control+F3         exec chvt 3
+bindsym $mod+Control+F4         exec chvt 4
+bindsym $mod+Control+F5         exec chvt 5
+bindsym $mod+Control+F6         exec chvt 6
+
+
+#  >>  WORKSPACE SETTINGS
+#  ==================================================
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9: •"
+set $ws10 "10: •"
+
+# switch to workspace
+bindsym $mod+1                  workspace $ws1
+bindsym $mod+2                  workspace $ws2
+bindsym $mod+3                  workspace $ws3
+bindsym $mod+4                  workspace $ws4
+bindsym $mod+5                  workspace $ws5
+bindsym $mod+6                  workspace $ws6
+bindsym $mod+7                  workspace $ws7
+bindsym $mod+8                  workspace $ws8
+bindsym $mod+9                  workspace $ws9
+bindsym $mod+0                  workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1            move container to workspace $ws1
+bindsym $mod+Shift+2            move container to workspace $ws2
+bindsym $mod+Shift+3            move container to workspace $ws3
+bindsym $mod+Shift+4            move container to workspace $ws4
+bindsym $mod+Shift+5            move container to workspace $ws5
+bindsym $mod+Shift+6            move container to workspace $ws6
+bindsym $mod+Shift+7            move container to workspace $ws7
+bindsym $mod+Shift+8            move container to workspace $ws8
+bindsym $mod+Shift+9            move container to workspace $ws9
+bindsym $mod+Shift+0            move container to workspace $ws10
+
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+F5		            reload        
+bindsym $mod+Shift+F5           $exec reloader
+
+bindsym $mod+Shift+F4           $exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+bindsym XF86MonBrightnessUp     $exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown   $exec light -U 5 # decrease screen brightness
+
+bindsym $mod+F3                 $exec light -A 1 # increase screen brightness
+bindsym $mod+F2                 $exec light -U 1 # decrease screen brightness
+
+bindsym Print              $exec scrot  '%A %d %B %Y %r.png' -e 'mv "$f" ~/Pictures/Screenshots'
+
+# bindsym XF86MonBrightnessUp $exec bash ~/.config/i3/scripts/brightness.sh up
+# bindsym XF86MonBrightnessDown $exec bash ~/.config/i3/scripts/brightness.sh down
+
+# Pulse Audio controls
+# bindsym XF86AudioRaiseVolume $exec bash ~/.config/i3/scripts/volume.sh up
+# bindsym XF86AudioLowerVolume $exec bash ~/.config/i3/scripts/volume.sh down
+# bindsym XF86AudioMute $exec bash ~/.config/i3/scripts/volume.sh mute
+
+# Starting notification listener dunst
+# $exec_always dunst > /dev/null 2>&1 &
+
+#  COLORS
+#  ==================================================
+
+# $xresource $I3VAR XRESOURCE DEFAULT
+set_from_resource $active theme.foregroundColor #FF00FF
+
+##                        border     bg        text       indic
+client.focused           $active    $active      #FFFFFF    $act
+#client.focused_inactive  #0000FF    #0000FF   #00FF00    #0000FF
+#client.unfocused         #0000FF    #0000FF   #00FF00    #0000FF
+#client.urgent            #FF0000    #FF0000   #FF0000    #FF0000
+
+
+# Staring compton
+$exec_always compton 
+
+# polybar
+$exec_always flashfocus --no-flash-on-focus
+$exec_always $HOME/.config/polybar/launch.sh
+
+#Setting the background:
+$exec_always feh --bg-scale ~/Pictures/Wallpapers/bg.*
+
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 800 500
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] border pixel 5
+
+# Runs the tmuxinit script, which searches for an earlier tmux instance,
+# otherwise starts a new one (to prevent multiple dropdown sessions).
+$exec urxvt -name dropdown 
+
+
+# for_window [instance="messenger"] floating enable
+# for_window [instance="messenger"] resize set 800 650
+# for_window [instance="messenger"] move scratchpad
+# for_window [instance="messenger"] border pixel 5
+
+
+# bindsym $mod+Shift+Print $exec gnome-screenshot -a
+# bar {
+#     status_command i3status
+#     }
+
+assign [class="code-oss"] 2
+
+for_window [class="^.*"] border none
+# for_window [class="^.*"] border pixel 1
+
+gaps inner 20
+gaps outer 20
+
+# workspace 1 gaps inner 0
+# workspace 1 gaps outer 0

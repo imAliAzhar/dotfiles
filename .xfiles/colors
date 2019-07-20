@@ -1,0 +1,23 @@
+*.foreground:    foregroundColor
+*.background:    backgroundColor 
+*.tBackground:   tBackgroundColor 
+*.cursorColor:   cursorsColor
+*.accent:        accentColor
+*.warning:       warningColor
+
+*.color0:        black
+*.color1:        red
+*.color2:        green
+*.color3:        yellow
+*.color4:        blue
+*.color5:        magenta
+*.color6:        cyan
+*.color7:        white
+*.color8:        lightBlack
+*.color9:        lightRed
+*.color10:       lightGreen
+*.color11:       lightYellow
+*.color12:       lightBlue
+*.color13:       lightMagenta
+*.color14:       lightCyan
+*.color15:       lightWhite

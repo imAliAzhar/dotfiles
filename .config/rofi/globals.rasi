@@ -1,0 +1,8 @@
+* {
+foreground: #C6C1A3;
+background: #3B303B;
+tBackground: #e63B303B;
+cursorColor: #785F5A;
+accent: #785f5a;
+warning: #a95332;
+}

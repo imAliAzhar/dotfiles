@@ -1,0 +1,12 @@
+#!/bin/bash
+
+EMOJIS_PATH="$HOME/.config/rofi/emojis"
+
+line=`cat $EMOJIS_PATH | rofi -dmenu -theme fullscreen -i -markup-rows -p "" -columns 6`
+[[ -z $line ]] && exit
+a="${line#*>}"
+b="${a%<*}"
+echo -n $b | xsel -ipb
+
+# emoji=`cat $EMOJIS_PATH | rofi -dmenu -theme fullscreen -i -markup-rows -p "" -columns 6 | awk '{ print $3 }'`
+xdotool key Ctrl+Shift+v

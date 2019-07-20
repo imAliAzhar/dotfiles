@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Description: Create and open an executable script, or 
+#              just open it if it exists already
+
+if [ $# -eq 0 ]; then
+    echo "No script provided"
+    exit
+fi
+
+SCRIPT_FOLDER="$HOME/.local/bin"
+SHABANG="#!/bin/bash"
+
+for script in "$@"
+do
+    SCRIPT_PATH="$SCRIPT_FOLDER/${script}"
+    if [[ ! -f $SCRIPT_PATH ]]; then
+        if [[ -f $script ]]; then
+            mv $script $SCRIPT_PATH
+        else
+            echo $SHABANG > $SCRIPT_PATH
+        fi
+        chmod +x $SCRIPT_PATH
+    fi
+    if [[ "`head -c 2 $SCRIPT_PATH`" != "#!" ]]; then
+        sed -i '1s/^/#!\/bin\/bash\n/' $SCRIPT_PATH
+    fi
+code $SCRIPT_PATH
+done

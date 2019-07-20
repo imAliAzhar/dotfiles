@@ -1,0 +1,35 @@
+! General settings
+URxvt.saveLines:                2000
+URxvt.scrollBar:                False
+URxvt.scrollstyle:              rxvt
+URxvt.urgentOnBell:             True
+URxvt.cursorBlink:              True
+URxvt.internalBorder:           30
+URxvt.depth:                    32
+
+URxvt.background:               [92]backgroundColor
+
+! Disable ISO Mode
+URxvt.iso14755:                 False
+
+! Extensions
+URxvt.perl-ext-common:          default,clipboard,resize-font
+
+! Keybindings
+URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
+URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
+URxvt.keysym.Control-minus:     resize-font:smaller
+URxvt.keysym.Control-plus:      resize-font:bigger
+URxvt.keysym.Control-equal:     resize-font:reset
+URxvt.keysym.Control-question:  resize-font:show
+
+! Control Arrow movements
+URxvt.keysym.Control-Up:        \033[1;5A
+URxvt.keysym.Control-Down:      \033[1;5B
+URxvt.keysym.Control-Left:      \033[1;5D
+URxvt.keysym.Control-Right:     \033[1;5C
+
+! Fonts
+URxvt.font:                     xft:DankMono:size=15:antialias=true:hinting=true
+URxvt.boldFont:                 xft:DankMono:size=15:italic:antialias=true:hinting=true
+URxvt.letterSpace:              -1

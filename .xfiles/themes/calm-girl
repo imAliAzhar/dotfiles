@@ -1,0 +1,31 @@
+! black
+*.color0:       #585c69
+*.color8:       #585c69
+
+! red
+*.color1:       #cab0a1
+*.color9:       #cab0a1
+
+! green
+*.color2:       #9f8578
+*.color10:      #9f8578
+
+! yellow
+*.color3:       #986c5b
+*.color11:      #986c5b
+
+! blue
+*.color4:       #808178
+*.color12:      #808178
+
+! magenta
+*.color5:       #979892
+*.color13:      #979892
+
+! cyan
+*.color6:       #cab0a1
+*.color14:      #cab0a1
+
+! white
+*.color7:       #707880
+*.color15:      #707880
