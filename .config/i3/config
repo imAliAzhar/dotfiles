@@ -10,6 +10,7 @@
 #  ==================================================
 font pango:mono 8
 
+# set $mod Mod3
 set $mod Mod3
 set $win Mod4
 
@@ -23,7 +24,8 @@ set $exec                   exec --no-startup-id
 set $exec_always            exec_always --no-startup-id
 
 # set default terminal
-set $term urxvt
+set $TERM urxvt
+set $BROWSER firefox
 
 # use mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -55,11 +57,11 @@ focus_follows_mouse no
 
 # switch between recent workspaces
 bindsym $mod+Tab                workspace back_and_forth
-bindsym $mod+Shift+Tab          $exec python ~/.config/i3/scripts/focus_next.py     
+bindsym $mod+Shift+Tab          $exec python3 ~/.config/i3/scripts/focus_next.py     
 
 # cycle windows
-bindsym $win+Tab                $exec python ~/.config/i3/scripts/focus_next.py
-bindsym $win+Shift+Tab          $exec python ~/.config/i3/scripts/focus_prev.py
+bindsym $win+Tab                $exec python3 ~/.config/i3/scripts/focus_next.py
+bindsym $win+Shift+Tab          $exec python3 ~/.config/i3/scripts/focus_prev.py
 
 
 # workspace next/prev
@@ -67,8 +69,8 @@ bindsym $win+Control+Right      workspace next
 bindsym $win+Control+Left       workspace prev
 
 # start a terminal
-bindsym $mod+Return             split h $exec $term
-bindsym $mod+Shift+Return       split v $exec $term
+bindsym $mod+Return             split h $exec $TERM
+bindsym $mod+Shift+Return       split v $exec $TERM
 
 # change focus/toggle tiling & floating windows
 bindsym $mod+space              floating toggle
@@ -87,12 +89,12 @@ bindsym $mod+w                  kill
 # bindsym $mod+Shift+w
 
 # toggle split/exit i3
-bindsym $mod+e                  $exec $term -e ranger
+bindsym $mod+e                  $exec $TERM -e ranger
 # bindsym $mod+Shift+e            $exec emojiselector
 
 # start ranger as user/sudo
 bindsym $mod+r                  $exec rofi -show drun -theme bmenu
-bindsym $mod+Shift+r            $exec $term -e sudo ranger /
+bindsym $mod+Shift+r            $exec $TERM -e sudo ranger /
 
 # tabbed layout
 bindsym $mod+t                  layout tabbed
@@ -138,11 +140,11 @@ bindsym $mod+shift+f                  gaps inner current set 0; gaps outer curre
 # bindsym $mod+Shift+h
 
 # next window/workspace
-bindsym $mod+j                  $exec python ~/.config/i3/scripts/focus_next.py
+bindsym $mod+j                  $exec python3 ~/.config/i3/scripts/focus_next.py
 # bindsym $mod+Shift+j            workspace next
 
 # prev window/workspace
-bindsym $mod+k                  $exec python ~/.config/i3/scripts/focus_prev.py
+bindsym $mod+k                  $exec python3 ~/.config/i3/scripts/focus_prev.py
 # bindsym $mod+Shift+k            workspace prev
 
 bindsym $mod+l                  $exec flash_window
@@ -166,7 +168,7 @@ bindsym $mod+l                  $exec flash_window
 # bindsym $mod+Shift+b
 
 # start chromium/netflix
-bindsym $mod+n                  $exec vivaldi-stable
+bindsym $mod+n                  $exec $BROWSER
 # bindsym $mod+Shift+n            $exec chromium --app=https://www.netflix.com/browse
 
 # toggle/create messenger

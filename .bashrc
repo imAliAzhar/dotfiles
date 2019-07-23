@@ -33,7 +33,7 @@ alias venv="source venv/bin/activate"
 
 alias bt="bluetoothctl" 
 
-alias p="python" 
+alias p="python3" 
 
 alias cls="clear" 
 

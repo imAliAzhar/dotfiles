@@ -1,8 +1,22 @@
 ; VARNAME = ${xrdb:XRESOURCE:DEFAULT}
 
+[colors]
+background = ${xrdb:tBackground:#ff00ff}
+foreground = ${xrdb:foreground:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
+
 [bar/bottom]
-monitor = eDP-1
+monitor = VGA-1
 ;bottom = true
+
+; background = #eb091115
+background = ${colors.background}
+; foreground = ${colors.foreground}
+
+; background = ${colors.background}
 
 width = 100% 
 height = 30
@@ -12,9 +26,6 @@ offset-y = 10
 ;override-redirect = true
 
 radius = 0
-
-background = ${xrdb:tBackground:#ff00ff}
-foreground = ${xrdb:foreground:#ff00ff}
 
 ;line-color = ${bar/bottom.background}
 line-size = 1
@@ -33,7 +44,7 @@ font-5 = Termsynu:size=10:antialias=false;2
 
 modules-left =  i3
 modules-center = title
-modules-right =  keyboard backlight wireless-network battery clock 
+modules-right =  keyboard clock 
 
 
 ;modules-left = i3 powermenu
@@ -441,8 +452,8 @@ menu-2-1-exec = menu_open-0
 [module/clock]
 type = internal/date
 interval = 1.0
-date =    %%{F#99}%a, %d %b %%{F-}  %%{F${bar/bottom.background}%I:%M %p%{F-}
-date-alt = %%{F#99}%A, %B %d, %Y  %%{Fbar/bottom.background}%I:%M%{F${bar/bottom.background}}:%S %p
+date =    %%{F#99}%a, %d %b %%{F-}  %%{F${colors.background}%I:%M %p%{F-}
+date-alt = %%{F#99}%A, %B %d, %Y  %%{colors.background}%I:%M%{F${bar/bottom.background}}:%S %p
 ;date-alt = %A, %d %B %Y
 ;time-alt = %I:%M:%S
 ;format =  <label>
