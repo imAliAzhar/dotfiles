@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PIPE="/tmp/mpv_pipe"
+video="$1"
+[[ -f ${video} ]] || exit 1
+if [[ -n `pidof mpv` ]]; then
+    echo "loadfile \"${video}\" append-play" > ${PIPE}
+    echo "playlist-next" > ${PIPE}
+else
+    [[ -e ${PIPE} ]] || mkfifo ${PIPE}
+    mpv --input-file=${PIPE} "$video" > /dev/null 2>&1 &
+fi

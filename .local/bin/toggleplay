@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# {"command": ["cycle", "pause"]}
+
+PIPE="/tmp/mpv_pipe"
+
+
+[[ -n `pidof mpv` ]] || exit 1
+[[ -e ${PIPE} ]] || mkfifo ${PIPE}
+echo "cycle pause" > ${PIPE}

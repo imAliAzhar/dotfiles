@@ -111,9 +111,10 @@ bindsym --release  $mod+i                  $exec emojiselector
 # bindsym $mod+o                  $exec chromium --new-window --app=https://github.com/awan324/lynx/
 # bindsym $mod+Shift+o
 
-# open slack(lynx)
-# bindsym $mod+p                  $exec chromium --new-window --app=https://bese-6fypgroup.slack.com/messages/CBHUHCLNP/
-# bindsym $mod+Shift+P
+# Toggle mpv play
+bindsym $mod+p                  $exec toggleplay
+bindsym $win+p                  [class="mpv"] scratchpad show
+bindsym $mod+Shift+p            [class="mpv"] fullscreen toggle
 
 # focus the parent container
 bindsym $mod+a                  focus parent
@@ -279,7 +280,7 @@ bindsym Print              $exec scrot  '%A %d %B %Y %r.png' -e 'mv "$f" ~/Pictu
 set_from_resource $active theme.foregroundColor #FF00FF
 
 ##                        border     bg        text       indic
-client.focused           $active    $active      #FFFFFF    $act
+client.focused            #000000    #000000      #000000    #000000
 #client.focused_inactive  #0000FF    #0000FF   #00FF00    #0000FF
 #client.unfocused         #0000FF    #0000FF   #00FF00    #0000FF
 #client.urgent            #FF0000    #FF0000   #FF0000    #FF0000
@@ -319,6 +320,12 @@ $exec urxvt -name dropdown
 assign [class="code-oss"] 2
 
 for_window [class="^.*"] border none
+
+for_window [class="mpv"] floating enable
+for_window [class="mpv"] move scratchpad # need to do this ti enable toggling
+for_window [class="mpv"] scratchpad show
+for_window [class="mpv"] resize set 960 540
+for_window [class="mpv"] border pixel 1
 # for_window [class="^.*"] border pixel 1
 
 gaps inner 20
