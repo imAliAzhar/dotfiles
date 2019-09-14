@@ -17,6 +17,8 @@ alias d="docker"
 
 alias off="shutdown now" 
 
+alias zz="systemctl suspend" 
+
 alias v="vim" 
 alias sv="sudo vim" 
 
