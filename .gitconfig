@@ -1,0 +1,17 @@
+[user]
+	name = imaliazhar
+	email = aliazharthegreat@live.com
+[alias]
+    a = add
+    c  = commit -m 
+    ac = commit -am
+    co = checkout
+    br = branch
+    pop = stash pop
+    dc = reset HEAD^
+    dd = reset --hard HEAD
+    rs = checkout -- 
+    delete = reset --hard HEAD~
+[credential]
+	helper = cache
+	UseHttpPath = true
