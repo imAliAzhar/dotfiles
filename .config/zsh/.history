@@ -1,0 +1,147 @@
+vim .config/zsh/.history
+mv .vim/vimrc.txt .vim/vimrc
+\:wq
+vim sdf
+la
+shutdown
+pwd
+mv gitconfig.txt .gitconfig
+cd Projects
+g clone https://github.com/arbisoft/sentimeter-backend.git
+/bin/bash
+sudo brew 
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+v zshc
+vim .zshenv
+brew
+brew install python
+python3
+python
+python3.6
+cd .config/zsh
+vim aliases
+p
+g pull
+p venv venv
+p -m venv venv
+venv
+pip install -r requirements.txt
+brew uninstall python3
+brew install pyenv
+pyenv versions
+pyenv local 3.4
+pyenv install 3.4
+pyenv install 3.4.3
+lsof :i node
+brew cask install adoptopenjdk8
+vim .gitconfig
+react-native --version
+react-native link react-native-vector-icons
+react-native run-ios --device "Faizan's iPad" --variant=release
+react-native run-ios --device "Faizan's iPad" --configuration Release
+npm install -g ios-deploy
+react-native run-ios --simulator "iPhone X"
+react-native run-ios
+react-native run-ios --simulator
+react-native run-ios --simulator "sdf"
+react-native run-ios --device "Faizanâ€ƒ¹s iPad" 
+react-native run-ios --device "Faizanâ€ƒ¹s iPad" --configuration Release
+react-native run-ios --simulator "iPad Pro (9.7-inch)"
+react-native run-ios --device "Marshal" --configuration Release
+react-native run-ios --device "Marshal"
+rm -rf node_modules
+md Projects/test/
+cd Projects/test
+git clone https://github.com/arbisoft/sentimeter-apps.git
+cd sentimeter-apps
+g co masters/sentimeter-node
+gem install cocoapods
+sudo gem install cocoapods
+pod init
+cd ios
+pod install
+/Users/imaliazhar/Projects/test/sentimeter-apps/node_modules/react-native/scripts/launchPackager.command ; exit;
+emulator --list-avds
+emulator --list-avd
+emulator -avd
+emulator -list
+emulator -h
+emulator -list-avds
+yarn cache clean
+cd awesome
+rm awesome -rf
+rm -rf awesome 
+react-native init awesome
+git pull
+g d
+g ac 'fix picker height for ios'
+g ac 'right align urdu placeholders for ios'
+gg push
+g ac '\
+\
+\
+\
+\
+
+cd .config
+ls
+cd ..
+cd $HOME/Library/Application Support/Code/User/
+cd
+cd Library
+g fetch
+code
+code .
+vim .config/zsh/.zshrc
+g ac 'adjusted spacing btw input fields'
+yarn
+g delete
+and 
+vzsh
+dotfiles add .config/zsh
+git clone --bare https://github.com/imaliazhar/dotfiles.git $HOME/.dotfiles
+ls -a
+man xcode-select
+dotfiles checkout
+vim .profile
+vim temp
+g stash
+g pop
+g co -b 'aa-auth-layout'
+g c 'adding auth layout'
+g ac 'fix finish survey button for ios'
+g ac 'updated build number'
+and vr
+and --variant=release
+g ac 'updated version number'
+g push
+react-native run-android
+g dd
+g ac 'integrated question layout in open ended screen'
+react-native run-android --variant=release
+yarn start
+git init
+g ac 'initial commit'
+g a .
+g c 'initial commit'
+g log
+and
+g ac 'question layout integrated with star screen'
+g dc
+brew tap dteoh/sqa
+brew untap dteoh/sqa
+vim .config/zsh/aliases
+/Users/imaliazhar/Projects/sentimeter-apps/node_modules/react-native/scripts/launchPackager.command ; exit;
+defaults write com.apple.Terminal FocusFollowsMouse -bool true
+defaults write com.apple.x11 wm_ffm -bool true
+emulator -avd Tablet_API_28
+and vr
+g pull
+g d
+g log
+and
+g ac 'vertically center start button text'
+g ac 'center align star icons'
+g push
+react-native run-android --variant=release
+g dd

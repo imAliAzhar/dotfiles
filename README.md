@@ -13,3 +13,6 @@
 `dotfiles checkout`
 
 For more details, read [this](https://www.atlassian.com/git/tutorials/dotfiles) article.
+
+For Mac Setup:
+`ln -s ~/.config/code/* ~/Library/Application\ Support/Code/User/`
