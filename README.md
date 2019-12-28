@@ -16,3 +16,4 @@ For more details, read [this](https://www.atlassian.com/git/tutorials/dotfiles) 
 
 For Mac Setup:
 `ln -s ~/.config/code/* ~/Library/Application\ Support/Code/User/`
+`ln -s ~/.config/firefox/* ~/Library/Application\ Support/Firefox/Profiles/<PUBLIC_DIR>/`
