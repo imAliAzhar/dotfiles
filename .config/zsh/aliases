@@ -1,15 +1,20 @@
-alias g="git" 
-alias c="code" 
+alias g="git"
+alias c="code"
 alias v="vim"
+alias t="tmux"
 alias sv="sudo vim"
 alias s="sudo"
+alias r="ranger"
 
 alias md="mkdir"
 
 alias venv="source venv/bin/activate"
-alias p="python3"
+alias p="python"
 alias vzsh="vim ~/.config/zsh/.zshrc"
 
 alias and="react-native run-android"
+alias dserve="python manage.py runserver --settings=sentimeter.settings.dev"
+alias dshell="python manage.py shell --settings=sentimeter.settings.dev"
+alias y="yarn"
 
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
