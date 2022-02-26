@@ -1,0 +1,9 @@
+{
+  "baseFontSize": 22,
+  "theme": "obsidian",
+  "translucency": true,
+  "cssTheme": "Obsidian Nord",
+  "enabledCssSnippets": [
+    "rainbow-headings"
+  ]
+}

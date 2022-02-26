@@ -1,0 +1,100 @@
+{
+  "main": {
+    "id": "76606c61dfb962b4",
+    "type": "split",
+    "children": [
+      {
+        "id": "31e9bcd63212b99f",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "177739c9f9c785d9",
+    "type": "split",
+    "children": [
+      {
+        "id": "22e86bae5a1c2dba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "74551cb0394731c5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "277cb2214d080846",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "j",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "271fe4dc3214a297",
+    "type": "split",
+    "children": [
+      {
+        "id": "61e659f385149deb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6e28c00b374e5c33",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "31e9bcd63212b99f",
+  "lastOpenFiles": [
+    "Zettelkasten/German Brands.md",
+    "Zettelkasten/Types of Wine.md",
+    "Zettelkasten/Inbox.md",
+    "Zettelkasten/My First Obsidian Note.md",
+    "Misc/Wein.md",
+    "Templates/Daily Notes.md",
+    "Misc/Test.md",
+    "Daily Notes/2022/February/26-Sat.md",
+    "Zettelkasten/Untitled.md",
+    "Zettelkasten/D.md"
+  ]
+}
