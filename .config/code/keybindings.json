@@ -1,0 +1,303 @@
+// Place your key bindings in this file to override the defaultsauto[]
+
+[
+  {
+    "key": "cmd+shift+r",
+    "command": "workbench.action.reloadWindow"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorTextFocus"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.files.action.showActiveFileInExplorer",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+h",
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "when": "filesExplorerFocus"
+  },
+  {
+    "key": "cmd+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "cmd+w",
+    "command": "workbench.action.closeActiveEditor",
+    "when": "!editorIsOpen"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "workbench.action.closeWindow"
+  },
+
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.editor.previousChange",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.editor.nextChange",
+    "when": "editorFocus"
+  },
+  {
+    "key": "alt+cmd+b",
+    "command": "workbench.action.toggleStatusbarVisibility"
+  },
+
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "'${file}'" }
+  },
+  {
+    "key": "ctrl+-",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+shift+8",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "editor.action.formatSelection",
+    "when": "editorHasDocumentSelectionFormattingProvider && editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.files.saveAs"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.files.saveLocalFile",
+    "when": "remoteFileDialogVisible"
+  },
+  {
+    "key": "cmd+i",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "-editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+  },
+
+  // GIT
+  // ====
+
+  {
+    "key": "alt+/",
+    "command": "gitlens.showCommitSearch"
+  },
+  {
+    "key": "cmd+shift+g",
+    "command": "workbench.view.scm"
+  },
+  {
+    "key": "cmd+g",
+    "command": "git.openFile",
+    "when": "editorFocus && isInDiffEditor"
+  },
+  {
+    "key": "cmd+g",
+    "command": "git.openChange",
+    "when": "editorFocus && !isInDiffEditor"
+  },
+  {
+    "key": "cmd+k cmd+a",
+    "command": "git.stageSelectedRanges",
+    "when": "isInDiffEditor"
+  },
+  {
+    "key": "cmd+k cmd+r",
+    "command": "git.revertSelectedRanges",
+    "when": "isInDiffEditor"
+  },
+
+  // SQL Tools
+  // =========
+  {
+    "key": "cmd+' cmd+'",
+    "command": "sqltools.executeCurrentQuery"
+  },
+  {
+    "key": "cmd+e cmd+e",
+    "command": "-sqltools.executeQuery",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+/",
+    "command": "workbench.action.gotoSymbol"
+  },
+  {
+    "key": "shift+cmd+o",
+    "command": "-workbench.action.gotoSymbol"
+  },
+  {
+    "key": "ctrl+shift+/",
+    "command": "workbench.action.showAllSymbols"
+  },
+  {
+    "key": "cmd+t",
+    "command": "-workbench.action.showAllSymbols"
+  },
+  {
+    "key": "cmd+d cmd+o",
+    "command": "workbench.action.toggleEditorWidths"
+  },
+  {
+    "key": "cmd+d cmd+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "cmd+d cmd+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "cmd+d cmd+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "cmd+d cmd+j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "shift+cmd+\\",
+    "command": "-editor.action.jumpToBracket",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+\\",
+    "command": "workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "cmd+d cmd+\\",
+    "command": "-workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "rest-client.cancel-request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "alt+cmd+k",
+    "command": "-rest-client.cancel-request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "rest-client.generate-codesnippet",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "alt+cmd+c",
+    "command": "-rest-client.generate-codesnippet",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "ctrl+cmd+l",
+    "command": "rest-client.rerun-last-request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "alt+cmd+l",
+    "command": "-rest-client.rerun-last-request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "ctrl+alt+l",
+    "command": "rest-client.rerun-last-request",
+    "when": "httpResponsePreviewFocus"
+  },
+  {
+    "key": "alt+cmd+l",
+    "command": "-rest-client.rerun-last-request",
+    "when": "httpResponsePreviewFocus"
+  },
+  {
+    "key": "ctrl+cmd+r",
+    "command": "rest-client.request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "alt+cmd+r",
+    "command": "-rest-client.request",
+    "when": "editorTextFocus && editorLangId == 'http'"
+  },
+  {
+    "key": "ctrl+cmd+e",
+    "command": "rest-client.switch-environment"
+  },
+  {
+    "key": "alt+cmd+e",
+    "command": "-rest-client.switch-environment"
+  },
+  {
+    "key": "ctrl+cmd+h",
+    "command": "rest-client.history"
+  },
+  {
+    "key": "alt+cmd+h",
+    "command": "-rest-client.history"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "workbench.action.revertAndCloseActiveEditor"
+  },
+  {
+    "key": "alt+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+up",
+    "command": "-editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "ctrl+shift+k",
+    "command": "workbench.action.terminal.focusPrevious"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "-rust-analyzer.joinLines",
+    "when": "editorTextFocus && editorLangId == 'rust'"
+  },
+  {
+    "key": "ctrl+shift+space",
+    "command": "editor.action.triggerParameterHints",
+    "when": "editorHasSignatureHelpProvider && editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+h",
+    "command": "-workbench.action.replaceInFiles"
+  }
+]

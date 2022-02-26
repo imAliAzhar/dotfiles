@@ -1,0 +1,154 @@
+{
+  // General
+  // ========================
+
+  // Workbench
+  // ------------------------
+
+  "workbench.startupEditor": "none",
+  "workbench.editor.showIcons": false,
+  "workbench.settings.editor": "json",
+  "workbench.sideBar.location": "right",
+  "workbench.activityBar.visible": true,
+  "workbench.editor.enablePreview": true,
+  "workbench.colorTheme": "Palenight Operator",
+
+  // Editor
+  // ------------------------
+
+  "editor.fontSize": 16,
+  "editor.fontWeight": "normal",
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.size": "fill",
+  "editor.minimap.scale": 1,
+  "editor.lineNumbers": "relative",
+  "editor.mouseWheelZoom": false,
+  "editor.renderWhitespace": "all",
+  "diffEditor.renderSideBySide": true,
+  "editor.suggest.localityBonus": true,
+  "diffEditor.renderIndicators": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.fontFamily": "'MonoLisa'",
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorBlinking": "phase",
+  //   "editor.tokenColorCustomizations": {
+  //     "textMateRules": [
+  //       { "scope": ["string", "dec"], "settings": { "fontStyle": "italic" } }
+  //     ]
+  //   },
+
+  // Explorer
+  // ------------------------
+
+  "explorer.confirmDelete": true,
+  "explorer.confirmDragAndDrop": false,
+  "window.dialogStyle": "custom",
+  "window.openFoldersInNewWindow": "off",
+
+  // Files
+  // ------------------------
+
+  "files.associations": {
+    "*.notes": "markdown"
+  },
+
+  // Terminal
+  // ------------------------
+
+  "terminal.integrated.fontSize": 16,
+
+  // Debug
+  // ------------------------
+
+  "debug.inlineValues": true,
+
+  // Languages
+  // ========================
+
+  // TypeScript
+  // ------------------------
+  "[typescript]": {
+    "editor.rulers": [120],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // JavaScript
+  // ------------------------
+
+  "[javascript]": {
+    "editor.rulers": [80],
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "eslint.run": "onSave",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+
+  // JSON
+  // ------------------------
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Extensions
+  // ========================
+
+  // Vim
+  // ------------------------
+
+  "vim.insertModeKeyBindings": [
+    { "before": ["<C-j>"], "after": ["<ESC>"] },
+    { "before": ["<C-u>"], "after": ["<ESC>", "v", "i", "w", "U", "e", "a"] }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["H"], "after": ["^"] },
+    { "before": ["L"], "after": ["$"] },
+    { "before": ["\\"], "after": ["O", "<ESC>"] },
+    { "before": ["<CR>"], "after": ["o", "<ESC>"] },
+    { "before": ["U"], "commands": ["cursorUndo"] },
+    { "before": ["g", "u"], "after": ["v", "i", "w", "U", "e"] }
+  ],
+  "vim.sneak": true,
+  "vim.leader": " ",
+  "vim.useSystemClipboard": true,
+  "vim.replaceWithRegister": true,
+  "vim.camelCaseMotion.enable": true,
+  "vim.highlightedyank.enable": true,
+  "vim.sneakUseIgnorecaseAndSmartcase": true,
+  "json.schemas": [
+    {
+      "name": "vscode-expo-manifest",
+      "url": "file:///Users/imaliazhar/Library/Application%20Support/Code/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
+      "fileMatch": [
+        "app.json",
+        "app.config.json"
+      ]
+    }
+  ],
+  "terminal.integrated.gpuAcceleration": "off",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

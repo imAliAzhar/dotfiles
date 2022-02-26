@@ -1,0 +1,38 @@
+set ratios 1:2
+set relativenumber on
+set previewer ~/.config/lf/pv.sh
+
+map e
+map f
+map S
+map C
+map DD
+map gc cd ~/.config/
+map gv cd ~/Documents/Gringotts/
+
+cmd fzf_jump ${{
+  res="$(fd -H . | fzf +m --reverse)"
+    if [ -f "$res" ];
+  then
+    lf -remote "send $id select $res"
+    lf -remote "send $id open"
+    elif [ -d "$res" ];
+  then
+    lf -remote "send $id cd $res"
+    fi
+}}
+
+# map / :fzf_jump
+
+cmd open ${{
+  case $(file --mime-type "$f" -bL) in
+    text/*|application/json)
+      $EDITOR "$f";;
+    *)
+      open "$f" ;;
+  esac
+}}
+
+map DD $rm -rf "$fx"
+map S $$SHELL
+map C code "$fx"

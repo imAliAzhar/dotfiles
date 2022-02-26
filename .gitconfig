@@ -1,0 +1,29 @@
+[alias]
+  a = add
+  c  = commit -m
+  l = log --oneline
+  co = checkout
+  ac = commit -am
+  br = branch
+  pop = stash pop
+  dc = reset HEAD^
+  dd = reset --hard HEAD
+  rs = checkout --
+  delete = reset --hard HEAD~
+  cmp = pull --no-ff --no-commit origin
+  cmpl = merge --no-ff --no-commit 
+  ra = commit --amend --no-edit
+  rc = rebase --continue
+[blame]
+  date = human
+[diff]
+  tool = vscode
+[merge]
+  conflictstyle = diff3
+[core]
+  mergeoptions = --no-edit
+[credential]
+	helper = store
+[user]
+	name = imAliAzhar
+	email = ali.azhar@finn.auto

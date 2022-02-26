@@ -1,0 +1,41 @@
+let mapleader="\<Space>"
+set encoding=utf-8
+
+"inoremap jj <Esc>
+map <C-s> :w<CR>
+map <C-w> :q!<CR>
+
+set number
+set relativenumber
+
+nnoremap <leader><tab> :bn<CR>
+"nnoremap <C-Tab> :bp<CR>
+
+nnoremap <CR> o<Esc>
+nnoremap \ O<Esc>
+
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set autoindent
+set textwidth=80
+
+highlight LineNr ctermfg=darkgrey
+highlight CursorLineNr ctermfg=grey
+
+highlight EndOfBuffer ctermfg=darkgrey
+
+syntax on
+
+"let g:colorizer_auto_color = 1
+let g:colorizer_colornames = 0
+let g:colorizer_x11_names = 1
+"set termguicolors
+
+let g:CommandTMaxHeight=5
+let g:CommandTScanDotDirectories=1
+let g:CommandTHighlightColor='333333'
+
+set smartcase
