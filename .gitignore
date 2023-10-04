@@ -15,6 +15,9 @@ Videos
 .cargo
 .config/exercism
 .config/gh
+.config/obsidian/plugins
+.config/obsidian/themes
+.config/obsidian/workspace.json
 .degit
 .dotfiles
 .github

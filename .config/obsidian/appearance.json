@@ -1,9 +1,8 @@
 {
-  "baseFontSize": 22,
+  "baseFontSize": 18,
   "theme": "obsidian",
-  "translucency": true,
-  "cssTheme": "Obsidian Nord",
-  "enabledCssSnippets": [
-    "rainbow-headings"
-  ]
+  "translucency": false,
+  "cssTheme": "Atom",
+  "enabledCssSnippets": [],
+  "accentColor": ""
 }
