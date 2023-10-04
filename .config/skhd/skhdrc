@@ -20,10 +20,6 @@ alt + ctrl - l : yabai -m window --insert east
 # go back to previous workspace (kind of like back_and_forth in i3)
 cmd - tab : yabai -m space --focus recent
 
-# move focused window to previous workspace
-alt + shift - b : yabai -m window --space recent; \
-                  yabai -m space --focus recent
-
 # focus workspace
 cmd - 1 : yabai -m space --focus 1
 cmd - 2 : yabai -m space --focus 2
@@ -58,27 +54,23 @@ cmd + ctrl - 6 : yabai -m space --swap 6
 cmd + shift - 0x32 : yabai -m window --space last
 
 # change layout of desktop
-alt - e : ~/.config/yabai/scripts/toggle_bsp.zsh
+alt - e : yabai -m space --layout bsp
 alt - a : yabai -m space --layout float
 alt - s : yabai -m space --layout stack
+
+alt - x : yabai -m space --mirror x-axis
+alt + shift - e : yabai -m space --mirror y-axis
+
+alt - m : ~/.config/yabai/scripts/stage_manager_enable.zsh
+alt + shift - m : ~/.config/yabai/scripts/stage_manager_disable.zsh
 
 # cycle through stack windows
 alt - tab : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 alt + shift - tab : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
-alt - n : yabai -m window --focus stack.next || yabai -m window --focus stack.first
-alt - p : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
-alt - x : yabai -m space --mirror x-axis
-alt + shift - e : yabai -m space --mirror y-axis
 
 
 # # enter fullscreen mode for the focused container
 alt - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - f : yabai -m space --toggle padding && yabai -m space --toggle gap
-alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.95
-alt + shift - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9
-
-alt - c : yabai -m space --create && yabai -m space --focus last
-
-alt - x : yabai -m space --destroy
-
-cmd - h: 
+alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9500
+alt + shift - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9000

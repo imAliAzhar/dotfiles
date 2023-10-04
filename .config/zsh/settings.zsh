@@ -1,4 +1,4 @@
-#  _________  _          _ _ 
+#  _________  _          _ _
 # |__  / ___|| |__   ___| | |
 #   / /\___ \| '_ \ / _ \ | |
 #  / /_ ___) | | | |  __/ | |
@@ -16,4 +16,4 @@ source $ZDOTDIR/tmux.zsh
 
 
 HISTFILE=$HOME/.cache/zsh/histfile             # Defauts to $ZDOTDIR
-WORDCHARS="*?_-.[]~&;!#$%^(){}<>"              # Stop kill-word on /
+WORDCHARS="*?[]~&;!#$%^(){}<> "                # Stop kill-word on these

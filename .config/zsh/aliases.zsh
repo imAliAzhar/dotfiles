@@ -20,6 +20,7 @@ alias vzsh="vim ~/.config/zsh/settings.zsh"
 alias vvim="vim ~/.config/nvim/init.vim"
 
 alias y="yarn"
+alias pp="pnpm"
 
 alias dot="GIT_WORK_TREE=~ GIT_DIR=~/.dotfiles"
 

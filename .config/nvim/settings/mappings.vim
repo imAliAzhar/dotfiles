@@ -1,7 +1,7 @@
 "Enter adds a new line below
 nnoremap <CR> o<Esc>
 
-      "\ adds a new line above
+"\ adds a new line above
 nnoremap \ O<Esc>
 
 "Toggle line comment

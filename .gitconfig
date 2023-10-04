@@ -1,7 +1,7 @@
 [alias]
   a = add
   c  = commit -m
-  l = log --oneline
+  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #111111)%an on %cd%Creset' --date=format:\"%b %d, '%y\""
   co = checkout
   ac = commit -am
   br = branch
@@ -10,8 +10,6 @@
   dd = reset --hard HEAD
   rs = checkout --
   delete = reset --hard HEAD~
-  cmp = pull --no-ff --no-commit origin
-  cmpl = merge --no-ff --no-commit 
   ra = commit --amend --no-edit
   rc = rebase --continue
 [blame]

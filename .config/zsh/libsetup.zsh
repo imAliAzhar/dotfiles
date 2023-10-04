@@ -1,0 +1,1 @@
+brew install fd fzf ripgrep lf bat

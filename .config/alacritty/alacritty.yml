@@ -52,7 +52,7 @@ font:
 
 window:
   startup_mode: Maximized
-  decorations: transparent
+  decorations: buttonless # full, buttonless, transparent, none
   # opacity: 0.9
   padding:
     x: 25

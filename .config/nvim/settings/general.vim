@@ -7,4 +7,5 @@ set relativenumber                      " Relative line numbers
 set fcs=eob:\                           " Hide tilde on blank lines
 set hidden                              " Allow switching between unsaved buffers
 set guicursor+=n:hor100                 " Use underline as curser
+set mouse=                              " Disable mouse
 

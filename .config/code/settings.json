@@ -26,20 +26,16 @@
   "editor.minimap.scale": 1,
   "editor.lineNumbers": "relative",
   "editor.mouseWheelZoom": false,
-  "editor.renderWhitespace": "all",
-  "diffEditor.renderSideBySide": true,
+  "editor.renderWhitespace": "boundary",
   "editor.suggest.localityBonus": true,
-  "diffEditor.renderIndicators": false,
   "editor.minimap.renderCharacters": false,
   "editor.formatOnSaveMode": "modifications",
   "editor.fontFamily": "'MonoLisa'",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorBlinking": "phase",
-  //   "editor.tokenColorCustomizations": {
-  //     "textMateRules": [
-  //       { "scope": ["string", "dec"], "settings": { "fontStyle": "italic" } }
-  //     ]
-  //   },
+  "diffEditor.renderSideBySide": true,
+  "diffEditor.renderIndicators": false,
+  "diffEditor.ignoreTrimWhitespace": false,
 
   // Explorer
   // ------------------------
@@ -55,11 +51,13 @@
   "files.associations": {
     "*.notes": "markdown"
   },
+  "files.trimTrailingWhitespace": true,
 
   // Terminal
   // ------------------------
 
   "terminal.integrated.fontSize": 16,
+  "terminal.integrated.gpuAcceleration": "off",
 
   // Debug
   // ------------------------
@@ -99,7 +97,6 @@
       "source.fixAll.eslint": true
     }
   },
-  "eslint.run": "onSave",
   "javascript.updateImportsOnFileMove.enabled": "never",
 
   // JSON
@@ -109,6 +106,21 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Rust
+  // ------------------------
+
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  },
+
+  // HTML
+  // ------------------------
+
+  "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
@@ -137,18 +149,11 @@
   "vim.camelCaseMotion.enable": true,
   "vim.highlightedyank.enable": true,
   "vim.sneakUseIgnorecaseAndSmartcase": true,
-  "json.schemas": [
-    {
-      "name": "vscode-expo-manifest",
-      "url": "file:///Users/imaliazhar/Library/Application%20Support/Code/User/globalStorage/bycedric.vscode-expo/manifest-44.0.0.json",
-      "fileMatch": [
-        "app.json",
-        "app.config.json"
-      ]
-    }
-  ],
-  "terminal.integrated.gpuAcceleration": "off",
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+
+  // Miscellaneous
+  // ------------------------
+
+  "eslint.run": "onSave",
+  "svelte.enable-ts-plugin": true,
+  "colorize.languages": ["json"]
 }
