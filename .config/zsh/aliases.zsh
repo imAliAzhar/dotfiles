@@ -9,7 +9,9 @@ alias s="sudo"
 #alias cat="bat"
 alias rzsh="source ~/.config/zsh/settings.zsh"
 alias ip="ipconfig getifaddr en0"
-alias ls="exa"
+alias ls="eza"
+alias lf="lfcd"
+alias rt="trash"
 
 alias md="mkdir"
 
