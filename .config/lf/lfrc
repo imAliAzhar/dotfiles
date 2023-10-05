@@ -9,11 +9,21 @@ map C
 map DD
 map gc cd ~/.config/
 map gp cd ~/Projects/
-map DD $rm -rf "$fx"
 map S $$SHELL
 map C $code "$fx"
+map O $open "$PWD"
+map N push $mkdir<space>
 
 map f $vi $(fzf)
+
+cmd delete ${{
+    set -f
+    IFS=$'\n'   # set IFS to newline
+    files=($fx) # split the string into an array
+    trash "${files[@]}"
+}}
+
+map DD delete "$fx"
 
 cmd fzf_jump ${{
     res="$(fd -H --max-depth 1 | fzf --reverse --header='Jump to location')"
