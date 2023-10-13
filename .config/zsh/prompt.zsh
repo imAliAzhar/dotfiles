@@ -5,5 +5,15 @@ precmd() {                                        # Print empty line after each 
 }
 
 
-PROMPT='%B%F{3}❀%b  '
+set_prompt() {
+  if [[ $SHLVL -eq 1 ]]; then
+    echo '%B%F{3}$%b '
+  else
+    echo "%B%F{3}$(for ((i=2; i<=$SHLVL; i++)); do printf "▸"; done)%b  "
+
+  fi
+}
+
+
+PROMPT=$(set_prompt)
 RPROMPT='%F{8}%1d'
