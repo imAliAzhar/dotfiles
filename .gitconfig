@@ -1,7 +1,7 @@
 [alias]
   a = add
   c  = commit -m
-  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #111111)%an on %cd%Creset' --date=format:\"%b %d, '%y\""
+  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #111111)%an %ar %Creset' --date=format:\"%b %d, '%y\""
   co = checkout
   ac = commit -am
   br = branch
