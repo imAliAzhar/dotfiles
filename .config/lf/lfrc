@@ -25,6 +25,8 @@ cmd delete ${{
 
 map DD delete "$fx"
 
+map Z $unzip "$fx"
+
 cmd fzf_jump ${{
     res="$(fd -H --max-depth 1 | fzf --reverse --header='Jump to location')"
     if [ -n "$res" ]; then
@@ -37,6 +39,7 @@ cmd fzf_jump ${{
         lf -remote "send $id $cmd \"$res\""
     fi
 }}
+
 map / :fzf_jump
 
 
@@ -50,8 +53,8 @@ cmd fzf_search ${{
     )"
     [ -n "$res" ] && lf -remote "send $id select \"$res\""
 }}
-map <c-f> :fzf_search
 
+map <c-f> :fzf_search
 
 cmd open ${{
   case $(file --mime-type "$f" -bL) in
