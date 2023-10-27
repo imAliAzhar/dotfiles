@@ -17,3 +17,6 @@ yabai -m rule --add app="Slack" opacity=0.95
 yabai -m rule --add app="^Stats$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
 
+yabai -m rule --add app="Arc" space=1
+yabai -m rule --add app="Code" space=2
+yabai -m rule --add app="Alacritty" space=5
