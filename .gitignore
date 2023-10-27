@@ -26,6 +26,7 @@ Videos
 .config/obsidian/themes
 .config/obsidian/workspace.json
 .degit
+.docker
 .dotfiles
 .expo
 .github
@@ -34,6 +35,8 @@ Videos
 !.local/bin
 .swiftpm
 .npm
+.node_repl_history
+.psql_history
 .pnpm-state
 .rest-client
 .rustup
