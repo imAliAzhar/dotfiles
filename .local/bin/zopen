@@ -1,0 +1,9 @@
+#/bin/sh
+
+# Extend lf's open command to append dirs to zoxide
+
+if [[ -d $fx ]]; then
+    zoxide add $fx
+fi
+
+lf -remote  "send $id open \"$fx\""

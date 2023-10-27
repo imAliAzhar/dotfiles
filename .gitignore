@@ -30,7 +30,8 @@ Videos
 .expo
 .github
 .git-credentials
-.local
+.local/*
+!.local/bin
 .swiftpm
 .npm
 .pnpm-state

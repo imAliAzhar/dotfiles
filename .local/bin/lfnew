@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+# exit in case of any error
+set -e
+
+# Check if the number of arguments is correct
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <path>"
+    exit 1
+fi
+
+path=$1
+
+if [[ $path == */ ]]; then
+    /bin/mkdir -p "$path"
+else
+    dirname=$(/usr/bin/dirname "$path")
+
+    /bin/mkdir -p "$dirname"
+    echo -n " \n" > "$path"
+fi
+
+
+# handle exit error
+trap "send $id echomsg \"Error creating '$1'\"" ERR

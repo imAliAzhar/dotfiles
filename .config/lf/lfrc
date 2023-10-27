@@ -1,4 +1,4 @@
-set ratios 1:2
+set ratios 2:3
 set relativenumber true
 set previewer ~/.config/lf/pv.sh
 
@@ -12,9 +12,9 @@ map gp cd ~/Projects/
 map S $$SHELL
 map C $code "$fx"
 map O $open "$PWD"
-map N push $mkdir<space>
+map N push &lfnew<space>
 
-map f $vi $(fzf)
+map F $vi $(fzf)
 
 cmd delete ${{
     set -f
@@ -26,6 +26,10 @@ cmd delete ${{
 map DD delete "$fx"
 
 map Z $unzip "$fx"
+
+map f push &zoto<space>
+map l
+map l &zopen
 
 cmd fzf_jump ${{
     res="$(fd -H --max-depth 1 | fzf --reverse --header='Jump to location')"
@@ -55,6 +59,11 @@ cmd fzf_search ${{
 }}
 
 map <c-f> :fzf_search
+
+
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f")\""
+}}
 
 cmd open ${{
   case $(file --mime-type "$f" -bL) in
