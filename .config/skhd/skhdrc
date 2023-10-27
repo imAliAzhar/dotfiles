@@ -70,7 +70,7 @@ alt + shift - tab : yabai -m window --focus stack.prev || yabai -m window --focu
 
 
 # # enter fullscreen mode for the focused container
-alt - f : yabai -m window --toggle zoom-fullscreen
-alt + shift - f : yabai -m space --toggle padding && yabai -m space --toggle gap
+alt + shift - f : yabai -m window --toggle zoom-fullscreen
+alt + shift - g : yabai -m space --toggle padding && yabai -m space --toggle gap
 alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9500
 alt + shift - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9000
