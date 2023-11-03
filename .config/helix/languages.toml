@@ -1,0 +1,30 @@
+[language-server]
+bash-language-server = { command = "bash-language-server", args = ["start"] }
+
+
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+# https://rust-analyzer.github.io/manual.html#configuration
+
+inlayHints.bindingModeHints.enable = true
+inlayHints.chainingHints.enable = true
+inlayHints.closingBraceHints.enable = true
+inlayHints.closingBraceHints.minLines = 25
+inlayHints.closureCaptureHints.enable = true
+inlayHints.closureReturnTypeHints.enable = "always"
+inlayHints.closureStyle = "impl_fn"
+inlayHints.discriminantHints.enable = "always"
+inlayHints.expressionAdjustmentHints.enable = "always"
+inlayHints.expressionAdjustmentHints.hideOutsideUnsafe = "always"
+inlayHints.expressionAdjustmentHints.mode = "prefix"
+inlayHints.lifetimeElisionHints.enable = "always"
+inlayHints.lifetimeElisionHints.useParameterNames = true
+inlayHints.maxLength = 25
+inlayHints.parameterHints.enable = true
+inlayHints.renderColons = true
+inlayHints.typeHints.enable = true
+inlayHints.typeHints.hideClosureInitialization = true
+inlayHints.typeHints.hideNamedConstructor = true
+

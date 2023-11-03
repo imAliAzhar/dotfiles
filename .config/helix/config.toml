@@ -1,9 +1,19 @@
-theme = "catppuccin_macchiato"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
 cursorline = true
 color-modes = true
+bufferline = "never"
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
 
 [editor.cursor-shape]
 insert = "bar"
@@ -12,3 +22,36 @@ select = "underline"
 
 [editor.indent-guides]
 render = true
+
+[keys.normal]
+# H = "goto_line_start"
+# L = "goto_line_end"
+# G = "goto_last_line"
+esc = ["collapse_selection", "keep_primary_selection"]
+
+ret = ["open_below", "normal_mode"]
+"\\" = ["open_above", "normal_mode"]
+
+backspace = { r = ":config-reload" }
+
+[keys.normal.g]
+B = ":pipe-to tmux split-window -v helix-git-blame"
+
+[keys.normal.space]
+# w = ["buffer_close"]
+
+[keys.select]
+G = ["extend_line_below", "goto_last_line", "goto_line_end"]
+# H = "goto_line_start"
+# L = "goto_line_end"
+
+
+[keys.insert]
+C-p = "move_line_up"
+C-n = "move_line_down"
+C-e = "goto_line_end_newline"
+C-a = "goto_line_start"
+C-f = "move_char_right"
+C-b = "move_char_left"
+C-u = ["move_prev_word_start", "move_next_word_end", "switch_case", "move_char_right"]
+

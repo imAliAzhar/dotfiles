@@ -4,7 +4,7 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 
 export MYVIMRC=~/.config/nvim/init.vim
 
-export EDITOR="nvim"
+export EDITOR="hx"
 export NVM_DIR="$HOME/.nvm"
 
 # export KEYTIMEOUT=1      # Needed for vi mode
