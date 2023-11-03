@@ -6,6 +6,7 @@ map e
 map f
 map S
 map C
+map L
 map DD
 map gc cd ~/.config/
 map gp cd ~/Projects/
@@ -30,6 +31,7 @@ map Z $unzip "$fx"
 map f push &zoto<space>
 map l
 map l &zopen
+map L &hopen
 
 cmd fzf_jump ${{
     res="$(fd -H --max-depth 1 | fzf --reverse --header='Jump to location')"
