@@ -1,4 +1,4 @@
-set ratios 2:3
+set ratios 1:2
 set relativenumber true
 set previewer ~/.config/lf/pv.sh
 
@@ -73,3 +73,9 @@ cmd open ${{
       open "$f" ;;
   esac
 }}
+
+cmd reload-config ${{
+    lf -remote "send $id source ~/.config/lf/lfrc"
+}}
+
+map R reload-config
