@@ -5,10 +5,10 @@ font:
   normal:
     family: "MonoLisa"
     style: Regular
-  bold:
+  italic:
     family: "MonoLisa"
     style: Italic
-  italic:
+  bold:
     family: "MonoLisa"
     style: Bold
   bold_italic:
