@@ -18,9 +18,9 @@
     "textCodeBlock.background": "#24273a",
     "textLink.activeForeground": "#91d7e3",
     "textLink.foreground": "#8aadf4",
-    "textPreformat.foreground": "#cad3f5",
+    "textPreformat.foreground": "#cad3fkk5",
     "textSeparator.foreground": "#c6a0f6",
-    "activityBar.background": "#181926",
+    "activityBar.background": "#1e2030",
     "activityBar.foreground": "#c6a0f6",
     "activityBar.dropBorder": "#5b607899",
     "activityBar.inactiveForeground": "#6e738d",
@@ -30,7 +30,7 @@
     "activityBar.activeBorder": "#00000000",
     "activityBar.activeBackground": "#00000000",
     "activityBar.activeFocusBorder": "#00000000",
-    "badge.background": "#494d64",
+    "badge.background": "#00000000",
     "badge.foreground": "#cad3f5",
     "breadcrumb.activeSelectionForeground": "#c6a0f6",
     "breadcrumb.background": "#1e2030",
@@ -113,7 +113,7 @@
     "editorCodeLens.foreground": "#8087a2",
     "editorCursor.background": "#24273a",
     "editorCursor.foreground": "#f4dbd6",
-    "editorGroup.border": "#5b6078",
+    "editorGroup.border": "#1e2030",
     "editorGroup.dropBackground": "#5b607899",
     "editorGroup.emptyBackground": "#24273a",
     "editorGroupHeader.tabsBackground": "#181926",
@@ -128,12 +128,12 @@
     "editorHoverWidget.foreground": "#cad3f5",
     "editorIndentGuide.activeBackground": "#5b6078",
     "editorIndentGuide.background": "#494d64",
-    "editorInlayHint.foreground": "#5b6078",
-    "editorInlayHint.background": "#1e2030bf",
-    "editorInlayHint.typeForeground": "#b8c0e0",
-    "editorInlayHint.typeBackground": "#1e2030bf",
-    "editorInlayHint.parameterForeground": "#a5adcb",
-    "editorInlayHint.parameterBackground": "#1e2030bf",
+    "editorInlayHint.foreground": "#5b607888",
+    "editorInlayHint.background": "#24273a",
+    "editorInlayHint.typeForeground": "#b8c0e088",
+    "editorInlayHint.typeBackground": "#24273a",
+    "editorInlayHint.parameterForeground": "#a5adcb88",
+    "editorInlayHint.parameterBackground": "#24273a",
     "editorLineNumber.activeForeground": "#c6a0f6",
     "editorLineNumber.foreground": "#8087a2",
     "editorLink.activeForeground": "#c6a0f6",
@@ -259,8 +259,8 @@
     "notificationsErrorIcon.foreground": "#ed8796",
     "notificationsWarningIcon.foreground": "#f5a97f",
     "notificationsInfoIcon.foreground": "#8aadf4",
-    "panel.background": "#24273a",
-    "panel.border": "#5b6078",
+    "panel.background": "#1e2030",
+    "panel.border": "#24273a",
     "panelSection.border": "#5b6078",
     "panelSection.dropBackground": "#5b607899",
     "panelTitle.activeBorder": "#c6a0f6",
@@ -283,7 +283,7 @@
     "pickerGroup.border": "#c6a0f6",
     "pickerGroup.foreground": "#c6a0f6",
     "progressBar.background": "#c6a0f6",
-    "scrollbar.shadow": "#181926",
+    "scrollbar.shadow": "#24273a",
     "scrollbarSlider.activeBackground": "#363a4f66",
     "scrollbarSlider.background": "#5b60787f",
     "scrollbarSlider.hoverBackground": "#6e738d",
@@ -306,7 +306,7 @@
     "banner.background": "#494d64",
     "banner.foreground": "#cad3f5",
     "banner.iconForeground": "#cad3f5",
-    "statusBar.background": "#181926",
+    "statusBar.background": "#1e2030",
     "statusBar.foreground": "#cad3f5",
     "statusBar.border": "#00000000",
     "statusBar.noFolderBackground": "#181926",
@@ -330,8 +330,8 @@
     "commandCenter.activeForeground": "#c6a0f6",
     "commandCenter.background": "#181926",
     "commandCenter.activeBackground": "#5b607833",
-    "commandCenter.border": "#c6a0f6",
-    "tab.activeBackground": "#24273a",
+    "commandCenter.border": "#24273a",
+    "tab.activeBackground": "#1e2030",
     "tab.activeBorder": "#c6a0f6",
     "tab.activeBorderTop": "#00000000",
     "tab.activeForeground": "#c6a0f6",
@@ -341,6 +341,7 @@
     "tab.activeModifiedBorder": "#eed49f",
     "tab.inactiveModifiedBorder": "#eed49f4c",
     "terminal.foreground": "#cad3f5",
+    "terminal.background": "#1e2030",
     "terminal.ansiBlack": "#a5adcb",
     "terminal.ansiRed": "#ed8796",
     "terminal.ansiGreen": "#a6da95",
@@ -367,7 +368,7 @@
     "terminalCommandDecoration.defaultBackground": "#5b6078",
     "terminalCommandDecoration.successBackground": "#a6da95",
     "terminalCommandDecoration.errorBackground": "#ed8796",
-    "titleBar.activeBackground": "#181926",
+    "titleBar.activeBackground": "#1e2030",
     "titleBar.activeForeground": "#cad3f5",
     "titleBar.inactiveBackground": "#181926",
     "titleBar.inactiveForeground": "#cad3f57f",
@@ -613,20 +614,14 @@
     },
     {
       "name": "Comments",
-      "scope": [
-        "comment",
-        "punctuation.definition.comment"
-      ],
+      "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
         "foreground": "#6e738d",
         "fontStyle": "italic"
       }
     },
     {
-      "scope": [
-        "string",
-        "punctuation.definition.string"
-      ],
+      "scope": ["string", "punctuation.definition.string"],
       "settings": {
         "foreground": "#a6da95",
         "fontStyle": ""
@@ -777,10 +772,7 @@
       }
     },
     {
-      "scope": [
-        "variable.parameter",
-        "meta.function.parameters"
-      ],
+      "scope": ["variable.parameter", "meta.function.parameters"],
       "settings": {
         "foreground": "#ee99a0",
         "fontStyle": "italic"
@@ -788,10 +780,7 @@
     },
     {
       "name": "Built-ins",
-      "scope": [
-        "constant.language",
-        "support.function.builtin"
-      ],
+      "scope": ["constant.language", "support.function.builtin"],
       "settings": {
         "foreground": "#ed8796",
         "fontStyle": ""
@@ -860,10 +849,7 @@
     },
     {
       "name": "String template interpolation",
-      "scope": [
-        "string.template variable",
-        "string variable"
-      ],
+      "scope": ["string.template variable", "string variable"],
       "settings": {
         "foreground": "#cad3f5",
         "fontStyle": ""
@@ -887,9 +873,7 @@
     },
     {
       "name": "C++ keywords",
-      "scope": [
-        "keyword.operator.new.cpp"
-      ],
+      "scope": ["keyword.operator.new.cpp"],
       "settings": {
         "foreground": "#c6a0f6",
         "fontStyle": ""
@@ -935,9 +919,7 @@
     },
     {
       "name": "CSS vendored property names",
-      "scope": [
-        "support.type.vendored.property-name"
-      ],
+      "scope": ["support.type.vendored.property-name"],
       "settings": {
         "foreground": "#91d7e3",
         "fontStyle": ""
@@ -1003,10 +985,7 @@
     },
     {
       "name": "JSON/YAML constants",
-      "scope": [
-        "constant.language.json",
-        "constant.language.yaml"
-      ],
+      "scope": ["constant.language.json", "constant.language.yaml"],
       "settings": {
         "foreground": "#f5a97f",
         "fontStyle": ""
@@ -1014,10 +993,7 @@
     },
     {
       "name": "YAML anchors",
-      "scope": [
-        "entity.name.type.anchor.yaml",
-        "variable.other.alias.yaml"
-      ],
+      "scope": ["entity.name.type.anchor.yaml", "variable.other.alias.yaml"],
       "settings": {
         "foreground": "#eed49f",
         "fontStyle": ""
@@ -1100,9 +1076,7 @@
     },
     {
       "name": "dotenv left-hand side assignments",
-      "scope": [
-        "variable.other.env"
-      ],
+      "scope": ["variable.other.env"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": ""
@@ -1110,9 +1084,7 @@
     },
     {
       "name": "dotenv reference to existing env variable",
-      "scope": [
-        "string.quoted variable.other.env"
-      ],
+      "scope": ["string.quoted variable.other.env"],
       "settings": {
         "foreground": "#cad3f5",
         "fontStyle": ""
@@ -1197,9 +1169,7 @@
     },
     {
       "name": "HTML/XML-like <tags/>",
-      "scope": [
-        "entity.name.tag"
-      ],
+      "scope": ["entity.name.tag"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": ""
@@ -1224,9 +1194,7 @@
     },
     {
       "name": "HTML/XML tag attribute values",
-      "scope": [
-        "entity.other.attribute-name"
-      ],
+      "scope": ["entity.other.attribute-name"],
       "settings": {
         "foreground": "#eed49f",
         "fontStyle": ""
@@ -1234,9 +1202,7 @@
     },
     {
       "name": "Components",
-      "scope": [
-        "meta.tag support.class.component"
-      ],
+      "scope": ["meta.tag support.class.component"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": ""
@@ -1244,10 +1210,7 @@
     },
     {
       "name": "Annotations",
-      "scope": [
-        "punctuation.definition.annotation",
-        "storage.type.annotation"
-      ],
+      "scope": ["punctuation.definition.annotation", "storage.type.annotation"],
       "settings": {
         "foreground": "#f5a97f",
         "fontStyle": ""
@@ -1299,10 +1262,7 @@
     },
     {
       "name": "Node constants as keywords (module, etc.)",
-      "scope": [
-        "support.constant.node",
-        "support.type.object.module.js"
-      ],
+      "scope": ["support.constant.node", "support.type.object.module.js"],
       "settings": {
         "foreground": "#c6a0f6",
         "fontStyle": ""
@@ -1371,9 +1331,7 @@
     },
     {
       "name": "Vue components",
-      "scope": [
-        "support.class.component.vue"
-      ],
+      "scope": ["support.class.component.vue"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": ""
@@ -1546,10 +1504,7 @@
     },
     {
       "name": "Markdown auto links",
-      "scope": [
-        "punctuation.definition.link",
-        "markup.underline.link"
-      ],
+      "scope": ["punctuation.definition.link", "markup.underline.link"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": ""
@@ -1603,10 +1558,7 @@
     },
     {
       "name": "Markdown quotes",
-      "scope": [
-        "markup.quote",
-        "punctuation.definition.quote.begin"
-      ],
+      "scope": ["markup.quote", "punctuation.definition.quote.begin"],
       "settings": {
         "foreground": "#f5bde6",
         "fontStyle": ""
@@ -1668,10 +1620,7 @@
     },
     {
       "name": "PHP Attributes",
-      "scope": [
-        "support.attribute.builtin",
-        "meta.attribute.php"
-      ],
+      "scope": ["support.attribute.builtin", "meta.attribute.php"],
       "settings": {
         "foreground": "#eed49f",
         "fontStyle": ""
@@ -1712,9 +1661,7 @@
     },
     {
       "name": "Python double underscore functions",
-      "scope": [
-        "support.function.magic.python"
-      ],
+      "scope": ["support.function.magic.python"],
       "settings": {
         "foreground": "#91d7e3",
         "fontStyle": "italic"
@@ -1763,9 +1710,7 @@
     },
     {
       "name": "python function calls",
-      "scope": [
-        "meta.function-call.python"
-      ],
+      "scope": ["meta.function-call.python"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": "italic"
@@ -1803,9 +1748,7 @@
     },
     {
       "name": "entity.name.type",
-      "scope": [
-        "support.type.python"
-      ],
+      "scope": ["support.type.python"],
       "settings": {
         "foreground": "#f5a97f",
         "fontStyle": ""
@@ -1821,10 +1764,7 @@
     },
     {
       "name": "Arguments accessed later in the function body",
-      "scope": [
-        "meta.indexed-name.python",
-        "meta.item-access.python"
-      ],
+      "scope": ["meta.indexed-name.python", "meta.item-access.python"],
       "settings": {
         "foreground": "#ee99a0",
         "fontStyle": "italic"
@@ -1840,9 +1780,7 @@
     },
     {
       "name": "Ruby built-in functions",
-      "scope": [
-        "support.function.kernel.ruby"
-      ],
+      "scope": ["support.function.kernel.ruby"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": "italic"
@@ -1958,10 +1896,7 @@
     },
     {
       "name": "Rust lifetime",
-      "scope": [
-        "storage.modifier.lifetime.rust",
-        "entity.name.type.lifetime"
-      ],
+      "scope": ["storage.modifier.lifetime.rust", "entity.name.type.lifetime"],
       "settings": {
         "foreground": "#8aadf4",
         "fontStyle": "italic"
