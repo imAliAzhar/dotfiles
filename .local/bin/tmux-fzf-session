@@ -1,0 +1,103 @@
+#!/bin/zsh
+
+# Declare an associative array
+typeset -A path_map
+
+# Predefined mappings
+path_map[default]="$HOME/"
+path_map[dotfiles]="$HOME/"
+path_map[config]="$HOME/.config"
+
+# Dynamically add directories from ~/Projects
+for dir in ~/Projects/*(/); do
+  # Extract just the directory name, not the full path
+  dir_name=${dir:t}
+  # Add it to the map
+  path_map[$dir_name]=$dir
+done
+
+# Get list of sessions sorted by recent use
+SESSIONS=$(tmux list-sessions -F '#{session_last_attached} #{session_name}' | sort --numeric-sort -r | awk '{print $2}')
+
+# Convert \n seperated list to ordered array
+read -r -d '' -A sessions_array <<< "$SESSIONS"
+
+# Create an associative array to mark the projects that are in sessions
+typeset -A is_session
+for session in $sessions_array; do
+    is_session[$session]=1
+done
+
+# Get list of projects
+projects_array=(${(k)path_map})
+
+# Append projects to sessions list if not already present
+for project in $projects_array; do
+    if [[ ! -v is_session[$project] ]]; then
+        sessions_array+=($project)
+    fi
+done
+
+
+# Project names will be formatted differently in fzf
+# Create map to restore actual project name after selection
+
+declare -A project_display_name
+declare -a project_display_name_list
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# Populate the associative array with display and actual values
+for p in $sessions_array; do
+
+    # We only add colored $k to list because when fzf returns selection
+    # color will be removed
+    if [[ -v is_session[$p] ]]; then
+      k="• $p"
+      colored_k="$GREEN$k$NC"
+    else
+      k="  $p"
+      colored_k=$k
+    fi
+
+    project_display_name_list+=($colored_k)
+    project_display_name[$k]=$p
+done
+
+
+if [ -n "$TMUX" ]; then
+  # Remove the first session which is currently active
+  project_display_name_list=("${project_display_name_list[@]:1}")
+fi
+
+# Use fzf with the display values
+project_display_name_list=$(printf '%s\n' "${project_display_name_list[@]}")
+selected=$(echo $project_display_name_list | fzf --no-info --no-scrollbar )
+
+test=(${(k)project_display_name})
+
+
+# Extract the actual value from the associative array using the selected key
+FOLDER=${project_display_name[$selected]}
+
+if [ -z "$FOLDER" ]; then
+  exit 0
+fi
+
+
+SESSION_EXISTS=$(echo "$SESSIONS" | grep -Fx "$FOLDER")
+
+if [ -z $SESSION_EXISTS ]; then
+  # Create session at corresponding path
+
+  FOLDER_PATH=$path_map[$FOLDER]
+  cd $FOLDER_PATH
+  tmux new-session -d -s $FOLDER
+fi
+
+if [ -z "$TMUX" ]; then
+  tmux attach -t $FOLDER
+else
+  tmux switch-client -t $FOLDER
+fi

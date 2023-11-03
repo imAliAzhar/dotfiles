@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+DIR=$(fd -H -t d --base-directory $HOME --color always | fzf --ansi)
+
+if [ -z $DIR ]; then
+  exit 0
+fi
+
+tmux send-keys -t 1.1 ":cd $HOME/$DIR" Enter
+
+tmux select-window -t 1
