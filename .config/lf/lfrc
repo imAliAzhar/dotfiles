@@ -28,6 +28,7 @@ map DD delete "$fx"
 
 map Z $unzip "$fx"
 
+map <esc> quit
 map f push &zoto<space>
 map l
 map l &zopen

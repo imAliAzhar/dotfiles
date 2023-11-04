@@ -1,9 +1,16 @@
-#/bin/sh
+#!/bin/zsh
 
 # Extend lf's open command to append dirs to zoxide
 
 if [[ -d $fx ]]; then
     zoxide add $fx
+fi
+
+# HELIX_EXPLORER (set by ~/.local/bin/helix-explorer) opens the file in helix
+if [[ -n $HELIX_EXPLORER ]] && [[ ! -d $fx ]]; then
+    tmux send-keys -t 1.1 ":open '$fx'" Enter
+    lf -remote  "send $id quit"
+    exit 0
 fi
 
 lf -remote  "send $id open \"$fx\""

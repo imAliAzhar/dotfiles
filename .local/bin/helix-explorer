@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+DIR=$(pwd)
+
+# ~/.local/bin/zopen will open the file in Helix when HELIX_EXPLORER is set
+tmux display-popup -E sh -c "HELIX_EXPLORER=true lf $DIR"

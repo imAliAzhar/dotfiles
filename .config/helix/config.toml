@@ -34,11 +34,8 @@ ret = ["open_below", "normal_mode"]
 
 backspace = { r = ":config-reload" }
 
-[keys.normal.g]
-B = ":pipe-to tmux split-window -v helix-git-blame"
-
 [keys.normal.space]
-# w = ["buffer_close"]
+e = ":sh helix-explorer"
 
 [keys.select]
 G = ["extend_line_below", "goto_last_line", "goto_line_end"]
@@ -53,5 +50,9 @@ C-e = "goto_line_end_newline"
 C-a = "goto_line_start"
 C-f = "move_char_right"
 C-b = "move_char_left"
-C-u = ["move_prev_word_start", "move_next_word_end", "switch_case", "move_char_right"]
-
+C-u = [
+    "move_prev_word_start",
+    "move_next_word_end",
+    "switch_case",
+    "move_char_right",
+]
