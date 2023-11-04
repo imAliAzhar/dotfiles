@@ -94,6 +94,15 @@ if [ -z $SESSION_EXISTS ]; then
   FOLDER_PATH=$path_map[$FOLDER]
   cd $FOLDER_PATH
   tmux new-session -d -s $FOLDER
+
+  # Set git env vars for dotfiles
+  # Later re-exported by ~/.config/zsh/tmux.zsh
+  if [ "$FOLDER" = "dotfiles" ]; then
+    echo dotfiles
+    tmux set-environment -t dotfiles GIT_WORK_TREE "$HOME"
+    tmux set-environment -t dotfiles GIT_DIR "$HOME/.dotfiles"
+  fi
+  
 fi
 
 if [ -z "$TMUX" ]; then
