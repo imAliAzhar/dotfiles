@@ -62,7 +62,7 @@
   // Debug
   // ------------------------
 
-  "debug.inlineValues": true,
+  "debug.inlineValues": "on",
 
   // Languages
   // ========================
@@ -155,5 +155,7 @@
 
   "eslint.run": "onSave",
   "svelte.enable-ts-plugin": true,
-  "colorize.languages": ["json"]
+  "colorize.languages": [
+    "json"
+  ]
 }

@@ -4,7 +4,7 @@ bash-language-server = { command = "bash-language-server", args = ["start"] }
 
 
 [language-server.rust-analyzer.config.check]
-command = "clippy"
+#command = "clippy"
 
 # https://rust-analyzer.github.io/manual.html#configuration
 

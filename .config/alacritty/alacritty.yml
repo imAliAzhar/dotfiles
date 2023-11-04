@@ -3,17 +3,17 @@ import:
 
 font:
   normal:
-    family: "MonoLisa"
+    family: "Dank Mono"
     style: Regular
   italic:
-    family: "MonoLisa"
+    family: "Dank Mono"
     style: Italic
   bold:
-    family: "MonoLisa"
+    family: "Dank Mono"
     style: Bold
   bold_italic:
-    family: "MonoLisa"
-    style: Bold Italic
+    family: "Dank Mono"
+    style: Italic
 
   # Point size
   size: 18.0
@@ -30,14 +30,15 @@ window:
   decorations: buttonless # full, buttonless, transparent, none
   # opacity: 0.9
   padding:
-    x: 25
-    y: 25
+    x: 23
+    y: 23
     # shell:
     #   program: /bin/zsh
     #   args:
     #       - -l
     #       - -c
     #       - "tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}"
+    dynamic_padding: true
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -57,6 +58,9 @@ selection:
 
 live_config_reload: true
 
+env:
+  TERM: xterm-256color
+
 key_bindings:
   # use `xxd -ps` to get hexdump
 
@@ -69,8 +73,12 @@ key_bindings:
   # - { key: W,         mods: Command,            chars: "\x60\x78"                }
   # Detach from tmux: prefix d
   - { key: W, mods: Command|Shift, chars: "\x60\x64" }
+  # Tmux sessions quick open: prefix r
+  - { key: R, mods: Command, chars: "\x60\x72" }
   # List tmux sessions: prefix s
   - { key: R, mods: Command|Shift, chars: "\x60\x73" }
+  # Switch to next session: prefix )
+  - { key: L, mods: Command, chars: "\x60\x4c" }
   # Switch to prev session: prefix (
   - { key: H, mods: Command, chars: "\x60\x28" }
   # Quick open: prefix p

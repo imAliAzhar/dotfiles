@@ -54,9 +54,9 @@ cmd + ctrl - 6 : yabai -m space --swap 6
 cmd + shift - 0x32 : yabai -m window --space last
 
 # change layout of desktop
-alt - e : yabai -m space --layout bsp
-alt - a : yabai -m space --layout float
-alt - s : yabai -m space --layout stack
+# alt - e : yabai -m space --layout bsp
+# alt - a : yabai -m space --layout float
+# alt - s : yabai -m space --layout stack
 
 alt - x : yabai -m space --mirror x-axis
 alt + shift - e : yabai -m space --mirror y-axis
@@ -69,7 +69,7 @@ alt - tab : yabai -m window --focus stack.next || yabai -m window --focus stack.
 alt + shift - tab : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 
 
-# # enter fullscreen mode for the focused container
+# enter fullscreen mode for the focused container
 alt + shift - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - g : yabai -m space --toggle padding && yabai -m space --toggle gap
 alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9500

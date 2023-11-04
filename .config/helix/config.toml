@@ -11,10 +11,25 @@ soft-wrap.enable = true
 space = "all"
 tab = "all"
 
+[editor.statusline]
+right = [
+    "version-control",
+    "spacer",
+    "separator",
+    "diagnostics",
+    "workspace-diagnostics",
+    "register",
+    "file-encoding",
+    "separator",
+    "position",
+    "position-percentage",
+    "total-line-numbers",
+]
+#version-control = "right"
+
 [editor.lsp]
 display-inlay-hints = true
 display-messages = true
-
 
 [editor.cursor-shape]
 insert = "bar"
@@ -29,20 +44,18 @@ render = true
 # L = "goto_line_end"
 # G = "goto_last_line"
 esc = ["collapse_selection", "keep_primary_selection"]
+C-e = "scroll_down"
+C-y = "scroll_up"
 
 ret = ["open_below", "normal_mode"]
 "\\" = ["open_above", "normal_mode"]
 
 backspace = { r = ":config-reload" }
 
-[keys.normal.space]
-e = ":sh helix-explorer"
-
 [keys.select]
 G = ["extend_line_below", "goto_last_line", "goto_line_end"]
 # H = "goto_line_start"
 # L = "goto_line_end"
-
 
 [keys.insert]
 C-p = "move_line_up"

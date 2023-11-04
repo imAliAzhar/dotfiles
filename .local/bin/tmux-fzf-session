@@ -2,12 +2,13 @@
 
 # Declare an associative array
 typeset -A path_map
-projects_array+=(default dotfiles config)
+projects_array+=(default dotfiles config obsidian)
 
 # Predefined mappings
 path_map[default]="$HOME/"
 path_map[dotfiles]="$HOME/"
 path_map[config]="$HOME/.config"
+path_map[obsidian]="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Gringotts"
 
 # Dynamically add directories from ~/Projects
 for dir in ~/Projects/*(/); do
