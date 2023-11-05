@@ -1,6 +1,7 @@
-if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ "$ZELLIJ" -ne "0" ]
+if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ]
 then
-    tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}
+    # tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}
+    source tmux-fzf-session
 fi
 
 # For dotfiles session, copy tmux env vars to shell env

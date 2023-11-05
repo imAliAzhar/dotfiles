@@ -2,6 +2,7 @@
 
 # Declare an associative array
 typeset -A path_map
+projects_array+=(default dotfiles config)
 
 # Predefined mappings
 path_map[default]="$HOME/"
@@ -14,6 +15,7 @@ for dir in ~/Projects/*(/); do
   dir_name=${dir:t}
   # Add it to the map
   path_map[$dir_name]=$dir
+  projects_array+=($dir_name)
 done
 
 # Get list of sessions sorted by recent use
@@ -27,9 +29,6 @@ typeset -A is_session
 for session in $sessions_array; do
     is_session[$session]=1
 done
-
-# Get list of projects
-projects_array=(${(k)path_map})
 
 # Append projects to sessions list if not already present
 for project in $projects_array; do
@@ -98,7 +97,6 @@ if [ -z $SESSION_EXISTS ]; then
   # Set git env vars for dotfiles
   # Later re-exported by ~/.config/zsh/tmux.zsh
   if [ "$FOLDER" = "dotfiles" ]; then
-    echo dotfiles
     tmux set-environment -t dotfiles GIT_WORK_TREE "$HOME"
     tmux set-environment -t dotfiles GIT_DIR "$HOME/.dotfiles"
   fi
