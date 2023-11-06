@@ -4,7 +4,8 @@ theme = "catppuccin_mocha"
 line-number = "relative"
 cursorline = true
 color-modes = true
-bufferline = "never"
+bufferline = "multiple"
+soft-wrap.enable = true
 
 [editor.whitespace.render]
 space = "all"

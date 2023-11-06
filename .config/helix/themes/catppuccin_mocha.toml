@@ -75,8 +75,8 @@
 "ui.window" = { fg = "crust" }
 "ui.help" = { fg = "overlay2", bg = "surface0" }
 
-"ui.bufferline" = { fg = "subtext0", bg = "mantle" }
-"ui.bufferline.active" = { fg = "mauve", bg = "base", underline = { color = "mauve", style = "line" } }
+"ui.bufferline" = { fg = "overlay0", bg = "crust" }
+"ui.bufferline.active" = { fg = "lavender", bg = "base" }
 "ui.bufferline.background" = { bg = "crust" }
 
 "ui.text" = "text"
