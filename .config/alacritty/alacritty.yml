@@ -73,13 +73,25 @@ key_bindings:
   - { key: R, mods: Command|Shift, chars: "\x60\x73" }
   # Switch to prev session: prefix (
   - { key: H, mods: Command, chars: "\x60\x28" }
+  # Quick open: prefix p
+  - { key: P, mods: Command, chars: "\x60\x70" }
+  # Quick open: prefix <ctrl>+p
+  - { key: P, mods: Command|Shift, chars: "\x60\x10" }
   # Toggle zoom for current pane: prefix z
   - { key: F, mods: Command, chars: "\x60\x7a" }
 
   # Helix Keybindings
 
   # Close current buffer: <esc>:bc<ret>
-  - { key: W, mods: Command, chars: "\x3a\x62\x63" }
+  - { key: W, mods: Command, chars: "\x3a\x62\x63\x0D" }
+  # Save current buffer: <esc>:w<ret>
+  - { key: S, mods: Command, chars: "\x3a\x77\x0D" }
+  # Open explorer: :sh helix-explorer <ctrl>+r % <ret>
+  - {
+      key: E,
+      mods: Command,
+      chars: "\x3a\x73\x68\x20\x68\x65\x6c\x69\x78\x2d\x65\x78\x70\x6c\x6f\x72\x65\x72\x20\x12\x25\x20\x0D",
+    }
 
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }

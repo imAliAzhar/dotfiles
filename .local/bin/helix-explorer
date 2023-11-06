@@ -1,6 +1,11 @@
 #!/bin/zsh
 
-DIR=$(pwd)
+if [ "$#" -eq 0 ]; then
+  echo "Usage: $0 <argument>"
+  exit 1
+fi
+
+DIR=$1
 
 # ~/.local/bin/zopen will open the file in Helix when HELIX_EXPLORER is set
-tmux display-popup -E sh -c "HELIX_EXPLORER=true lf $DIR"
+tmux display-popup -E -h 40 -w 120 sh -c "HELIX_EXPLORER=true lf $DIR"
