@@ -3,9 +3,16 @@ theme = "catppuccin_mocha"
 [editor]
 line-number = "relative"
 cursorline = true
+auto-format = true
 color-modes = true
 bufferline = "multiple"
 soft-wrap.enable = true
+
+[editor.indent-guides]
+render = true
+
+[editor.file-picker]
+hidden = false
 
 [editor.whitespace.render]
 space = "all"
@@ -13,17 +20,18 @@ tab = "all"
 
 [editor.statusline]
 right = [
-    "version-control",
-    "spacer",
-    "separator",
-    "diagnostics",
-    "workspace-diagnostics",
-    "register",
-    "file-encoding",
-    "separator",
-    "position",
-    "position-percentage",
-    "total-line-numbers",
+  "version-control",
+  "spacer",
+  "separator",
+  "diagnostics",
+  "workspace-diagnostics",
+  "register",
+  "file-encoding",
+  "separator",
+  "selections",
+  "position",
+  "position-percentage",
+  "total-line-numbers",
 ]
 #version-control = "right"
 
@@ -36,28 +44,67 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-[editor.indent-guides]
-render = true
-
 [keys.normal]
-# H = "goto_line_start"
-# L = "goto_line_end"
-# G = "goto_last_line"
+H = "goto_line_start"
+L = "goto_line_end"
+G = "goto_last_line"
+
 esc = ["collapse_selection", "keep_primary_selection"]
 C-e = "scroll_down"
 C-y = "scroll_up"
+# C-c = ["toggle_comments", "move_line_down"]
+"*" = [
+  "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search_next",
+]
+# ";" = "repeat_last_motion"
+
+C-v = "copy_selection_on_next_line"
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
+V = ["select_mode", "extend_to_line_bounds"]
+# x = ["select_mode", "extend_to_line_bounds"]
+D = [
+  "extend_to_line_end",
+  "yank_main_selection_to_clipboard",
+  "delete_selection",
+]
 
 ret = ["open_below", "normal_mode"]
 "\\" = ["open_above", "normal_mode"]
 
-backspace = { r = ":config-reload" }
+[keys.normal.backspace]
+r = ":config-reload"
+
+[keys.normal.space]
+h = ":set lsp.display-inlay-hints true"
+H = ":set lsp.display-inlay-hints false"
 
 [keys.select]
 G = ["extend_line_below", "goto_last_line", "goto_line_end"]
-# H = "goto_line_start"
-# L = "goto_line_end"
+H = "goto_line_start"
+L = "goto_line_end"
+V = "extend_line_below"
+
+C-v = "copy_selection_on_next_line"
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
 
 [keys.insert]
+C-space = "completion"
 C-p = "move_line_up"
 C-n = "move_line_down"
 C-e = "goto_line_end_newline"
@@ -65,8 +112,10 @@ C-a = "goto_line_start"
 C-f = "move_char_right"
 C-b = "move_char_left"
 C-u = [
-    "move_prev_word_start",
-    "move_next_word_end",
-    "switch_case",
-    "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "switch_case",
+  "move_char_right",
 ]
+C-z = "undo"
+C-S-z = "redo"

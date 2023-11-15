@@ -1,8 +1,10 @@
 # Applications
 alias g="git"
+alias gri="git rebase -i "
 alias c="code"
 alias v="nvim"
 alias vim="vim"
+alias t="tmux-fzf-session"
 alias td="tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}"
 alias sv="sudo vim"
 alias s="sudo"
@@ -25,4 +27,3 @@ alias y="yarn"
 alias pp="pnpm"
 
 alias dot="GIT_WORK_TREE=~ GIT_DIR=~/.dotfiles"
-

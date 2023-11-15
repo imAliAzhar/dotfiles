@@ -2,7 +2,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 yabai -m config mouse_modifier fn
-yabai -m config focus_follows_mouse autoraise
+yabai -m config autofocus 
 
 yabai -m config top_padding    15
 yabai -m config bottom_padding 15
@@ -11,6 +11,7 @@ yabai -m config right_padding  15
 yabai -m config window_gap     15
 
 yabai -m rule --add app="Alacritty" opacity=0.95
+yabai -m rule --add app="WezTerm" opacity=0.95
 yabai -m rule --add app="Code" opacity=0.95
 yabai -m rule --add app="Slack" opacity=0.95
 

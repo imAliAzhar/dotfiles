@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # Quickly jump to dir with zoxide in lf
 

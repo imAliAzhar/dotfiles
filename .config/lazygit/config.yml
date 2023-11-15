@@ -1,0 +1,16 @@
+# ln -s $HOME/.config/lazygit/config.yml $HOME/Library/Application\ Support/lazygit
+promptToReturnFromSubprocess: false
+quitOnTopLevelReturn: true
+
+gui:
+  showFileTree: false
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never -s
+
+os:
+  editPreset: "helix"
+  edit: 'tmux send-keys -t 1.1 ":open {{filename}}" Enter'
+  editAtLine: 'tmux send-keys -t 1.1 ":open {{filename}}:{{line}}" Enter'

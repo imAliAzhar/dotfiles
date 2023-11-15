@@ -4,7 +4,7 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 export FZF_DEFAULT_OPTS="\
 
 --bind ctrl-j:accept
---ansi --header '' --padding 5% --prompt '♯ ' --pointer ▸ 
+--ansi --header '' --padding 5% --prompt '♯ ' --pointer ▸
 --color='pointer:bright-yellow,gutter:-1,bg+:-1,fg+:bright-yellow:bold'"
 
 export MYVIMRC=~/.config/nvim/init.vim

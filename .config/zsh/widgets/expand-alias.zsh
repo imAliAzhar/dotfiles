@@ -1,6 +1,6 @@
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 
-IGNORED_ALIASES="dot ls"
+IGNORED_ALIASES="dot ls cd"
 
 
 # expand with space

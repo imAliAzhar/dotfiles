@@ -10,15 +10,37 @@ alt + shift - j : yabai -m window --swap south || $(yabai -m window --display so
 alt + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
 alt + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
 
+# move current window maintaining split size
+shift + alt + ctrl - h : yabai -m window --warp west
+shift + alt + ctrl - j : yabai -m window --warp south
+shift + alt + ctrl - k : yabai -m window --warp north
+shift + alt + ctrl - l : yabai -m window --warp east
+
 # set insertion point in focused container
 alt + ctrl - h : yabai -m window --insert west
 alt + ctrl - j : yabai -m window --insert south
 alt + ctrl - k : yabai -m window --insert north
 alt + ctrl - l : yabai -m window --insert east
 
+# rotate clockwise and counter clockwise
+cmd + alt - r : yabai -m space --rotate 270
+cmd + shift + alt - r : yabai -m space --rotate 90
 
-# go back to previous workspace (kind of like back_and_forth in i3)
+# go back to previous workspace (similar back_and_forth in i3)
 cmd - tab : yabai -m space --focus recent
+
+# float / unfloat
+cmd + alt - p: yabai -m window --toggle float;\
+               yabai -m window --grid 4:4:1:1:2:2
+
+# reset layout
+cmd + alt - 0: yabai -m space --balance
+
+# resize
+cmd + alt - h : yabai -m window --resize right:-20:0 2> /dev/null || yabai -m window --resize left:-20:0 2> /dev/null
+cmd + alt - j : yabai -m window --resize bottom:0:20 2> /dev/null || yabai -m window --resize top:0:20 2> /dev/null
+cmd + alt - k : yabai -m window --resize bottom:0:-20 2> /dev/null || yabai -m window --resize top:0:-20 2> /dev/null
+cmd + alt - l : yabai -m window --resize right:20:0 2> /dev/null || yabai -m window --resize left:20:0 2> /dev/null
 
 # focus workspace
 cmd - 1 : yabai -m space --focus 1
@@ -54,9 +76,11 @@ cmd + ctrl - 6 : yabai -m space --swap 6
 cmd + shift - 0x32 : yabai -m window --space last
 
 # change layout of desktop
-# alt - e : yabai -m space --layout bsp
-# alt - a : yabai -m space --layout float
-# alt - s : yabai -m space --layout stack
+cmd + alt - e : yabai -m space --layout bsp
+cmd + alt - a : yabai -m space --layout float
+cmd + alt - s : yabai -m space --layout stack
+
+cmd + alt - 1 : yabai -m window --toggle split
 
 alt - x : yabai -m space --mirror x-axis
 alt + shift - e : yabai -m space --mirror y-axis
@@ -70,7 +94,7 @@ alt + shift - tab : yabai -m window --focus stack.prev || yabai -m window --focu
 
 
 # enter fullscreen mode for the focused container
-alt + shift - f : yabai -m window --toggle zoom-fullscreen
-alt + shift - g : yabai -m space --toggle padding && yabai -m space --toggle gap
-alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9500
-alt + shift - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9000
+cmd + alt - f : yabai -m window --toggle zoom-fullscreen
+cmd + alt - g : yabai -m space --toggle padding && yabai -m space --toggle gap
+cmd + alt - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9500
+cmd + alt + shift - o : ~/.config/yabai/scripts/toggle_transparency.zsh 0.9000

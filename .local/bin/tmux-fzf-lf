@@ -1,9 +1,14 @@
 #!/bin/zsh
 
+# Behavior 1
 # zoxide query -l | xargs basename | fzf | xargs -I {} sh -c 'tmux new-window "lf $(zoxide query {}); $SHELL"'
 
+# Behavior 2
 # open new shell then launch lf
 #  - exiting lf will cd into last dir (default lf behaviour configured)
 #  - will show previously entered keys on prompt
-zoxide query -l | xargs -I {} basename {} | fzf | xargs -I {} sh -c 'tmux new-window; tmux send-keys "lf $(zoxide query {})" C-m'
+# zoxide query -l | xargs -I {} basename {} | fzf | xargs -I {} sh -c 'tmux new-window; tmux send-keys "lf $(zoxide query {})" C-m'
+
+# Behavior 3
+tmux new-window lf
 

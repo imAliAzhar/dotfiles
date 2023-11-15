@@ -4,7 +4,6 @@ precmd() {                                        # Print empty line after each 
   }
 }
 
-
 set_prompt() {
   if [[ $SHLVL -eq 1 ]]; then
     echo '%B%F{3}$%f%b '
@@ -17,3 +16,6 @@ set_prompt() {
 
 PROMPT=$(set_prompt)
 RPROMPT='%F{8}%1d'
+
+# eval "$(starship init zsh)"
+# export STARSHIP_CONFIG=~/.config/starship/starship.toml

@@ -1,0 +1,13 @@
+[shlvl]
+disabled = false
+format = '[$symbol]($style) '
+repeat = true
+symbol = '❯'
+repeat_offset = 2
+threshold = 1
+
+[rust]
+disabled = true
+
+[package]
+disabled = true

@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+url="https://www.nytimes.com/games/wordle"
+
+open $url

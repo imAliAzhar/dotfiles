@@ -1,7 +1,7 @@
 [alias]
   a = add
   c  = commit -m
-  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #111111)%an %ar %Creset' --date=format:\"%b %d, '%y\""
+  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #6e738d)%an %ar %Creset' --date=format:\"%b %d, '%y\""
   co = checkout
   ac = commit -am
   br = branch
@@ -14,14 +14,28 @@
   rc = rebase --continue
 [blame]
   date = human
-[diff]
-  tool = vscode
 [merge]
   conflictstyle = diff3
+[pull]
+	rebase = true
 [core]
+  pager = delta
   mergeoptions = --no-edit
 [credential]
 	helper = store
 [user]
 	name = imAliAzhar
 	email = aliazharthegreat@gmail.com
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	side-by-side = false
+	features = lemonade
+
+[diff]
+    colorMoved = default
+
+[include]
+    path = ~/.config/delta/themes.gitconfig

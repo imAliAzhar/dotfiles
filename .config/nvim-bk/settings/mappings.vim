@@ -9,7 +9,6 @@ map <Leader>/ <Plug>CommentaryLine
 
 "Save buffer
 nnoremap <Leader>w :w<CR>
-
 "Close buffer
 nnoremap <Leader>q :bd<CR>
 
