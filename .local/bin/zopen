@@ -2,15 +2,31 @@
 
 # Extend lf's open command to append dirs to zoxide
 
+
 if [[ -d $fx ]]; then
     zoxide add $fx
 fi
 
-# HELIX_EXPLORER (set by ~/.local/bin/helix-explorer) opens the file in helix
-if [[ -n $HELIX_EXPLORER ]] && [[ ! -d $fx ]]; then
-    tmux send-keys -t 1.1 ":open '$fx'" Enter
-    lf -remote  "send $id quit"
-    exit 0
+read index window <<< $(tmux list-windows -F '#I #W' | head -n 1)
+
+if [[ -d $fx || $index -ne 1 || ($window != "hx" && $window != "nvim") ]]; then
+  lf -remote  "send $id open \"$fx\""
+  exit 0
 fi
 
-lf -remote  "send $id open \"$fx\""
+if [[ $window = "hx" ]]; then
+    tmux send-keys -t 1.1 ":open '$fx'" Enter
+elif [[ $window = "nvim" ]]; then
+    tmux send-keys -t 1.1 ":edit $fx" Enter
+fi
+
+tmux select-window -t 1 \; select-pane -t 1;
+
+if [[ -n "$TMUX" && -z "$TMUX_PANE" ]]; then
+  TMUX_POPUP=true
+fi
+
+if [[ -n $TMUX_POPUP ]]; then
+  lf -remote  "send $id quit"
+fi
+

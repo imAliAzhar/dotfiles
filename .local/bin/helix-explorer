@@ -7,5 +7,4 @@ fi
 
 DIR=$1
 
-# ~/.local/bin/zopen will open the file in Helix when HELIX_EXPLORER is set
-tmux display-popup -E -h 40 -w 120 sh -c "HELIX_EXPLORER=true lf $DIR"
+tmux display-popup -E -h 95% -w 95% sh -c "lf $DIR"
