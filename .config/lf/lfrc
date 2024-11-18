@@ -3,17 +3,20 @@ set relativenumber true
 set previewer ~/.config/lf/pv.sh
 
 map e
+map n
 map f
 map S
 map C
 map L
 map DD
 map gc cd ~/.config/
+map gl cd ~/.local/
 map gp cd ~/Projects/
 map S $$SHELL
 map C $code "$fx"
 map O $open "$PWD"
 map N push &lfnew<space>
+map . set hidden!
 
 map F $vi $(fzf)
 
@@ -35,7 +38,7 @@ map l &zopen
 map L &hopen
 
 cmd fzf_jump ${{
-    res="$(fd -H --max-depth 1 | fzf --reverse --header='Jump to location')"
+    res="$(fd -I -H --max-depth 1 | fzf --reverse --header='Jump to location')"
     if [ -n "$res" ]; then
         if [ -d "$res" ]; then
             cmd="cd"
