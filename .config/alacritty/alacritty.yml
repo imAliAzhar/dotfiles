@@ -98,13 +98,9 @@ key_bindings:
   - { mods: Command, key: S, chars: "\x3a\x77\x0D" }
   # Quick open: <space> f
   - { mods: Command, key: P, chars: "\x20\x66\x66" }
-  # Open explorer: :sh helix-explorer <ctrl>+r % <ret>
-  - {
-      mods: Command,
-      key: E,
-      chars: "\x3a\x73\x68\x20\x68\x65\x6c\x69\x78\x2d\x65\x78\x70\x6c\x6f\x72\x65\x72\x20\x12\x25\x20\x0D",
-    }
-  # Open lazygit: prefix g
+  # Open explorer: <space> e  (runs ~/.local/bin/editor-explorer through ~/.config/nvim/lua/config/keybindings.lua)
+  - { mods: Command, key: E, chars: "\x20\x65" }
+  # Open lazygit: <space> g  (runs ~/.local/bin/editor-git through ~/.config/tmux/tmux.conf)
   - { mods: Command, key: G, chars: "\x60\x67" }
   # Toggle comment: <ctrl> c
   - { mods: Command, key: "Slash", chars: "\x03" }
