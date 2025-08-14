@@ -9,9 +9,8 @@
   "workbench.editor.showIcons": false,
   "workbench.settings.editor": "json",
   "workbench.sideBar.location": "right",
-  "workbench.activityBar.visible": true,
   "workbench.editor.enablePreview": true,
-  "workbench.colorTheme": "Palenight Operator",
+  "workbench.colorTheme": "Catppuccin Macchiato",
 
   // Editor
   // ------------------------
@@ -30,7 +29,7 @@
   "editor.suggest.localityBonus": true,
   "editor.minimap.renderCharacters": false,
   "editor.formatOnSaveMode": "modifications",
-  "editor.fontFamily": "'MonoLisa'",
+  "editor.fontFamily": "'Victor Mono'",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorBlinking": "phase",
   "diffEditor.renderSideBySide": true,
@@ -62,7 +61,7 @@
   // Debug
   // ------------------------
 
-  "debug.inlineValues": true,
+  "debug.inlineValues": "on",
 
   // Languages
   // ========================
@@ -74,14 +73,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     }
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     }
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -94,7 +93,7 @@
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     }
   },
   "javascript.updateImportsOnFileMove.enabled": "never",
@@ -155,5 +154,7 @@
 
   "eslint.run": "onSave",
   "svelte.enable-ts-plugin": true,
-  "colorize.languages": ["json"]
+  "colorize.languages": [
+    "json"
+  ]
 }
