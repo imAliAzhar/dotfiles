@@ -1,0 +1,24 @@
+-- vim.api.nvim_create_autocmd("BufLeave", {
+-- 	callback = function(args)
+-- 		local bufnr = args.buf
+-- 		if vim.api.nvim_buf_get_option(bufnr, "modified") then
+-- 			return -- don't close if modified
+-- 		end
+--
+-- 		if vim.api.nvim_buf_get_option(bufnr, "buftype") ~= "" then
+-- 			return -- ignore special buffers like terminal, help, etc.
+-- 		end
+--
+-- 		-- Don't delete the current buffer if it's visible in another window
+-- 		for _, win in ipairs(vim.api.nvim_list_wins()) do
+-- 			if vim.api.nvim_win_get_buf(win) == bufnr then
+-- 				return
+-- 			end
+-- 		end
+--
+-- 		-- Delete the buffer safely
+-- 		vim.schedule(function()
+-- 			vim.api.nvim_buf_delete(bufnr, { force = false })
+-- 		end)
+-- 	end,
+-- })

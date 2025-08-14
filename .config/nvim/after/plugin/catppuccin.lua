@@ -1,8 +1,9 @@
 require("catppuccin").setup({
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        treesitter = true,
-    }
-}) 
-
+	transparent_background = true,
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		treesitter = true,
+		which_key = true,
+	},
+})
