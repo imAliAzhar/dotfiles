@@ -1,34 +1,108 @@
-function copyFilePath()
-  local filepath = vim.fn.expand('%')
-  vim.fn.setreg('+', filepath) -- write to clippoard
-end
-
-function copyFileName()
-  local filename = vim.fn.expand('%:t') -- Get the file name only
-  vim.fn.setreg('+', filename) -- Write to clipboard
-end
-
-function openExplorer()
-  local filepath = vim.fn.expand('%:p')
-  local command = "editor-explorer " .. filepath 
-  vim.fn.system(command)
-end
-
-
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
-vim.keymap.set({ 'n', 'i', 'v', 'c' }, '<Leader>e', openExplorer, { desc = "Open explorer" })
-vim.keymap.set('n', '<leader>gf', copyFileName, { desc = "Copy current file name", noremap = true, silent = true })
-vim.keymap.set('n', '<leader>gF', copyFilePath, { desc = "Copy current file path", noremap = true, silent = true })
+local map = vim.keymap.set
 
-vim.keymap.set({ 'n', 'v' }, "H", "0", { desc = "Go to beginning of line" })
-vim.keymap.set({ 'n', 'v' }, "L", "$", { desc = "Go to end of line" })
+vim.keymap.set("n", "j", "gj", { noremap = true })
+vim.keymap.set("n", "k", "gk", { noremap = true })
+vim.keymap.set("v", "j", "gj", { noremap = true })
+vim.keymap.set("v", "k", "gk", { noremap = true })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set({ 'n', 'v' }, '<Leader>p', '"+p', { desc = "Paste from system clipboard after cursor" })
-vim.keymap.set({ 'n', 'v' }, '<Leader>P', '"+P', { desc = "Paste from system clipboard before cursor" })
+-- Buffer Navigation
+map({ "n", "v" }, "gh", "<CMD>bprev<CR>", { desc = "Jump to previous buffer" })
+map({ "n", "v" }, "gl", "<CMD>bnext<CR>", { desc = "Jump to next buffer" })
+map({ "n", "v" }, "<Leader>d", vim.diagnostic.setqflist, { desc = "List diagnostics" })
 
-vim.keymap.set('n', '<CR>', 'o<Esc>', { desc = "Add new line below (normal mode)" })
+-- Buffer Management
+map({ "n", "v" }, "<Leader>r", ":e!<CR>", { desc = "Reload buffer" })
+map({ "n", "v" }, "<Leader>w", ":Bd<CR>", { desc = "Close buffer" })
+map({ "n", "v" }, "<leader>s", "<CMD>w<CR>", { desc = "Save file" })
+map({ "n", "v" }, "<leader>S", "<CMD>:noa w<CR>", { desc = "Save file without formatting" })
 
+map({ "n", "v" }, "<Leader>bn", ":bn<CR>", { desc = "Next buffer" })
+map({ "n", "v" }, "<Leader>bp", ":bp<CR>", { desc = "Previous buffer" })
 
+map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
+map("n", "<Leader>*", function()
+	vim.cmd("vim /" .. vim.fn.expand("<cword>") .. "/ % | cw")
+end, { noremap = true, silent = true, desc = "Search current word in current file" })
+map("v", "<localleader>8", ":s#^\\(.*\\)$#", { noremap = true, silent = true, desc = "Create capture group" })
+
+-- Add New Line
+map("n", "<CR>", "o<Esc>", { desc = "Add new line below (normal mode)" })
+
+-- Comment Actions
+map("n", "<leader>/", "gcl", { remap = true, desc = "Toggle comment (current line)" })
+map("v", "<leader>/", "gc", { remap = true, desc = "Toggle comment (selection)" })
+
+-- Clipboard Actions
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+map({ "n", "v" }, "<Leader>p", '"+p', { desc = "Paste from system clipboard after cursor" })
+map({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste from system clipboard before cursor" })
+
+-- Line Navigation
+map({ "n", "v", "x", "o" }, "H", "0", { desc = "Go to beginning of line" })
+map({ "n", "v", "x", "o" }, "L", "$", { desc = "Go to end of line" })
+
+-- map("n", "m", "'", { noremap = true, silent = true })
+-- map("n", "M", "m", { noremap = true, silent = true })
+
+-- Lua Execution
+-- map("n", "<Leader><Leader>x", "<CMD>source %<CR>", { desc = "Execute current lua file" })
+-- map("n", "<Leader>x", ":.lua<CR>", { desc = "Execute current lua line" })
+-- map("v", "<Leader>x", ":lua<CR>", { desc = "Execute selected lua line" })
+
+-- Copy Current File Info
+map("n", "<leader>cf", function()
+	local filename = vim.fn.expand("%:t")
+	vim.fn.setreg("+", filename)
+end, { desc = "Copy current file name", noremap = true, silent = true })
+
+map("n", "<leader>cp", function()
+	local filepath = vim.fn.expand("%")
+	vim.fn.setreg("+", filepath)
+end, { desc = "Copy current file path", noremap = true, silent = true })
+
+-- Diffview Integration
+map({ "n", "v" }, "<Leader>gg", ":DiffviewOpen<CR>", { desc = "Open diff view" })
+map({ "n", "v" }, "<Leader>gd", ":DiffviewClose<CR>", { desc = "Close diff view" })
+map({ "n", "v" }, "<Leader>gh", ":DiffviewFileHistory %<CR>", { desc = "Open file history for current file" })
+map({ "n", "v" }, "<Leader>gH", ":DiffviewFileHistory<CR>", { desc = "Open file history for current branch" })
+
+-- Window Navigation
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- Window Resizing
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- Tab Management
+map("n", "<leader><tab>H", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>L", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader><tab>t", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- Quickfix List
+
+local function toggle_qf()
+	for _, win in ipairs(vim.fn.getwininfo()) do
+		if win.quickfix == 1 then
+			vim.cmd("cclose")
+			return
+		end
+	end
+	vim.cmd("copen")
+end
+
+map("n", "<leader>l", toggle_qf, { noremap = true, silent = true, desc = "Open Quickfix list" })
+map("n", "]l", ":cnewer | copen<cr>", { noremap = true, silent = true, desc = "Next Quickfix history" })
+map("n", "[l", ":colder | copen<cr>", { noremap = true, silent = true, desc = "Previous Quickfix history" })
