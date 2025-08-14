@@ -1,31 +1,15 @@
-bindkey -e                                 # Use emacs keymap
-# bindkey -v '^?' backward-delete-char
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M viins "^[e" edit-command-line
 
-autoload -z     edit-command-line          # Edit current line in vim buffer
-zle -N          edit-command-line
-bindkey "^[e"   edit-command-line
+bindkey -M viins "^O" accept-line-and-down-history
+bindkey -M viins '^ ' autosuggest-execute
 
-bindkey '^ '    autosuggest-execute        # Execute suggested command
-
-bindkey '^ '    autosuggest-execute        # Execute suggested command
-
-bindkey "^O"    accept-line-and-down-history
-
-bindkey -s      '^[j' 'lfcd\n'              # run lfcd fn
-
-
-# bindkey -M viins "^ "    autosuggest-execute        # Execute suggested command
-# bindkey -M vicmd "^ "    autosuggest-execute        # Execute suggested command
-# bindkey -M viins "^O" accept-line-and-down-history
-# bindkey -M vicmd "^O" accept-line-and-down-history
-# bindkey -M vicmd "L" end-of-line
-# bindkey -M vicmd "H" beginning-of-line
-# bindkey -M vicmd "/" fzf-history-widget
-
-# bindkey '^B'    backward-word              # Switch char and word skip bindings
-# bindkey '^[B'   backward-char
-# bindkey '^[b'   backward-char
-# bindkey '^F'    forward-word
-# bindkey '^[F'   forward-char
-# bindkey '^[f'   forward-char
+function zvm_after_lazy_keybindings() {
+  bindkey -M vicmd "^[e" edit-command-line
+  bindkey -M vicmd "^O" accept-line-and-down-history
+  bindkey -M vicmd 'H' vi-first-non-blank
+  bindkey -M vicmd 'L' vi-end-of-line
+  bindkey -M vicmd "/" fzf-history-widget
+}
 

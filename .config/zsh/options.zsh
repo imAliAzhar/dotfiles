@@ -3,3 +3,4 @@ setopt AUTO_PARAM_SLASH                 # Tab completing directory appends a sla
 setopt NO_FLOW_CONTROL                  # Disable start (C-s) and stop (C-q) characters
 setopt HIST_IGNORE_DUPS                 # Do not enter command lines into the history list if they are duplicates of the previous event
 setopt SHARE_HISTORY                    # Share history across shells
+setopt PROMPT_SUBST                     # Enable substitution in the prompt. Useful for displaying git information.
