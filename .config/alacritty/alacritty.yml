@@ -3,16 +3,16 @@ import:
 
 font:
   normal:
-    family: "Dank Mono"
+    family: "Victor Mono"
     style: Regular
   italic:
-    family: "Dank Mono"
+    family: "Victor Mono"
     style: Italic
   bold:
-    family: "Dank Mono"
+    family: "Victor Mono"
     style: Bold
   bold_italic:
-    family: "Dank Mono"
+    family: "Victor Mono"
     style: Italic
 
   # Point size
@@ -66,41 +66,47 @@ env:
 key_bindings:
   # use `xxd -ps` to get hexdump
 
-  # Tmux Keybindings
-  # prefix_key: ` (\x60)
+# Tmux - Open Session Selector
+- { mods: Command, key: R, chars: "\x60\x72" }
 
-  # Open new window: prefix c
-  - { mods: Command, key: T, chars: "\x60\x63" }
-  # # Close current pane: prefix x
-  # - { key: W,         mods: Command,            chars: "\x60\x78"                }
-  # Detach from tmux: prefix d
-  - { mods: Command|Shift, key: W, chars: "\x60\x64" }
-  # Tmux sessions quick open: prefix r
-  - { mods: Command, key: R, chars: "\x60\x72" }
-  # List tmux sessions: prefix s
-  - { mods: Command|Shift, key: R, chars: "\x60\x73" }
-  # Switch to last pane: prefix o
-  - { mods: Command, key: J, chars: "\x60\x6f" }
-  # Switch to last window: prefix prefix
-  - { mods: Command, key: K, chars: "\x60\x6b" }
-  # Switch to last session: prefix l
-  - { mods: Command, key: L, chars: "\x60\x6c" }
-  # Quick open: prefix <ctrl>+p
-  - { mods: Command|Shift, key: P, chars: "\x60\x10" }
-  # Toggle zoom for current pane: prefix z
-  - { mods: Command, key: F, chars: "\x60\x7a" }
+# Tmux - Create new window
+- { mods: Command, key: T, chars: "\x60\x74" }
+- { mods: Command|Shift, key: T, chars: "\x60\x54" }
 
-  # Editor Keybindings
+# Tmux - Navigate right
+- { mods: Command, key: L, chars: "\x60\x29" }
 
-  # Close current buffer: <esc>:bd<ret>
-  - { mods: Command, key: W, chars: "\x3a\x62\x64\x0D" }
-  # Save current buffer: <esc>:w<ret>
-  - { mods: Command, key: S, chars: "\x3a\x77\x0D" }
-  # Quick open: <space> f
-  - { mods: Command, key: P, chars: "\x20\x66\x66" }
-  # Open explorer: <space> e  (runs ~/.local/bin/editor-explorer through ~/.config/nvim/lua/config/keybindings.lua)
-  - { mods: Command, key: E, chars: "\x20\x65" }
-  # Open lazygit: <space> g  (runs ~/.local/bin/editor-git through ~/.config/tmux/tmux.conf)
-  - { mods: Command, key: G, chars: "\x60\x67" }
-  # Toggle comment: <ctrl> c
-  - { mods: Command, key: "Slash", chars: "\x03" }
+# Tmux - Navigate left
+- { mods: Command, key: H, chars: "\x60\x28" }
+
+# Tmux - Open something
+- { mods: Command, key: O, chars: "\x60\x6f" }
+
+# Tmux - Navigate down
+- { mods: Command, key: J, chars: "\x60\x6e" }
+
+# Tmux - Navigate up
+- { mods: Command, key: K, chars: "\x60\x70" }
+
+# Editor - Close window
+- { mods: Command, key: W, chars: "\x20\x77" }
+
+# Editor - Open LazyGit
+- { mods: Command, key: G, chars: "\x60\x67" }
+
+# Editor - Search
+- { mods: Command, key: Slash, chars: "\x20\x2f" }
+
+# Editor - Save
+- { mods: Command, key: S, chars: "\x20\x73" }
+- { mods: Command|Shift, key: S, chars: "\x20\x53" }
+
+# Editor - Quick Open
+- { mods: Command, key: P, chars: "\x20\x06\x0a" }
+
+# Editor - Open Explorer
+- { mods: Command, key: E, chars: "\x20\x65" }
+
+# Editor - Search text in project
+- { mods: Command|Shift, key: F, chars: "\x20\x46" }
+
