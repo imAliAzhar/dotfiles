@@ -1,0 +1,34 @@
+# For more config visit: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+# ln -s $HOME/.config/lazygit/config.yml $HOME/Library/Application\ Support/lazygit
+promptToReturnFromSubprocess: false
+quitOnTopLevelReturn: true
+
+gui:
+  showFileTree: false
+  enlargedSideViewLocation: top
+  expandFocusedSidePanel: true
+  showListFooter: false
+  border: single
+  filterMode: fuzzy
+  switchTabsWithPanelJumpKeys: true
+  showBottomLine: false
+  showRandomTip: false
+  nerdFontsVersion: "3"
+  showFileIcons: false
+
+  authorColors:
+    '*': '#b4befe'
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never -s
+    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
+
+os:
+  editPreset: "nvim"
+  edit: '$HOME/.local/bin/nvr {{filename}}'
+  editAtLine: '$HOME/.local/bin/nvr {{filename}} +{{line}}'
+  editAtLineAndWait: 'nvim {{filename}} +{{line}}'
+
