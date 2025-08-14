@@ -1,4 +1,11 @@
-if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ "$TERM_PROGRAM" != "Apple_Terminal" ]
+# Sync with 'emulate_tmux' ~/.config/wezterm/wezterm.lua
+export NATIVE_TERM_MULTIPLEXING=false
+
+if [ "$NATIVE_TERM_MULTIPLEXING" = "true" ]; then
+  return 0
+fi
+
+if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "WezTerm" ];
 then
     # tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}
     source tmux-fzf-session
