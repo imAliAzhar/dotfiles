@@ -1,0 +1,15 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[mgr]
+ratio = [0, 1, 2]
+
+[opener]
+edit = [
+	{ run = 'nvr "$@"', desc = "$EDITOR", block = false, for = "unix" },
+]
+
+[plugins]
+preload = [
+    "~/.config/yazi/ui.lua"
+]
+
