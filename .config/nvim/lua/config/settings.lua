@@ -1,3 +1,5 @@
+vim.opt.ignorecase = true -- Case-insensitive by default
+vim.opt.smartcase = true -- But case-sensitive if uppercase in search
 vim.opt.expandtab = true --                                     Converts tabs to spaces
 vim.opt.tabstop = 2 --                                          Set tab size
 vim.opt.shiftwidth = 2 --                                       Set indent size on new line
@@ -28,3 +30,14 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = false
 
 vim.cmd("packadd cfilter")
+
+-- Open help files in the current window as a normal buffer
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function(event)
+		if vim.bo[event.buf].filetype == "help" then
+			vim.bo[event.buf].buflisted = true
+			vim.cmd.only()
+		end
+	end,
+})
