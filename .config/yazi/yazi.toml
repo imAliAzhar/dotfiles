@@ -2,14 +2,10 @@
 
 [mgr]
 ratio = [0, 1, 2]
+show_symlink = false
 
 [opener]
 edit = [
 	{ run = 'nvr "$@"', desc = "$EDITOR", block = false, for = "unix" },
-]
-
-[plugins]
-preload = [
-    "~/.config/yazi/ui.lua"
 ]
 
