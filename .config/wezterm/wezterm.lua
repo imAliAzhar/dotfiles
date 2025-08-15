@@ -11,7 +11,6 @@ local keymap = require("keymap")
 keymap.setup_keymap(config, emulate_tmux)
 
 config.font = wezterm.font("Victor Mono", { weight = "Medium" })
--- config.font = wezterm.font("Noto Sans Mono", { weight = "Regular" })
 config.font_size = 16
 config.window_padding = {
 	left = 0,
@@ -22,7 +21,7 @@ config.window_padding = {
 
 -- TODO: use from catppuccin package
 -- catppuccin-macchiato | https://catppuccin.com/palette
-local palette = {
+local catpuccin_mocha = {
 	crust = "#181926",
 	lavender = "#b7bdf8",
 	maroon = "#ee99a0",
@@ -31,9 +30,31 @@ local palette = {
 	subtext1 = "#b8c0e0",
 }
 
-config.color_scheme = "catppuccin-macchiato"
+local catpuccin_latte = {
+	crust = "#dce0e8",
+	lavender = "#7287fd",
+	maroon = "#e64553",
+	text = "#4c4f69",
+	subtext0 = "#6c6f85",
+	subtext1 = "#5c5f77",
+}
+
+local function get_system_theme()
+	if wezterm.gui then
+		return wezterm.gui.get_appearance()
+	end
+	return "Dark"
+end
+
+local system_theme = get_system_theme()
+local is_light_theme = system_theme == "Light"
+
+local palette = is_light_theme and catpuccin_latte or catpuccin_mocha
+
+config.color_scheme = is_light_theme and "catppuccin-latte" or "catppuccin-macchiato"
 config.colors = {
 	cursor_fg = palette.crust,
+	cursor_bg = palette.peach,
 	tab_bar = {
 		background = palette.crust,
 		active_tab = {
@@ -63,7 +84,7 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.show_new_tab_button_in_tab_bar = false
 
-config.window_background_opacity = 0.85
+config.window_background_opacity = is_light_theme and 0.90 or 0.85
 config.macos_window_background_blur = 20
 config.window_close_confirmation = "NeverPrompt"
 config.native_macos_fullscreen_mode = true

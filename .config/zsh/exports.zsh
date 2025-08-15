@@ -26,7 +26,18 @@ esac
 
 export GH_PACKAGES_TOKEN=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
 
-export VISUAL_THEME="light"
+if defaults read -g AppleInterfaceStyle &>/dev/null; then
+  unset LIGHT_THEME
+else
+  export LIGHT_THEME=true
+fi
+
+### LAZYGIT THEME
+################################################################################
+LG_THEME="${LIGHT_THEME:+latte}"
+LG_THEME="${LG_THEME:-mocha}"
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/themes/catppuccin-${LG_THEME}.yml"
+
 
 ### PATH
 ################################################################################

@@ -1,22 +1,3 @@
--- Use colors from Catpuccin plugin
-local colors = {
-	lavender = "#b4befe",
-	flamingo = "#f2cdcd",
-	mauve = "#cba6f7",
-	maroon = "#eba0ac",
-	peach = "#fab387",
-	yellow = "#f9e2af",
-	red = "#f38ba8",
-
-	subtext1 = "#bac2de",
-	subtext0 = "#a6adc8",
-	overlay0 = "#6c7086",
-
-	base = "#1e1e2e",
-	mantle = "#181825",
-	crust = "#11111b",
-}
-
 local function macro_recording_status()
 	local recording_register = vim.fn.reg_recording()
 	if recording_register ~= "" then
@@ -25,31 +6,34 @@ local function macro_recording_status()
 	return ""
 end
 
+local palette_name = (os.getenv("LIGHT_THEME") == "true") and "latte" or "mocha"
+local palette = require("catppuccin.palettes").get_palette(palette_name)
+
 require("lualine").setup({
 	options = {
 		theme = {
 			inactive = {
-				a = { bg = colors.mantle, fg = colors.subtext0 },
-				b = { bg = colors.mantle, fg = colors.overlay0 },
-				c = { bg = colors.mantle, fg = colors.subtext0 },
+				a = { bg = palette.mantle, fg = palette.subtext0 },
+				b = { bg = palette.mantle, fg = palette.overlay0 },
+				c = { bg = palette.mantle, fg = palette.subtext0 },
 			},
 
 			normal = {
-				a = { bg = colors.lavender, fg = colors.base, gui = "bold" },
-				b = { bg = colors.crust, fg = colors.subtext1 },
-				c = { bg = colors.mantle, fg = colors.subtext1 },
+				a = { bg = palette.lavender, fg = palette.base, gui = "bold" },
+				b = { bg = palette.crust, fg = palette.subtext1 },
+				c = { bg = palette.mantle, fg = palette.subtext1 },
 			},
 			command = {
-				a = { bg = colors.lavender, fg = colors.base, gui = "bold" },
+				a = { bg = palette.lavender, fg = palette.base, gui = "bold" },
 			},
 			insert = {
-				a = { bg = colors.maroon, fg = colors.base, gui = "bold" },
+				a = { bg = palette.maroon, fg = palette.base, gui = "bold" },
 			},
 			visual = {
-				a = { bg = colors.mauve, fg = colors.base, gui = "bold" },
+				a = { bg = palette.mauve, fg = palette.base, gui = "bold" },
 			},
 			replace = {
-				a = { bg = colors.yellow, fg = colors.base, gui = "bold" },
+				a = { bg = palette.yellow, fg = palette.base, gui = "bold" },
 			},
 		},
 		component_separators = { left = "", right = "" },
