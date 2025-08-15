@@ -80,7 +80,7 @@ return {
 						[" <c-f>"] = "close",
 						-- ["<esc>"] = "close",
 						["<Tab>"] = focus_preview,
-						["<C-f>"] = layout_actions.toggle_preview,
+						-- ["<C-f>"] = layout_actions.toggle_preview,
 					},
 					n = {
 						[" <c-f>"] = "close",
@@ -90,7 +90,7 @@ return {
 						["q"] = "close",
 						["<Tab>"] = focus_preview,
 						-- ["<C-f>"] = layout_actions.toggle_preview,
-						["<C-f>"] = "select_default",
+						-- ["<C-f>"] = "select_default",
 					},
 				},
 				-- layout_strategy = "vertical",
@@ -127,8 +127,8 @@ return {
 			extensions.smart_open.smart_open({ disable_devicons = true, initial_mode = "insert", cwd_only = true })
 		end)
 		vim.keymap.set("n", "<leader>f", builtin.live_grep)
-		vim.keymap.set("n", "<leader>b", builtin.buffers)
-		vim.keymap.set("n", "<leader>B", builtin.oldfiles)
+		vim.keymap.set("n", "<leader>bb", builtin.buffers)
+		vim.keymap.set("n", "<leader>bo", builtin.oldfiles)
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 		vim.keymap.set("n", "<leader>gl", builtin.git_status)
 		vim.keymap.set("n", "<leader>gb", builtin.git_branches)

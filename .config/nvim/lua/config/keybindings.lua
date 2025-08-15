@@ -29,8 +29,18 @@ map("n", "<Leader>*", function()
 end, { noremap = true, silent = true, desc = "Search current word in current file" })
 map("v", "<localleader>8", ":s#^\\(.*\\)$#", { noremap = true, silent = true, desc = "Create capture group" })
 
--- Add New Line
-map("n", "<CR>", "o<Esc>", { desc = "Add new line below (normal mode)" })
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		-- Add New Line
+		map("n", "<CR>", "o<Esc>", { desc = "Add new line below (normal mode)" })
+	end,
+})
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+	callback = function()
+		-- Reset New Line binding in command window
+		map("n", "<CR>", "<CR>", { buffer = true })
+	end,
+})
 
 -- Comment Actions
 map("n", "<leader>/", "gcl", { remap = true, desc = "Toggle comment (current line)" })
