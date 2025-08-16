@@ -1,4 +1,3 @@
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 
 export FZF_DEFAULT_OPTS="\
@@ -34,9 +33,7 @@ fi
 
 ### LAZYGIT THEME
 ################################################################################
-LG_THEME="${LIGHT_THEME:+latte}"
-LG_THEME="${LG_THEME:-mocha}"
-export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/themes/catppuccin-${LG_THEME}.yml"
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/theme.yml"
 
 
 ### PATH

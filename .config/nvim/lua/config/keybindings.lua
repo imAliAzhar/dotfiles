@@ -63,6 +63,12 @@ map({ "n", "v", "x", "o" }, "L", "$", { desc = "Go to end of line" })
 -- map("n", "<Leader>x", ":.lua<CR>", { desc = "Execute current lua line" })
 -- map("v", "<Leader>x", ":lua<CR>", { desc = "Execute selected lua line" })
 
+-- Reload theme
+map("n", "<leader><leader>rt", function()
+	vim.cmd("source ~/.config/nvim/after/plugin/theme.lua")
+	vim.cmd("source ~/.config/nvim/after/plugin/lualine.lua")
+end, { desc = "Reload theme" })
+
 -- Copy Current File Info
 map("n", "<leader>cf", function()
 	local filename = vim.fn.expand("%:t")

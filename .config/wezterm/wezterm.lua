@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local workspaces = require("workspaces")
+local theme = require("theme")
 
 local config = wezterm.config_builder()
 
@@ -49,25 +50,24 @@ end
 local system_theme = get_system_theme()
 local is_light_theme = system_theme == "Light"
 
-local palette = is_light_theme and catpuccin_latte or catpuccin_mocha
+config.color_scheme = theme.color_scheme
 
-config.color_scheme = is_light_theme and "catppuccin-latte" or "catppuccin-macchiato"
 config.colors = {
-	cursor_fg = palette.crust,
-	cursor_bg = palette.peach,
+	cursor_fg = theme.cursor_fg,
+	cursor_bg = theme.cursor_bg,
 	tab_bar = {
-		background = palette.crust,
+		background = theme.tab_bar_background,
 		active_tab = {
-			bg_color = palette.crust,
-			fg_color = palette.text,
+			bg_color = theme.tab_bar_active_tab_bg_color,
+			fg_color = theme.tab_bar_active_tab_fg_color,
 			intensity = "Bold", -- "Half", "Normal", "Bold"
 			underline = "None", -- "None", "Single", "Double"
 			italic = false,
 			strikethrough = false,
 		},
 		inactive_tab = {
-			bg_color = palette.crust,
-			fg_color = palette.subtext0,
+			bg_color = theme.tab_bar_inactive_tab_bg_color,
+			fg_color = theme.tab_bar_inactive_tab_fg_color,
 		},
 	},
 }
@@ -107,8 +107,8 @@ if emulate_tmux then
 		local segments = {}
 
 		if window:leader_is_active() then
-			table.insert(segments, { Foreground = { Color = palette.crust } })
-			table.insert(segments, { Background = { Color = palette.maroon } })
+			table.insert(segments, { Foreground = { Color = theme.status_line_fg } })
+			table.insert(segments, { Background = { Color = theme.status_line_bg } })
 			table.insert(segments, { Attribute = { Intensity = "Bold" } })
 			table.insert(segments, { Text = " LEADER " })
 			table.insert(segments, "ResetAttributes")
@@ -116,7 +116,7 @@ if emulate_tmux then
 		end
 
 		-- workspace text
-		table.insert(segments, { Foreground = { Color = palette.subtext1 } })
+		table.insert(segments, { Foreground = { Color = theme.status_line_active } })
 		table.insert(segments, { Text = workspace })
 
 		window:set_right_status(wezterm.format(segments))

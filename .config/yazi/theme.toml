@@ -1,6 +1,6 @@
 [flavor]
-dark  = "catppuccin-mocha"
-light = "catppuccin-latte"
+dark  = "theme" 
+light = "theme" 
 
 [status]
 separator_open = ""

@@ -18,24 +18,3 @@
 ((type_alias_declaration
   "type" @custom.type))
 
-((jsx_opening_element
-  name: (member_expression
-    property: (property_identifier) @custom.jsx_subcomponent)))
-((jsx_closing_element
-  name: (member_expression
-    property: (property_identifier) @custom.jsx_subcomponent)))
-((jsx_self_closing_element
-  name: (member_expression
-    property: (property_identifier) @custom.jsx_subcomponent)))
-
-((jsx_opening_element
-  attribute: (jsx_attribute (property_identifier) @custom.jsx_prop)))
-((jsx_self_closing_element
-  attribute: (jsx_attribute (property_identifier) @custom.jsx_prop)))
-
-((jsx_opening_element
-   name: (identifier) @custom.jsx_component))
-((jsx_closing_element
-   name: (identifier) @custom.jsx_component))
-((jsx_self_closing_element
-   name: (identifier) @custom.jsx_component))

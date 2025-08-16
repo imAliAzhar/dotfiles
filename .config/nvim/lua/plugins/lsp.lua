@@ -46,6 +46,7 @@ return {
 						path = {
 							"lua/?.lua",
 							"lua/?/init.lua",
+							"~/.config/yazi/plugins/types.yazi/",
 						},
 					},
 					-- Make the server aware of Neovim runtime files
@@ -54,6 +55,7 @@ return {
 						library = {
 							vim.env.VIMRUNTIME,
 							"${3rd}/luv/library",
+							"~/.config/hammerspoon/Spoons/EmmyLua.spoon/annotations",
 						},
 					},
 				})
@@ -120,8 +122,6 @@ return {
 				map("n", "<Leader>8", "<cmd>lua vim.lsp.buf.rename()<cr>", options)
 				map("n", "<Leader>i", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", options)
 				map("n", "<Leader>.", "<cmd>lua vim.lsp.buf.code_action()<cr>", options)
-
-				vim.diagnostic.config({ float = { source = "if_many", border = "single" } })
 
 				map("n", "<C-w>d", function()
 					local _, winid = vim.diagnostic.open_float({ focusable = true })
