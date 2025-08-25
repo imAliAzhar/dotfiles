@@ -1,27 +1,34 @@
-[alias]
-  a = add
-  c  = commit -m
-  l = "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #111111)%an %ar %Creset' --date=format:\"%b %d, '%y\""
-  co = checkout
-  ac = commit -am
-  br = branch
-  pop = stash pop
-  dc = reset HEAD^
-  dd = reset --hard HEAD
-  rs = checkout --
-  delete = reset --hard HEAD~
-  ra = commit --amend --no-edit
-  rc = rebase --continue
 [blame]
   date = human
-[diff]
-  tool = vscode
 [merge]
   conflictstyle = diff3
+[pull]
+	rebase = true
+[push]
+  autoSetupRemote = true
 [core]
+  pager = delta
   mergeoptions = --no-edit
+	excludesfile = /Users/aliazhar.khan/.config/git/gitignore
 [credential]
 	helper = store
 [user]
 	name = imAliAzhar
-	email = aliazharthegreat@gmail.com
+	email = aliazhkh@gmail.com
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	side-by-side = false
+	features = lemonade
+
+[diff]
+    external = difft
+    colorMoved = default
+
+[difft]
+	display=side-by-side
+
+[include]
+    path = ~/.config/delta/themes.gitconfig

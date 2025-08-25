@@ -15,6 +15,7 @@ function fish_user_key_bindings
 
     # Bind `Ctrl-g` to fuzzy_git_branch and `Ctrl-e` to fuzzy_git_commit
     for mode in default insert
+        bind -M default \cr history-pager
         bind -M $mode \cg fuzzy_git_branch
         bind -M $mode \eg fuzzy_git_commit
     end
