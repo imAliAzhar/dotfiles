@@ -1,0 +1,1 @@
+-- see ~/.config/nvim/lua/plugins/nvim-eslint.lua

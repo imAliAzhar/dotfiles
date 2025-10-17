@@ -29,6 +29,11 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = false
 
+vim.opt.grepprg = "rg --vimgrep --smart-case --fixed-strings -- "
+vim.opt.grepformat = "%f:%l:%c:%m"
+
+vim.opt.winborder = "rounded"
+
 vim.cmd("packadd cfilter")
 
 -- Open help files in the current window as a normal buffer

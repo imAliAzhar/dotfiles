@@ -6,9 +6,13 @@ return {
 		fidget.setup({
 			notification = {
 				override_vim_notify = true,
+				window = {
+					winblend = 0,
+				},
+
 				configs = {
 					default = {
-						ttl = 1,
+						ttl = 3,
 						annote_style = "Question",
 						debug_annote = "DEBUG",
 						debug_style = "Comment",

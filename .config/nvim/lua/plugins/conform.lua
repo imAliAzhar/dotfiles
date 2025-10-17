@@ -16,6 +16,8 @@ return {
 				json = { "prettier" },
 				html = { "prettier" },
 				css = { "prettier" },
+				xml = { "xmlformatter" },
+				sql = { "sleek" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()

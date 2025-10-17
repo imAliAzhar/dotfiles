@@ -4,7 +4,14 @@ return {
 	opts = function()
 		return {
 			indent = { char = "▏" },
-			scope = { char = "▍", highlight = { "IblIndent" } },
+			scope = {
+				enabled = false,
+				-- char = "▍",
+				char = "▏",
+				highlight = { "LineNr" },
+				show_start = false,
+				show_end = false,
+			},
 		}
 	end,
 }

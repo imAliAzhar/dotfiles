@@ -10,7 +10,7 @@ return {
 			yazi.yazi({
 				hooks = {
 					on_yazi_ready = function(_, _, process_api)
-						process_api:emit_to_yazi({ "hidden", "show" })
+						-- process_api:emit_to_yazi({ "hidden", "show" })
 					end,
 				},
 			})

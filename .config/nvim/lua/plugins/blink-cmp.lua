@@ -8,7 +8,8 @@ return {
 		},
 		keymap = {
 			-- preset = "none",
-			["<Tab>"] = { "select_next" },
+			["<CR>"] = { "accept", "fallback" },
+			["<Tab>"] = { "select_next", "fallback" },
 			["<S-Tab>"] = { "select_prev" },
 			["<C-space>"] = { "show", "fallback" },
 			["<up>"] = { "select_prev" },
@@ -18,15 +19,11 @@ return {
 		},
 
 		cmdline = {
-			preset = "enter",
-			["<Tab>"] = { "select_next" },
-			["<S-Tab>"] = { "select_prev" },
-			["<C-e>"] = { "select_and_accept", "fallback" },
-			["<C-space>"] = { "show" },
+			enabled = false,
 		},
 
 		appearance = {
-			use_nvim_cmp_as_default = true,
+			-- use_nvim_cmp_as_default = true,
 			nerd_font_variant = "mono",
 		},
 
@@ -35,6 +32,7 @@ return {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
 		},
+		snippets = { preset = "luasnip" },
 	},
 	opts_extend = { "sources.default" },
 }

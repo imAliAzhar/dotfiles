@@ -15,7 +15,8 @@ map({ "n", "v" }, "<Leader>d", vim.diagnostic.setqflist, { desc = "List diagnost
 
 -- Buffer Management
 map({ "n", "v" }, "<Leader>r", ":e!<CR>", { desc = "Reload buffer" })
-map({ "n", "v" }, "<Leader>w", ":Bd<CR>", { desc = "Close buffer" })
+map({ "n", "v" }, "<Leader>w", ":bd<CR>", { desc = "Close buffer" })
+map({ "n", "v" }, "<Leader>W", ":%bd<CR>", { desc = "Close all buffers" })
 map({ "n", "v" }, "<leader>s", "<CMD>w<CR>", { desc = "Save file" })
 map({ "n", "v" }, "<leader>S", "<CMD>:noa w<CR>", { desc = "Save file without formatting" })
 
@@ -42,6 +43,11 @@ vim.api.nvim_create_autocmd("CmdwinEnter", {
 	end,
 })
 
+-- Marks Management
+map("n", "M", "m", { desc = "Set mark" })
+map("n", "m", "'", { desc = "Jump to mark" })
+-- ' is used for buffer navigation
+
 -- Comment Actions
 map("n", "<leader>/", "gcl", { remap = true, desc = "Toggle comment (current line)" })
 map("v", "<leader>/", "gc", { remap = true, desc = "Toggle comment (selection)" })
@@ -52,22 +58,26 @@ map({ "n", "v" }, "<Leader>p", '"+p', { desc = "Paste from system clipboard afte
 map({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste from system clipboard before cursor" })
 
 -- Line Navigation
-map({ "n", "v", "x", "o" }, "H", "0", { desc = "Go to beginning of line" })
+map({ "n", "v", "x", "o" }, "H", "^", { desc = "Go to beginning of line" })
 map({ "n", "v", "x", "o" }, "L", "$", { desc = "Go to end of line" })
 
 -- map("n", "m", "'", { noremap = true, silent = true })
 -- map("n", "M", "m", { noremap = true, silent = true })
 
 -- Lua Execution
--- map("n", "<Leader><Leader>x", "<CMD>source %<CR>", { desc = "Execute current lua file" })
--- map("n", "<Leader>x", ":.lua<CR>", { desc = "Execute current lua line" })
--- map("v", "<Leader>x", ":lua<CR>", { desc = "Execute selected lua line" })
+map("n", "<leader><leader>el", function()
+	vim.cmd("source %")
+	vim.notify("Executed current Lua file", vim.log.levels.INFO)
+end, { desc = "Execute current lua file" })
 
 -- Reload theme
 map("n", "<leader><leader>rt", function()
 	vim.cmd("source ~/.config/nvim/after/plugin/theme.lua")
 	vim.cmd("source ~/.config/nvim/after/plugin/lualine.lua")
 end, { desc = "Reload theme" })
+
+-- map("n", "<leader>el", ":.lua<CR>", { desc = "Execute current lua line" })
+-- map("v", "<leader>el", ":lua<CR>", { desc = "Execute selected lua line" })
 
 -- Copy Current File Info
 map("n", "<leader>cf", function()
@@ -109,15 +119,41 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Quickfix List
 
+-- local function toggle_qf()
+-- 	for _, win in ipairs(vim.fn.getwininfo()) do
+-- 		if win.quickfix == 1 then
+-- 			vim.cmd("cclose")
+-- 			return
+-- 		end
+-- 	end
+-- 	vim.cmd("copen")
+-- end
 local function toggle_qf()
+	local qf_winid = nil
+	local cur_win = vim.api.nvim_get_current_win()
+
 	for _, win in ipairs(vim.fn.getwininfo()) do
 		if win.quickfix == 1 then
-			vim.cmd("cclose")
-			return
+			qf_winid = win.winid
+			break
 		end
 	end
-	vim.cmd("copen")
+
+	if qf_winid then
+		if qf_winid == cur_win then
+			-- Already focused → close it
+			vim.cmd("cclose")
+		else
+			-- Open but not focused → jump to it
+			vim.api.nvim_set_current_win(qf_winid)
+		end
+	else
+		-- Not open → open it
+		vim.cmd("copen")
+	end
 end
+
+map("n", "<leader>mm", ":make<cr>", { noremap = true, silent = true, desc = "Run make" })
 
 map("n", "<leader>l", toggle_qf, { noremap = true, silent = true, desc = "Open Quickfix list" })
 map("n", "]l", ":cnewer | copen<cr>", { noremap = true, silent = true, desc = "Next Quickfix history" })

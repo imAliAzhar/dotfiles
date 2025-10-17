@@ -18,3 +18,8 @@
 ((type_alias_declaration
   "type" @custom.type))
 
+((accessibility_modifier
+  "private" @custom.accessibility_modifier))
+
+((interface_declaration
+  "interface" @custom.interface_declaration))

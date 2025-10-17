@@ -11,10 +11,12 @@ return {
 
 		vim.keymap.set("n", "<leader>ae", function()
 			vim.g.copilot_enabled = true
+			vim.notify("Copilot enabled")
 		end, { desc = "Enable Copilot" })
 
 		vim.keymap.set("n", "<leader>ad", function()
 			vim.g.copilot_enabled = false
+			vim.notify("Copilot disabled")
 		end, { desc = "Disable Copilot" })
 	end,
 }

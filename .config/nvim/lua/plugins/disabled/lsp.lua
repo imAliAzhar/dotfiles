@@ -22,7 +22,7 @@ return {
 		require("mason").setup()
 		require("mason-lspconfig").setup()
 
-		local lsp = require("lspconfig")
+		local lsp = vim.lsp.config
 
 		----------------------------------------------------------------------------
 		-- Lua
@@ -122,6 +122,11 @@ return {
 				map("n", "<Leader>8", "<cmd>lua vim.lsp.buf.rename()<cr>", options)
 				map("n", "<Leader>i", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", options)
 				map("n", "<Leader>.", "<cmd>lua vim.lsp.buf.code_action()<cr>", options)
+				map("n", "<leader>gH", function()
+					local enabled = not vim.lsp.inlay_hint.is_enabled({})
+					vim.lsp.inlay_hint.enable(enabled)
+					vim.notify("Inlay hints: " .. (enabled and " on" or "off"))
+				end, { buffer = 0, desc = "Toggle inlay hints" })
 
 				map("n", "<C-w>d", function()
 					local _, winid = vim.diagnostic.open_float({ focusable = true })
@@ -135,6 +140,77 @@ return {
 				if client ~= nil then
 					client.server_capabilities.semanticTokensProvider = nil
 				end
+
+				-- Create a custom namespace. This will aggregate signs from all other
+				-- namespaces and only show the one with the highest severity on a
+				-- given line
+				local ns = vim.api.nvim_create_namespace("diagnostics")
+
+				-- Get a reference to the original signs handler
+				local orig_signs_handler = vim.diagnostic.handlers.signs
+
+				vim.diagnostic.config({
+					virtual_text = false,
+					float = { source = "if_many", border = "single" },
+					severity_sort = true,
+					-- virtual_lines = { current_line = false },
+
+					signs = {
+						-- To enable text, increase vim.opt.signcolumn in settings.lua
+						text = {
+							[vim.diagnostic.severity.ERROR] = " •",
+							[vim.diagnostic.severity.WARN] = " •",
+							[vim.diagnostic.severity.INFO] = " •",
+							[vim.diagnostic.severity.HINT] = " •",
+						},
+						numhl = {
+							[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+							[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+							[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+							[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+						},
+					},
+				})
+
+				vim.diagnostic.handlers.signs = {
+					show = function(_, bufnr, _, opts)
+						-- Get all diagnostics from the whole buffer rather than just the
+						-- diagnostics passed to the handler
+						local diagnostics = vim.diagnostic.get(bufnr)
+
+						-- Find the "worst" diagnostic per line
+						local max_severity_per_line = {}
+						for _, d in pairs(diagnostics) do
+							local m = max_severity_per_line[d.lnum]
+							if not m or d.severity < m.severity then
+								max_severity_per_line[d.lnum] = d
+							end
+						end
+
+						-- Pass the filtered diagnostics (with our custom namespace) to
+						-- the original handler
+						local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
+						orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
+					end,
+
+					hide = function(_, bufnr)
+						orig_signs_handler.hide(ns, bufnr)
+					end,
+				}
+
+				map("n", "]e", function()
+					vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, wrap = true, count = 1 })
+				end, { desc = "Go to next error" })
+				map("n", "[e", function()
+					vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, wrap = true, count = 1 })
+				end, { desc = "Go to next error" })
+
+				map("n", "]w", function()
+					vim.diagnostic.jump({ severity = vim.diagnostic.severity.WARN, wrap = true, count = 1 })
+				end, { desc = "Go to next warning" })
+				map("n", "[w", function()
+					vim.diagnostic.jump({ severity = vim.diagnostic.severity.WARN, wrap = true, count = 1 })
+				end, { desc = "Go to next warning" })
 			end,
 		})
 	end,
