@@ -33,6 +33,10 @@ if status is-interactive
     abbr --add gignore git update-index --skip-worktree
     abbr --add gunignore git update-index --no-skip-worktree
 
+    abbr --add aa rewise-german-word-audio
+    abbr --add at rewise-german-word-answer
+    abbr --add ai rewise-german-word-explain
+
     # # SDKs and toolchains
     # --------------------------------------------------------------------------
 

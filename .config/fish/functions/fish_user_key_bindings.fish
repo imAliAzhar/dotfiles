@@ -18,5 +18,6 @@ function fish_user_key_bindings
         bind -M default \cr history-pager
         bind -M $mode \cg fuzzy_git_branch
         bind -M $mode \eg fuzzy_git_commit
+        bind -M $mode \ck rewise-german-word-explain
     end
 end
