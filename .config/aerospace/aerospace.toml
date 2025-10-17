@@ -61,13 +61,13 @@ preset = 'qwerty'
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-[gaps]
-inner.horizontal = 10
-inner.vertical =   10
-outer.left =       18
-outer.bottom =     18
-outer.top =        19
-outer.right =      18
+# [gaps]
+# inner.horizontal = 10
+# inner.vertical =   10
+# outer.left =       18
+# outer.bottom =     18
+# outer.top =        19
+# outer.right =      18
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -147,6 +147,14 @@ cmd-shift-8 = 'move-node-to-workspace 8'
 cmd-shift-9 = 'move-node-to-workspace 9'
 cmd-shift-0 = 'move-node-to-workspace 10'
 
+
+alt-shift-ctrl-f = 'workspace 1'
+alt-shift-ctrl-d = 'workspace 0'
+alt-shift-ctrl-s = 'workspace 3'
+alt-shift-ctrl-j = 'workspace 9'
+alt-shift-ctrl-k = 'workspace 10'
+alt-shift-ctrl-l = 'workspace 8'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
@@ -162,6 +170,10 @@ alt-shift-f = 'layout floating tiling'
 cmd-alt-h = [] # Disable "hide others"
 
 [workspace-to-monitor-force-assignment]
+1 = [1, 'main']
+4 = [1, 'main']
+5 = [1, 'main']
+6 = [1, 'main']
 7 = 'built-in'
 8 = 'built-in'
 9 = 'built-in'
@@ -204,7 +216,7 @@ run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iphonesimulator'
-run = 'move-node-to-workspace 8'
+run = 'move-node-to-workspace 0'
 
 [[on-window-detected]]
 if.window-title-regex-substring = 'WhatsApp'
