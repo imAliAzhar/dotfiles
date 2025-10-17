@@ -2,8 +2,8 @@
 
 if [ "$1" = "--scrollback" ]; then
   # capture full scrollback
-  tmux capture-pane -p -S - | nvr -
+  tmux capture-pane -e -p -S - | nvr - --ansi
 else
   # capture just the visible pane
-  tmux capture-pane -p | nvr -
+  tmux capture-pane -e -p | nvr - --ansi
 fi
