@@ -5,6 +5,11 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
+
+killall stats_provider
+# Update with path to stats_provider
+$HOME/.local/bin/stats_provider --cpu usage --disk usage --memory ram_usage --interval 1 &
+
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
 # These are only some of the options available. For all options see:
@@ -12,7 +17,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=32 color=0x00000000 padding_left=16 padding_right=16
+sketchybar --bar position=top height=32 color=0xFF000000 padding_left=16 padding_right=16 display=$DISPLAY_ID
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -24,8 +29,8 @@ default=(
   padding_right=5
   icon.font="Hack Nerd Font:Bold:17.0"
   label.font="Roboto:Medium:13.0"
-  icon.color=0xFF8F9591
-  label.color=0xFF8F9591
+  icon.color=0xFFFFFFFF
+  label.color=0xFFFFFFFF
   icon.padding_left=0
   icon.padding_right=0
   label.padding_left=0
@@ -53,7 +58,19 @@ sketchybar \
            --subscribe aerospace aerospace_workspace_change \
            --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+           --subscribe battery system_woke power_source_change \
+           --add item cpu_usage right \
+           --set cpu_usage script="sketchybar --set cpu_usage label=⚙\ \$CPU_USAGE" \
+           --subscribe cpu_usage system_stats \
+           --add item ram_usage right \
+           --set ram_usage script="sketchybar --set ram_usage label=▦\ \$RAM_USAGE" \
+           --subscribe ram_usage system_stats \
+           --set /_usage/ label.color=0x65FFFFFF \
+           # --add item disk_usage right \
+           # --set disk_usage script="sketchybar --set disk_usage label=◉\ \$DISK_USAGE" \
+           # --subscribe disk_usage system_stats \
+           --
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
+sketchybar --hotload on

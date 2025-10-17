@@ -2,8 +2,8 @@
 
 
 case $FOCUSED_WORKSPACE in
-  0) label="Terminal" ;;
-  1) label="Web" ;;
+  0) label="Term" ;;
+  1) label="Arc" ;;
   2) label="App" ;;
   3) label="Slack" ;;
   9) label="Whatsapp" ;;
