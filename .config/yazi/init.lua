@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global
+--- @diagnostic disable: undefined-global
 
 -- Show the link target of the hovered item in the status line
 Status:children_add(function(self)
@@ -9,3 +9,6 @@ Status:children_add(function(self)
 		return ""
 	end
 end, 3300, Status.LEFT)
+
+require("folder-rules"):setup()
+require("hidden-files"):setup()

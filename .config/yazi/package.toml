@@ -13,3 +13,10 @@ use = "DreamMaoMao/searchjump"
 rev = "7fafec3"
 hash = "5337bf545993d8c4dec2c229031f49d"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "e95c7b3"
+hash = "1e047e1b13b5e3fc6ab1f5d0d04a14e2"
+
+[flavor]
+deps = []

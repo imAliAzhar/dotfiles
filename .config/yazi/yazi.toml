@@ -9,3 +9,11 @@ edit = [
 	{ run = 'nvr "$@"', desc = "$EDITOR", block = false, for = "unix" },
 ]
 
+# ~/.config/yazi/yazi.toml
+[[opener.bulk-rename]]
+run   = 'nvim "$@"'
+block = true
+
+[[open.prepend_rules]]
+name = "bulk-rename.txt"
+use  = "bulk-rename"

@@ -4,7 +4,17 @@ run = "shell 'open -R $0'"
 desc = "Open the file in Finder"
 
 [[mgr.prepend_keymap]]
+on = "<C-o>"
+run = 'shell -- qlmanage -p "$@"'
+desc = "Preview the file using Quick Look"
+
+[[mgr.prepend_keymap]]
 on   = "o"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on   = "e"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
@@ -24,7 +34,7 @@ run  = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
 [[mgr.prepend_keymap]]
-on = "q"
+on = "<Esc>"
 run = "close"
 desc = "Close the current tab, or quit if it is last tab"
 
