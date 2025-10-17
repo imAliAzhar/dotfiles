@@ -24,6 +24,7 @@ if status is-interactive
     abbr --add gcan git commit --amend --no-edit
     abbr --add gbr git branch
     abbr --add gpop git stash pop
+    abbr --add gch git cherry-pick -e
     abbr --add gdc git reset HEAD^
     abbr --add gdd git reset --hard HEAD
     abbr --add grs git checkout --
@@ -54,6 +55,9 @@ if status is-interactive
     fish_add_path $ANDROID_HOME/emulator
     fish_add_path $ANDROID_HOME/platform-tools
 
+    # Rust
+    fish_add_path $HOME/.cargo/bin
+
     # Shell plugins
     # --------------------------------------------------------------------------
 
@@ -72,6 +76,14 @@ if status is-interactive
 
     # Lazygit
     set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/theme.yml"
+
+    # Atuin
+    set -gx ATUIN_NOBIND true
+    atuin init fish | source
+
+    # bind to ctrl-r in normal and insert mode, add any other bindings you want here too
+    bind \cr _atuin_search
+    bind -M insert \cr _atuin_search
 
     # Environment variables
     # --------------------------------------------------------------------------
