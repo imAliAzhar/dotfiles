@@ -156,5 +156,6 @@
   "svelte.enable-ts-plugin": true,
   "colorize.languages": [
     "json"
-  ]
+  ],
+  "github.copilot.nextEditSuggestions.enabled": true
 }
