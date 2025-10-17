@@ -20,6 +20,25 @@
                                     }
                                 ],
                                 "from": {
+                                    "key_code": "d",
+                                    "modifiers": {}
+                                },
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 200,
+                                    "basic.to_if_held_down_threshold_milliseconds": 200
+                                },
+                                "to_if_alone": [{ "key_code": "d" }],
+                                "to_if_held_down": [{ "key_code": "left_shift" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "is_built_in_keyboard": true }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
                                     "key_code": "s",
                                     "modifiers": {}
                                 },
@@ -39,14 +58,14 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "a",
                                     "modifiers": {}
                                 },
                                 "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 200,
-                                    "basic.to_if_held_down_threshold_milliseconds": 200
+                                    "basic.to_if_alone_timeout_milliseconds": 350,
+                                    "basic.to_if_held_down_threshold_milliseconds": 350
                                 },
-                                "to_if_alone": [{ "key_code": "d" }],
+                                "to_if_alone": [{ "key_code": "a" }],
                                 "to_if_held_down": [{ "key_code": "left_alt" }],
                                 "type": "basic"
                             },
@@ -58,15 +77,15 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "k",
                                     "modifiers": {}
                                 },
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200,
                                     "basic.to_if_held_down_threshold_milliseconds": 200
                                 },
-                                "to_if_alone": [{ "key_code": "f" }],
-                                "to_if_held_down": [{ "key_code": "left_gui" }],
+                                "to_if_alone": [{ "key_code": "k" }],
+                                "to_if_held_down": [{ "key_code": "right_shift" }],
                                 "type": "basic"
                             },
                             {
@@ -96,34 +115,15 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "k",
+                                    "key_code": "semicolon",
                                     "modifiers": {}
                                 },
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200,
                                     "basic.to_if_held_down_threshold_milliseconds": 200
                                 },
-                                "to_if_alone": [{ "key_code": "k" }],
+                                "to_if_alone": [{ "key_code": "semicolon" }],
                                 "to_if_held_down": [{ "key_code": "right_alt" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [{ "is_built_in_keyboard": true }],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {}
-                                },
-                                "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 200,
-                                    "basic.to_if_held_down_threshold_milliseconds": 200
-                                },
-                                "to_if_alone": [{ "key_code": "j" }],
-                                "to_if_held_down": [{ "key_code": "right_gui" }],
                                 "type": "basic"
                             }
                         ]
@@ -136,7 +136,8 @@
                                     {
                                         "bundle_identifiers": [
                                             "^com\\.github\\.wez\\.wezterm$",
-                                            "^org\\.gnu\\.Emacs$"
+                                            "^org\\.gnu\\.Emacs$",
+                                            "^dev\\.zed\\.Zed$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -187,6 +188,7 @@
                         "description": "When Caps Lock (Control) is pressed with J, it acts as Return.",
                         "manipulators": [
                             {
+                                "conditions": [],
                                 "from": {
                                     "key_code": "j",
                                     "modifiers": { "mandatory": ["left_control"] }
@@ -226,6 +228,12 @@
                         "description": "Make F and J act as Command when held, F or J when tapped.",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "is_built_in_keyboard": true }],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "j",
                                     "modifiers": { "optional": ["any"] }
@@ -245,6 +253,12 @@
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "is_built_in_keyboard": true }],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f",
                                     "modifiers": { "optional": ["any"] }
