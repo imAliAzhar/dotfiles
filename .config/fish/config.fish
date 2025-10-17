@@ -85,6 +85,9 @@ if status is-interactive
     bind \cr _atuin_search
     bind -M insert \cr _atuin_search
 
+    # Notifications
+    source ~/.config/fish/functions/notify_command_completion.fish
+
     # Environment variables
     # --------------------------------------------------------------------------
 
