@@ -48,16 +48,33 @@ local keymap = {
 		action = action.ToggleFullScreen,
 	},
 
-	-- Editor
-
 	{
-		key = "w",
 		mods = "SUPER",
+		key = "-",
 		action = action.Multiple({
-			action.SendKey({ key = " " }),
-			action.SendKey({ key = "w" }),
+			action.SendKey({ key = "`" }),
+			action.SendKey({ key = "-" }),
 		}),
 	},
+	{
+		mods = "SUPER",
+		key = "\\",
+		action = action.Multiple({
+			action.SendKey({ key = "`" }),
+			action.SendKey({ key = "\\" }),
+		}),
+	},
+
+	-- Editor
+
+	-- {
+	-- 	key = "w",
+	-- 	mods = "SUPER",
+	-- 	action = action.Multiple({
+	-- 		action.SendKey({ key = " " }),
+	-- 		action.SendKey({ key = "w" }),
+	-- 	}),
+	-- },
 
 	{
 		key = "g",
@@ -77,14 +94,14 @@ local keymap = {
 		}),
 	},
 
-	{
-		key = "s",
-		mods = "SUPER",
-		action = action.Multiple({
-			action.SendKey({ key = " " }),
-			action.SendKey({ key = "s" }),
-		}),
-	},
+	-- {
+	-- 	key = "s",
+	-- 	mods = "SUPER",
+	-- 	action = action.Multiple({
+	-- 		action.SendKey({ key = " " }),
+	-- 		action.SendKey({ key = "s" }),
+	-- 	}),
+	-- },
 	{
 		key = "s",
 		mods = "SUPER|SHIFT",
@@ -209,6 +226,15 @@ local tmux = {
 	},
 
 	{
+		key = "z",
+		mods = "SUPER",
+		action = action.Multiple({
+			action.SendKey({ key = "`" }),
+			action.SendKey({ key = "z" }),
+		}),
+	},
+
+	{
 		key = "j",
 		mods = "SUPER",
 		action = action.Multiple({
@@ -277,7 +303,6 @@ local tmux_emulated = {
 		mods = "SUPER",
 		action = action.SpawnCommandInNewTab({
 			args = { "zsh", "-l", "-c", "lazygit" },
-			en,
 		}),
 	},
 
@@ -369,7 +394,7 @@ local tmux_emulated = {
 		mods = "LEADER|SHIFT",
 		action = action.PromptInputLine({
 			description = "Enter new name for session",
-			action = wezterm.action_callback(function(window, pane, line)
+			action = wezterm.action_callback(function(window, _, line)
 				if line then
 					wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
 				end
