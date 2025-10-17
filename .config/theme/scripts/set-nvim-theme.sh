@@ -6,19 +6,19 @@ THEME=$1
 MODE=$2
 
 
-MARK=">>> theme marker <<<"
-
 PARTS="$HOME/.config/theme/$THEME/nvim"
 NVIM_THEME="$HOME/.config/nvim/after/plugin/theme.lua"
 STATUSBAR_THEME="$HOME/.config/nvim/after/plugin/lualine.lua"
 
 tmp="$(mktemp)"
 cat "$PARTS/$MODE.lua" > "$tmp"
-sed -n "/$MARK/,\$p" "$NVIM_THEME" >> "$tmp"
+cat "$PARTS/common.lua" >> "$tmp"
 mv "$tmp" "$NVIM_THEME"
 
+MARK=">>> theme marker <<<"
 tmp="$(mktemp)"
-cat "$PARTS/$MODE-statusbar.lua" > "$tmp"
+cat "$PARTS/statusbar/$MODE.lua" > "$tmp"
+cat "$PARTS/statusbar/common.lua" >> "$tmp"
 sed -n "/$MARK/,\$p" "$STATUSBAR_THEME" >> "$tmp"
 mv "$tmp" "$STATUSBAR_THEME"
 

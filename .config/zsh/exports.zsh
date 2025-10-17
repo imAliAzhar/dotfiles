@@ -38,6 +38,7 @@ export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/th
 
 ### PATH
 ################################################################################
+export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
@@ -45,7 +46,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
 
@@ -80,3 +80,12 @@ rehash
 ################################################################################
 
 export BUN_INSTALL="$HOME/.bun"
+
+
+### MAESTRO
+################################################################################
+
+export PATH=$PATH:$HOME/.maestro/bin
+
+export MAESTRO_CLI_AI_MODEL=gpt-4.1
+export MAESTRO_DRIVER_STARTUP_TIMEOUT=30000
