@@ -16,7 +16,15 @@ system_theme_watcher:setup()
 system_theme_watcher:add_listener(function(theme)
 	hs.alert.show("Theme changed to " .. theme, 1)
 
-	sh(([[~/.config/theme/scripts/set-theme.sh cattpuccin %s]]):format(theme))
+	sh(([[~/.config/theme/scripts/set-theme.sh rose-pine %s]]):format(theme))
+end)
+
+local external_display_watcher = require("external_display_watcher")
+external_display_watcher:setup()
+
+external_display_watcher:add_listener(function(count)
+	-- Reload sketchybar to update display settings
+	sh("sketchybar --bar display=" .. count)
 end)
 
 hs.loadSpoon("EmmyLua")
