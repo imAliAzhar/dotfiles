@@ -1,21 +1,24 @@
 function fuzzy_git_commit
-    # Get list of commits (assuming `git l` is defined as a custom alias)
-    set -l commits (git l --color=always)
-    
+    # One-line, colored commits: <hash> <subject> <author> <date>
+    set -l commits (git log --color=always \
+        --date=format:"%b %d, '%y" \
+        --pretty=format:"%C(yellow)%h%Creset %C(white)%s %C(dim)%an %ad%Creset")
+
     if test (count $commits) -eq 0
+        echo "No commits found"
         return
     end
-    
-    # Let user pick a commit with fzf
+
+    # Fuzzy select with ANSI color support
     set -l selected (printf "%s\n" $commits | fzf --ansi +m)
-    
+
     if test -z "$selected"
         return
     end
-    
-    # Extract the commit hash (first word)
-    set -l commit_hash (string split ' ' "$selected")[1]
-    
-    # Insert commit hash into current command line at cursor
-    commandline -i "$commit_hash "
+
+    # First token is the short hash
+    set -l commit_hash (string split ' ' -- "$selected")[1]
+
+    # Insert at cursor
+    commandline -i -- "$commit_hash"
 end
