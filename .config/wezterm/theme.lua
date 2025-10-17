@@ -8,8 +8,8 @@ local palette = {
 }
 
 return {
-	color_scheme = "catppuccin-macchiato",
-	window_background_opacity = 0.90,
+	color_scheme = "rose-pine-moon",
+	window_background_opacity = 0.85,
 	cursor_fg = palette.crust,
 	cursor_bg = palette.peach,
 	tab_bar_background = palette.crust,
