@@ -1,4 +1,8 @@
 function select-tmux-session --description 'FZF-based tmux session picker'
+    if test "$MUX" != tmux
+        return 0
+    end
+
     # Fish does not support associative arrays, so we use parallel arrays instead.
     set session_names_list
     set session_dirs_list
