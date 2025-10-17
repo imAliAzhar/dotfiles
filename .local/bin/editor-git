@@ -1,3 +1,4 @@
 #!/bin/zsh
 
-tmux display-popup -E -h 95% -w 95% sh -c "lazygit"
+tmux display-popup -EE -B -h 100% -w 100% sh -c "lazygit"
+

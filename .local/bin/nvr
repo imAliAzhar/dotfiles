@@ -1,0 +1,44 @@
+#!/bin/zsh
+
+# Check for --ansi flag
+ansi_mode=false
+file_arg=""
+
+for arg in "$@"; do
+    if [[ $arg == "--ansi" ]]; then
+        ansi_mode=true
+    else
+        file_arg="$arg"
+    fi
+done
+
+function handle_tmux() {
+    if [[ $1 == "-" ]]; then
+        # Read from standard input and save to a temporary file
+        mkdir -p /tmp/nvr
+        if [[ $ansi_mode == true ]]; then
+            # Create temp file and rename it with .ansi extension
+            temp_file=$(mktemp /tmp/nvr/tmp.XXXXXXXXXX)
+            ansi_file="${temp_file}.ansi"
+            mv "$temp_file" "$ansi_file"
+            temp_file="$ansi_file"
+        else
+            temp_file=$(mktemp /tmp/nvr/tmp.XXXXXXXXXX)
+        fi
+        cat > "$temp_file"
+
+        # Open the temporary file in the tmux pane
+        tmux send-keys -t $EDITOR.1 ":edit $temp_file" Enter
+    else
+        if [[ $GIT == "true" ]]; then
+            tmux send-keys -t $EDITOR.1 ":DiffviewOpen -- $1" Enter
+        else
+            tmux send-keys -t $EDITOR.1 ":edit $1" Enter
+        fi
+    fi
+
+    # Focus the editor window and pane
+    tmux select-window -t $EDITOR \; select-pane -t 1
+}
+
+handle_tmux "$file_arg"
