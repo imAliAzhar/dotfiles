@@ -1,0 +1,44 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "vim_mode": true,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    // "dark": "Rosé Pine Moon"
+    "dark": "One Dark"
+  },
+  "title_bar": {
+    "show_user_picture": false
+  },
+  "restore_on_startup": "last_session",
+  "restore_on_file_reopen": true,
+  "active_pane_modifiers": {
+    "inactive_opacity": 0.7
+  },
+  "bottom_dock_layout": "contained",
+  "allow_rewrap": "anywhere",
+  "show_signature_help_after_edits": true,
+  "scrollbar": {
+    "show": "never"
+  },
+  "use_system_window_tabs": true,
+  "tab_bar": {
+    "show": true
+  },
+  "relative_line_numbers": true,
+  "use_smartcase_search": true,
+  "git": {
+    "inline_blame": {
+      "delay_ms": 300
+    }
+  }
+}
