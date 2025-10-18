@@ -23,8 +23,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-export GH_PACKAGES_TOKEN=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
-
 if defaults read -g AppleInterfaceStyle &>/dev/null; then
   unset LIGHT_THEME
 else
