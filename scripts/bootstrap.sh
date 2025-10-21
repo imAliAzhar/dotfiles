@@ -203,11 +203,20 @@ install_mac_app_from_gh_releases() {
   download_url="$(
     printf '%s' "$release_json" |
       jq -r '
-        .assets[]
-        | select(.name | test("macos|darwin"; "i"))
-        | select(.name | test("\\.(dmg|zip)$"; "i"))
-        | .browser_download_url
-      ' | head -n 1
+      .assets
+      | map({name: .name, url: .browser_download_url})
+      | map(select(.name | test("macos|darwin"; "i") and (.name | test("\\.(dmg|zip)$"; "i"))))
+      | sort_by(
+          # Primary: dmg (0 is higher priority than 1)
+          (if .name | test("\\.dmg$"; "i") then 0 else 1 end),
+          # Secondary: macos/darwin match specificity (already filtered, but we still include)
+          (if .name | test("macos"; "i") then 0
+           elif .name | test("darwin"; "i") then 1 else 2 end),
+          # Tertiary: zip fallback
+          (if .name | test("\\.zip$"; "i") then 1 else 0 end)
+        )
+      | .[0].url
+    '
   )"
 
   if [[ -z "$download_url" ]]; then
@@ -228,10 +237,43 @@ main() {
   install_homebrew
   setup_dotfiles
 
-  install_mac_app_from_url "Arc" "https://releases.arc.net/release/Arc-latest.dmg"
-  install_mac_app_from_gh_releases "Wezterm" "https://github.com/wezterm/wezterm"
-  install_mac_app_from_url "Alfred" "https://cachefly.alfredapp.com/Alfred_5.7.1_2307.dmg"
+  brew install \
+    atuin \
+    bat \
+    btop \
+    difftastic \
+    dust \
+    eza \
+    fd \
+    felixkratz/formulae/sketchybar \
+    figlet \
+    fzf \
+    gh \
+    git-delta \
+    httpie \
+    jq \
+    lazygit \
+    lstr \
+    lua-language-server \
+    massren \
+    neovim \
+    ripgrep \
+    stylua \
+    tmux \
+    trash \
+    yazi
 
+  install_mac_app_from_url "Arc" "https://releases.arc.net/release/Arc-latest.dmg"
+  install_mac_app_from_url "Alfred" "https://cachefly.alfredapp.com/Alfred_5.7.1_2307.dmg"
+  install_mac_app_from_url "ChatGPT" "https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg"
+  install_mac_app_from_url "ProtonVPN" "https://vpn.protondownload.com/download/macos/6.0.0/ProtonVPN_mac_v6.0.0.dmg"
+  install_mac_app_from_url "qBittorent" "https://sourceforge.net/projects/qbittorrent/files/qbittorrent-mac/qbittorrent-5.0.5/qbittorrent-5.0.5.dmg/download"
+  install_mac_app_from_url "WhatsApp" "https://web.whatsapp.com/desktop/mac_native/release/?configuration=Release&src=whatsapp_downloads_page"
+
+  install_mac_app_from_gh_releases "Wezterm" "https://github.com/wezterm/wezterm"
+  install_mac_app_from_gh_releases "Karabiner" "https://github.com/pqrs-org/Karabiner-Elements"
+  install_mac_app_from_gh_releases "Hammerspoon" "https://github.com/Hammerspoon/hammerspoon"
+  install_mac_app_from_gh_releases "IINA" "https://github.com/iina/iina"
 }
 
 main
