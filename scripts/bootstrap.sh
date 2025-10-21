@@ -104,8 +104,7 @@ setup_dirs() {
 }
 
 install_homebrew() {
-  log "Installing Homebrew..."
-  run bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  log "Checking Homebrew..."
 
   # Add Homebrew to PATH for current session
   # Homebrew installs to /opt/homebrew on Apple Silicon, /usr/local on Intel
@@ -114,15 +113,33 @@ install_homebrew() {
   elif [[ -f "/usr/local/bin/brew" ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
+
+  if command -v brew &>/dev/null; then
+    log "Homebrew already installed"
+    return 0
+  fi
+
+  log "Installing Homebrew..."
+  run bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH again after installation
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -f "/usr/local/bin/brew" ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  log "Homebrew installed"
 }
 
 setup_dotfiles() {
   log "Creating symlinks for dotfiles..."
 
-  run rm -r ~/.config
+  run rm -rf ~/.config
   run ln -s "$DOTFILES/config" ~/.config
 
-  run rm -r ~/.local/bin
+  run rm -rf ~/.local/bin
+  run mkdir -p ~/.local/bin
   run ln -s "$DOTFILES/bin" ~/.local/bin
 
   run ln -s "$DOTFILES/zsh/zshenv" ~/.zshenv
