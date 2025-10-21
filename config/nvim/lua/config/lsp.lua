@@ -2,6 +2,7 @@ vim.lsp.enable("ts_ls")
 vim.lsp.enable("lua_ls")
 -- vim.lsp.enable("denols")
 -- vim.lsp.enable("fish_ls")
+vim.lsp.enable("bashls")
 
 local function configure_diagnistics()
 	vim.diagnostic.config({

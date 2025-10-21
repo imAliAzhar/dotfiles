@@ -18,7 +18,7 @@ function select-tmux-session --description 'FZF-based tmux session picker'
     end
 
     set misc_sessions home dotfiles obsidian
-    set misc_session_dirs_list $HOME $HOME/.config "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Gringotts"
+    set misc_session_dirs_list $HOME $HOME/Dotfiles "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Gringotts"
     #
     for i in (seq (count $misc_sessions))
         if contains $misc_sessions[$i] $session_names_list
@@ -74,11 +74,6 @@ function select-tmux-session --description 'FZF-based tmux session picker'
         cd $session_dirs_list[$selected_idx]
 
         set tmux_args -d -s $selected_session -n $EDITOR
-
-        # For dotfiles session, set GIT environment variables
-        if test "$selected_session" = dotfiles
-            set -a tmux_args -e GIT_WORK_TREE="$HOME" -e GIT_DIR="$HOME/.dotfiles"
-        end
 
         tmux new-session $tmux_args
 
