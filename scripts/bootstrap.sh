@@ -44,6 +44,51 @@ run() {
   return $exit_code
 }
 
+install_mac_cli_tools() {
+  log "Checking Command Line Tools for Xcode..."
+
+  if xcode-select -p >/dev/null 2>&1; then
+    log "Command Line Tools already installed."
+    return 0
+  fi
+
+  local flag="/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
+  # Create the flag so softwareupdate lists CLT
+  run sudo touch "$flag"
+
+  local listing
+  if ! listing="$(softwareupdate -l 2>/dev/null)"; then
+    run sudo rm -f "$flag"
+    echo "Error: softwareupdate -l failed."
+    return 1
+  fi
+
+  # Extract the latest CLT product label
+  # Handles formats like:
+  #   * Label: Command Line Tools for Xcode-15.3
+  #   *   Command Line Tools for Xcode-15.3
+  local prod
+  prod="$(printf '%s\n' "$listing" |
+    sed -n 's/^[[:space:]]*\*[[:space:]]*Label:[[:space:]]*//p; s/^[[:space:]]*\*[[:space:]]*//p' |
+    grep -i 'Command Line Tools' |
+    tail -n 1)"
+
+  if [[ -z "$prod" ]]; then
+    # Clean up the flag and fall back to GUI prompt
+    run sudo rm -f "$flag"
+    log "Command Line Tools not listed by softwareupdate; falling back to GUI prompt..."
+    xcode-select --install >/dev/null 2>&1 || true
+    return 0
+  fi
+
+  log "Installing: $prod"
+  run sudo softwareupdate -i "$prod" --verbose
+
+  run sudo rm -f "$flag"
+
+  log "Command Line Tools for Xcode installed."
+}
+
 clone_dotfiles_repo() {
   log "Cloning Dotfiles repository..."
 
@@ -52,6 +97,7 @@ clone_dotfiles_repo() {
 
 setup_dirs() {
   run rm -rf "$DIR"
+  run rm -rf "$DOTFILES"
 
   run mkdir -p "$DIR"
   run mkdir -p "$APP_INSTALLERS_DIR"
@@ -233,6 +279,7 @@ main() {
   log "Bootstrapping macOS environment..."
 
   setup_dirs
+  install_mac_cli_tools
   clone_dotfiles_repo
   install_homebrew
   setup_dotfiles
