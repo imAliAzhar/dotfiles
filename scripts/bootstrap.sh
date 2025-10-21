@@ -21,10 +21,17 @@ log() {
 }
 
 run() {
-  if [[ "$DRY_RUN" == "1" ]] || [[ "$VERBOSE" == "1" ]]; then
+  local dry_run_override="$DRY_RUN"
+
+  if [[ "$1" == "-n" ]]; then
+    dry_run_override=1
+    shift
+  fi
+
+  if [[ "$dry_run_override" == "1" ]] || [[ "$VERBOSE" == "1" ]]; then
     echo -e "${ANSI_GRAY}\$ $*${ANSI_RESET}" >&2
 
-    if [[ "$DRY_RUN" == "1" ]]; then
+    if [[ "$dry_run_override" == "1" ]]; then
       return 0
     fi
   fi
@@ -110,6 +117,35 @@ install_mac_app_from_dmg() {
   run hdiutil detach "/Volumes/$volume" -quiet
 }
 
+install_mac_app_from_zip() {
+  local app="$1"
+  local zip_path="$2"
+
+  if [ -z "$app" ] || [ -z "$zip_path" ]; then
+    echo "Error: Both app name and ZIP path are required"
+    echo "Usage: install_mac_app_from_zip <app_name> <zip_path>"
+    return 1
+  fi
+
+  log "Installing $app from ZIP..."
+
+  local extract_dir="$APP_INSTALLERS_DIR/${app}_extracted"
+  run mkdir -p "$extract_dir"
+  run unzip -q "$zip_path" -d "$extract_dir"
+
+  # Find .app file in the extracted directory
+  local app_path=$(find "$extract_dir" -name "*.app" -maxdepth 3 | head -n 1)
+
+  if [[ -n "$app_path" ]]; then
+    run cp -r "$app_path" $HOME/Applications/
+  else
+    echo "Error: Could not find .app file in ZIP"
+    exit 1
+  fi
+
+  run rm -rf "$extract_dir"
+}
+
 install_mac_app_from_url() {
   local app="$1"
   local url="$2"
@@ -131,9 +167,12 @@ install_mac_app_from_url() {
   dmg)
     install_mac_app_from_dmg "$app" "$APP_INSTALLERS_DIR/$filename"
     ;;
+  zip)
+    install_mac_app_from_zip "$app" "$APP_INSTALLERS_DIR/$filename"
+    ;;
   *)
     echo "Error: Unsupported file format .$extension"
-    echo "Supported formats: dmg"
+    echo "Supported formats: dmg, zip"
     return 1
     ;;
   esac
@@ -142,6 +181,43 @@ install_mac_app_from_url() {
   run rm "$APP_INSTALLERS_DIR/$filename"
 
   log "$app installed successfully"
+}
+
+install_mac_app_from_gh_releases() {
+  local app="$1"
+  local repo_url="$2"
+
+  if [[ -z "$app" || -z "$repo_url" ]]; then
+    echo "Error: Both app name and GitHub repo URL are required"
+    echo "Usage: install_mac_app_from_gh_releases <app_name> <https://github.com/owner/repo>"
+    return 1
+  fi
+
+  # Normalize to GitHub Releases API
+  local api_url="${repo_url/github.com/api.github.com/repos}/releases/latest"
+
+  log "Searching latest release for $app at $api_url..."
+
+  release_json="$(run curl -fsSL "$api_url")"
+
+  download_url="$(
+    printf '%s' "$release_json" |
+      jq -r '
+        .assets[]
+        | select(.name | test("macos|darwin"; "i"))
+        | select(.name | test("\\.(dmg|zip)$"; "i"))
+        | .browser_download_url
+      ' | head -n 1
+  )"
+
+  if [[ -z "$download_url" ]]; then
+    echo "No macOS asset found for $app"
+    return 1
+  fi
+
+  local filename="${download_url##*/}"
+  log "Found macOS installer for $app: $filename"
+  install_mac_app_from_url "$app" "$download_url"
 }
 
 main() {
@@ -153,6 +229,8 @@ main() {
   setup_dotfiles
 
   install_mac_app_from_url "Arc" "https://releases.arc.net/release/Arc-latest.dmg"
+  install_mac_app_from_gh_releases "Wezterm" "https://github.com/wezterm/wezterm"
+  install_mac_app_from_url "Alfred" "https://cachefly.alfredapp.com/Alfred_5.7.1_2307.dmg"
 
 }
 
