@@ -11,9 +11,9 @@ source $ZDOTDIR/bindings.zsh
 source $ZDOTDIR/exports.zsh
 source $ZDOTDIR/options.zsh
 source $ZDOTDIR/prompt.zsh
-source $ZDOTDIR/tmux.zsh
+# source $ZDOTDIR/tmux.zsh
 source $ZDOTDIR/perf.zsh
-source $ZDOTDIR/secrets.zsh
+# source $ZDOTDIR/secrets.zsh
 source $ZDOTDIR/chruby.sh
 
 
