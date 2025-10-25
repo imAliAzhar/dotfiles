@@ -7,6 +7,7 @@ bin/*
 
 config/.jira
 config/exercism
+config/fish/fish_variables
 config/fish/secrets.fish
 config/gcloud
 config/gh
