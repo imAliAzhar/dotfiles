@@ -84,6 +84,7 @@ if status is-interactive
     # bind to ctrl-r in normal and insert mode, add any other bindings you want here too
     bind \cr _atuin_search
     bind -M insert \cr _atuin_search
+    bind -M insert down _atuin_bind_up
 
     # Notifications
     source ~/.config/fish/functions/notify_command_completion.fish
