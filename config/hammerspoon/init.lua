@@ -25,6 +25,11 @@ external_display_watcher:setup()
 external_display_watcher:add_listener(function(count)
 	-- Reload sketchybar to update display settings
 	sh("sketchybar --bar display=" .. count)
+	if count > 1 then
+		sh("bottom_bar --bar hidden=false")
+	else
+		sh("bottom_bar --bar hidden=true")
+	end
 end)
 
-hs.loadSpoon("EmmyLua")
+-- hs.loadSpoon("EmmyLua")

@@ -9,7 +9,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ['exec-and-forget sketchybar']
+after-startup-command = ['exec-and-forget sketchybar', 'exec-and-forget bottom_bar']
 
 # Start AeroSpace at login
 start-at-login = true
@@ -61,12 +61,12 @@ preset = 'qwerty'
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-# [gaps]
+[gaps]
 # inner.horizontal = 10
 # inner.vertical =   10
 # outer.left =       18
-# outer.bottom =     18
-# outer.top =        19
+# outer.top =     18
+outer.bottom =        [{ monitor."Built-in Retina Display" = 0 }, 31]
 # outer.right =      18
 
 # 'main' binding mode declaration
@@ -170,7 +170,7 @@ alt-shift-f = 'layout floating tiling'
 cmd-alt-h = [] # Disable "hide others"
 
 [workspace-to-monitor-force-assignment]
-1 = [1, 'main']
+2 = [1, 'main']
 4 = [1, 'main']
 5 = [1, 'main']
 6 = [1, 'main']

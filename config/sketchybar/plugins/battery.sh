@@ -20,22 +20,26 @@ fi
 # esac
 
 case "${PERCENTAGE}" in
-  9[0-9]|100) ICON="⣿"   # full
+9[0-9] | 100)
+  ICON="⣿" # full
   ;;
-  [7-8][0-9]) ICON="⣦"   # high
+[7-8][0-9])
+  ICON="⣦" # high
   ;;
-  [4-6][0-9]) ICON="⣤"   # medium
+[4-6][0-9])
+  ICON="⣤" # medium
   ;;
-  [2-3][0-9]) ICON="⣄"   # low
+[2-3][0-9])
+  ICON="⣄" # low
   ;;
-  *) ICON="⣀"            # empty/critical
+*)
+  ICON="⣀" # empty/critical
   ;;
 esac
 
 if [[ "$CHARGING" != "" ]]; then
   ICON="⧗"
 fi
-
 
 COLOR=0x65FFFFFF
 
@@ -45,4 +49,4 @@ fi
 
 # The item invoking this script (name $NAME) will get its icon and label
 # updated with the current battery status
-sketchybar --set "$NAME" label="$ICON $PERCENTAGE%" label.color=$COLOR
+$BAR_NAME --set "$NAME" label="$ICON $PERCENTAGE%" label.color=$COLOR
