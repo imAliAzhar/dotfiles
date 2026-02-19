@@ -1,0 +1,5 @@
+#!/usr/bin/osascript
+
+tell application "Slack"
+	quit
+end tell
