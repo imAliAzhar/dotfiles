@@ -3,6 +3,8 @@ bin/*
 !bin/edit-tmux-pane-output
 !bin/editor-git
 !bin/nvr
+!bin/slack-close
+!bin/slack-open
 !bin/tmux-fzf-session
 
 config/.jira
