@@ -170,7 +170,13 @@ alt-shift-f = 'layout floating tiling'
 cmd-alt-h = [] # Disable "hide others"
 
 [workspace-to-monitor-force-assignment]
-2 = [1, 'main']
+# @monitor-toggle:built-in
+0 = 'built-in'
+2 = 'built-in'
+# @monitor-toggle:external
+# 0 = [1, 'main']
+# 2 = [1, 'main']
+1 = [1, 'main']
 4 = [1, 'main']
 5 = [1, 'main']
 6 = [1, 'main']

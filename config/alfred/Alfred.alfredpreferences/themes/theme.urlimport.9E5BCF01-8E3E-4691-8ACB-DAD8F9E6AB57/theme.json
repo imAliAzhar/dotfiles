@@ -1,0 +1,65 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 12,
+      "subtext" : {
+        "size" : 11,
+        "colorSelected" : "#ECECECFF",
+        "font" : "System Light",
+        "color" : "#FFFEFBCC"
+      },
+      "shortcut" : {
+        "size" : 16,
+        "colorSelected" : "#FDFFFCCB",
+        "font" : "System Light",
+        "color" : "#FEFFFFCB"
+      },
+      "backgroundSelected" : "#00C3FF7F",
+      "text" : {
+        "size" : 16,
+        "colorSelected" : "#FAFFFCFF",
+        "font" : "System",
+        "color" : "#FEFFFFCB"
+      },
+      "iconPaddingHorizontal" : 7,
+      "roundness" : 17,
+      "paddingVertical" : 5,
+      "iconSize" : 30
+    },
+    "search" : {
+      "backgroundSelected" : "#F8F7F2B5",
+      "paddingHorizontal" : 8,
+      "spacing" : 8,
+      "text" : {
+        "size" : 27,
+        "colorSelected" : "#5A5A5AFF",
+        "font" : "System Light",
+        "color" : "#FEFFFFF3"
+      },
+      "background" : "#FBFCFF00",
+      "roundness" : 22,
+      "paddingVertical" : 6
+    },
+    "window" : {
+      "color" : "#00000033",
+      "paddingHorizontal" : 12,
+      "width" : 609,
+      "borderPadding" : 0,
+      "borderColor" : "#0000007F",
+      "blur" : 0,
+      "roundness" : 32,
+      "paddingVertical" : 11
+    },
+    "credit" : "Jinseon Yoo and rogue",
+    "visualEffectMode" : 2,
+    "separator" : {
+      "color" : "#CBCBCBF3",
+      "thickness" : 0
+    },
+    "scrollbar" : {
+      "color" : "#FEFCFF32",
+      "thickness" : 7
+    },
+    "name" : "Frosty Glass Dark"
+  }
+}
