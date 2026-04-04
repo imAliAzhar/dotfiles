@@ -54,6 +54,22 @@ vim.api.nvim_create_autocmd("FileType", {
 		-- `dd` deletes an item from the list.
 		vim.keymap.set("n", "dd", delete_qf_items, { buffer = true })
 		vim.keymap.set("x", "d", delete_qf_items, { buffer = true })
+
+		-- Filter quickfix list with title
+		local function filter_qf(exclude)
+			local bang = exclude and "!" or ""
+			vim.ui.input({ prompt = "Cfilter" .. bang .. ": " }, function(pattern)
+				if not pattern or pattern == "" then return end
+				local old_title = vim.fn.getqflist({ title = 0 }).title or ""
+				vim.cmd("Cfilter" .. bang .. " " .. pattern)
+				local new_title = old_title .. " | filter" .. bang .. ": " .. pattern
+				vim.fn.setqflist({}, "a", { title = new_title })
+			end)
+		end
+
+		vim.keymap.set("n", "f", function() filter_qf(false) end, { buffer = true, desc = "Filter quickfix (keep)" })
+		vim.keymap.set("n", "F", function() filter_qf(true) end, { buffer = true, desc = "Filter quickfix (remove)" })
+		vim.keymap.set("n", "u", "<cmd>colder | copen<cr>", { buffer = true, desc = "Undo filter (older list)" })
 	end,
 	desc = "Quickfix tweaks",
 })
