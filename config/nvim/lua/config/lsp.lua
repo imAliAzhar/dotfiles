@@ -1,4 +1,5 @@
-vim.lsp.enable("ts_ls")
+vim.lsp.enable("vtsls")
+-- vim.lsp.enable("tsserver")
 vim.lsp.enable("lua_ls")
 -- vim.lsp.enable("denols")
 -- vim.lsp.enable("fish_ls")
@@ -57,9 +58,56 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
 
-	callback = function(event)
+	callback = function(ev)
 		configure_diagnistics()
 		improve_diagnostic_floating_window()
 		add_diagnostic_jumps()
+
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+		-- Navigation (not in defaults)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to Definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to Declaration" })
+
+		-- Override grr to include symbol name in quickfix title
+		vim.keymap.set("n", "grr", function()
+			local word = vim.fn.expand("<cword>")
+			vim.lsp.buf.references(nil, {
+				on_list = function(options)
+					options.title = "References: " .. word
+					vim.fn.setqflist({}, " ", options)
+					vim.cmd.copen()
+				end,
+			})
+		end, { buffer = ev.buf, desc = "References" })
+
+		-- Call Hierarchy
+		vim.keymap.set("n", "grc", vim.lsp.buf.incoming_calls, { buffer = ev.buf, desc = "Incoming Calls" })
+		vim.keymap.set("n", "grC", vim.lsp.buf.outgoing_calls, { buffer = ev.buf, desc = "Outgoing Calls" })
+
+		-- Format
+		vim.keymap.set({ "n", "v" }, "grf", function()
+			vim.lsp.buf.format({ async = true })
+		end, { buffer = ev.buf, desc = "Format" })
+
+		-- Workspace Symbols
+		vim.keymap.set("n", "grw", vim.lsp.buf.workspace_symbol, { buffer = ev.buf, desc = "Workspace Symbols" })
+
+		-- vtsls-specific
+		if client.name == "vtsls" then
+			vim.keymap.set("n", "grs", function()
+				local params = vim.lsp.util.make_position_params(0, "utf-16")
+				client:request("workspace/executeCommand", {
+					command = "typescript.goToSourceDefinition",
+					arguments = { params.textDocument.uri, params.position },
+				}, function(_, result)
+					if result and #result > 0 then
+						vim.lsp.util.show_document(result[1], "utf-16", { focus = true })
+					else
+						vim.notify("No source definition found", vim.log.levels.INFO)
+					end
+				end, ev.buf)
+			end, { buffer = ev.buf, desc = "Go to Source Definition" })
+		end
 	end,
 })

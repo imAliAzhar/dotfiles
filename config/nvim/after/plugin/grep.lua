@@ -23,6 +23,7 @@ local function grep_selection_single_line()
 
 	vim.cmd("silent grep " .. escaped)
 
+	vim.fn.setqflist({}, "a", { title = "Grep: " .. selection })
 	vim.cmd("copen")
 end
 

@@ -156,5 +156,6 @@ end
 map("n", "<leader>mm", ":make<cr>", { noremap = true, silent = true, desc = "Run make" })
 
 map("n", "<leader>l", toggle_qf, { noremap = true, silent = true, desc = "Open Quickfix list" })
+map("n", "<leader>L", "<cmd>Telescope quickfixhistory<cr>", { noremap = true, silent = true, desc = "Quickfix history" })
 map("n", "]l", ":cnewer | copen<cr>", { noremap = true, silent = true, desc = "Next Quickfix history" })
 map("n", "[l", ":colder | copen<cr>", { noremap = true, silent = true, desc = "Previous Quickfix history" })
