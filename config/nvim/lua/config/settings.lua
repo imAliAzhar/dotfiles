@@ -17,6 +17,7 @@ vim.opt.cursorline = true --                                    Highlight the cu
 vim.opt.cmdheight = 0 --                                        Hide the command line
 -- vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = true
+vim.opt.termguicolors = true
 
 local undo_dir = "/tmp/.vim-undo-dir"
 if vim.fn.isdirectory(undo_dir) ~= 1 then
