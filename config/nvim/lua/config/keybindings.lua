@@ -81,14 +81,46 @@ end, { desc = "Reload theme" })
 
 -- Copy Current File Info
 map("n", "<leader>cf", function()
-	local filename = vim.fn.expand("%:t")
+	local filename = vim.fn.expand("%:r")
 	vim.fn.setreg("+", filename)
 end, { desc = "Copy current file name", noremap = true, silent = true })
 
 map("n", "<leader>cp", function()
 	local filepath = vim.fn.expand("%")
+	local home = vim.fn.expand("$HOME")
+	filepath = filepath:gsub("^" .. home, "~")
 	vim.fn.setreg("+", filepath)
 end, { desc = "Copy current file path", noremap = true, silent = true })
+
+map("n", "<leader>cP", function()
+	local filepath = vim.fn.expand("%:p")
+	local home = vim.fn.expand("$HOME")
+	filepath = filepath:gsub("^" .. home, "~")
+	vim.fn.setreg("+", filepath)
+end, { desc = "Copy current file's absolute path", noremap = true, silent = true })
+
+map("n", "<leader>cl", function()
+	local filepath = vim.fn.expand("%")
+	local home = vim.fn.expand("$HOME")
+	filepath = filepath:gsub("^" .. home, "~")
+	local line = vim.fn.line(".")
+	vim.fn.setreg("+", filepath .. ":" .. line)
+end, { desc = "Copy current file path with line number", noremap = true, silent = true })
+
+map("n", "<leader>cL", function()
+	local filepath = vim.fn.expand("%:p")
+	local home = vim.fn.expand("$HOME")
+	filepath = filepath:gsub("^" .. home, "~")
+	local line = vim.fn.line(".")
+	vim.fn.setreg("+", filepath .. ":" .. line)
+end, { desc = "Copy current file's absolute path with line number", noremap = true, silent = true })
+
+map("n", "<leader>cr", function()
+	local root = vim.fn.getcwd()
+	local home = vim.fn.expand("$HOME")
+	root = root:gsub("^" .. home, "~")
+	vim.fn.setreg("+", root)
+end, { desc = "Copy root folder path", noremap = true, silent = true })
 
 -- Diffview Integration
 map({ "n", "v" }, "<Leader>gg", ":DiffviewOpen<CR>", { desc = "Open diff view" })
