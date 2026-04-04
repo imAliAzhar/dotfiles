@@ -235,6 +235,15 @@ local tmux = {
 	},
 
 	{
+		key = "o",
+		mods = "SUPER",
+		action = action.Multiple({
+			action.SendKey({ key = "`" }),
+			action.SendKey({ key = "o" }),
+		}),
+	},
+
+	{
 		key = "j",
 		mods = "SUPER",
 		action = action.Multiple({
