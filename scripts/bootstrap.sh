@@ -145,6 +145,43 @@ setup_dotfiles() {
   run ln -s "$DOTFILES/zsh/zshenv" ~/.zshenv
 
   run ln -s "$DOTFILES/emacs/config.el" ~/.emacs
+
+  run mkdir -p ~/.claude
+  run ln -sf "$DOTFILES/config/claude/settings.json" ~/.claude/settings.json
+  run ln -sf "$DOTFILES/config/claude/statusline-command.sh" ~/.claude/statusline-command.sh
+}
+
+setup_alfred() {
+  log "Setting up Alfred preferences symlink..."
+
+  local alfred_support_dir="$HOME/Library/Application Support/Alfred"
+  local alfred_prefs="$alfred_support_dir/Alfred.alfredpreferences"
+  local dotfiles_prefs="$DOTFILES/config/alfred/Alfred.alfredpreferences"
+
+  # Check if dotfiles contains Alfred preferences
+  if [[ ! -d "$dotfiles_prefs" ]]; then
+    log "Alfred preferences not found in dotfiles, skipping..."
+    return 0
+  fi
+
+  # Skip if symlink already exists and points to correct location
+  if [[ -L "$alfred_prefs" && "$(readlink "$alfred_prefs")" == "$dotfiles_prefs" ]]; then
+    log "Alfred symlink already configured"
+    return 0
+  fi
+
+  # Remove existing preferences (backup if not a symlink)
+  if [[ -d "$alfred_prefs" && ! -L "$alfred_prefs" ]]; then
+    log "Backing up existing Alfred preferences..."
+    run mv "$alfred_prefs" "$alfred_prefs.backup"
+  elif [[ -L "$alfred_prefs" ]]; then
+    run rm "$alfred_prefs"
+  fi
+
+  run mkdir -p "$alfred_support_dir"
+  run ln -s "$dotfiles_prefs" "$alfred_prefs"
+
+  log "Alfred preferences symlinked"
 }
 
 install_mac_app_from_dmg() {
@@ -300,8 +337,9 @@ main() {
   clone_dotfiles_repo
   install_homebrew
   setup_dotfiles
+  setup_alfred
 
-  brew install \
+  run brew install \
     atuin \
     bat \
     btop \
@@ -338,6 +376,15 @@ main() {
   install_mac_app_from_gh_releases "Karabiner" "https://github.com/pqrs-org/Karabiner-Elements"
   install_mac_app_from_gh_releases "Hammerspoon" "https://github.com/Hammerspoon/hammerspoon"
   install_mac_app_from_gh_releases "IINA" "https://github.com/iina/iina"
+
+  # Remove dock hide/show animation
+  defaults write com.apple.dock autohide-delay -float 0
+  defaults write com.apple.dock autohide-time-modifier -int 0
+  killall Dock
+
+  # Restore dock hide/show animation
+  # defaults write com.apple.dock autohide-time-modifier -float 0.5
+  # killall Dock
 }
 
 main
