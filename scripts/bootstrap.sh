@@ -21,17 +21,10 @@ log() {
 }
 
 run() {
-  local dry_run_override="$DRY_RUN"
-
-  if [[ "$1" == "-n" ]]; then
-    dry_run_override=1
-    shift
-  fi
-
-  if [[ "$dry_run_override" == "1" ]] || [[ "$VERBOSE" == "1" ]]; then
+  if [[ "$DRY_RUN" == "1" ]] || [[ "$VERBOSE" == "1" ]]; then
     echo -e "${ANSI_GRAY}\$ $*${ANSI_RESET}" >&2
 
-    if [[ "$dry_run_override" == "1" ]]; then
+    if [[ "$DRY_RUN" == "1" ]]; then
       return 0
     fi
   fi
@@ -90,15 +83,17 @@ install_mac_cli_tools() {
 }
 
 clone_dotfiles_repo() {
-  log "Cloning Dotfiles repository..."
+  if [[ -d "$DOTFILES/.git" ]]; then
+    log "Dotfiles repo already exists, pulling latest..."
+    run git -C "$DOTFILES" pull --ff-only
+    return 0
+  fi
 
+  log "Cloning Dotfiles repository..."
   run git clone https://github.com/imAliAzhar/dotfiles.git "$DOTFILES"
 }
 
 setup_dirs() {
-  run rm -rf "$DIR"
-  run rm -rf "$DOTFILES"
-
   run mkdir -p "$DIR"
   run mkdir -p "$APP_INSTALLERS_DIR"
 }
@@ -132,23 +127,34 @@ install_homebrew() {
   log "Homebrew installed"
 }
 
+ensure_symlink() {
+  local target="$1"
+  local link="$2"
+
+  if [[ -L "$link" && "$(readlink "$link")" == "$target" ]]; then
+    return 0
+  fi
+
+  # Remove whatever is there (stale symlink, file, or directory)
+  if [[ -e "$link" || -L "$link" ]]; then
+    run rm -rf "$link"
+  fi
+
+  run mkdir -p "$(dirname "$link")"
+  run ln -s "$target" "$link"
+}
+
 setup_dotfiles() {
   log "Creating symlinks for dotfiles..."
 
-  run rm -rf ~/.config
-  run ln -s "$DOTFILES/config" ~/.config
-
-  run rm -rf ~/.local/bin
-  run mkdir -p ~/.local/bin
-  run ln -s "$DOTFILES/bin" ~/.local/bin
-
-  run ln -s "$DOTFILES/zsh/zshenv" ~/.zshenv
-
-  run ln -s "$DOTFILES/emacs/config.el" ~/.emacs
+  ensure_symlink "$DOTFILES/config" ~/.config
+  ensure_symlink "$DOTFILES/bin" ~/.local/bin
+  ensure_symlink "$DOTFILES/zsh/zshenv" ~/.zshenv
+  ensure_symlink "$DOTFILES/emacs/config.el" ~/.emacs
 
   run mkdir -p ~/.claude
-  run ln -sf "$DOTFILES/config/claude/settings.json" ~/.claude/settings.json
-  run ln -sf "$DOTFILES/config/claude/statusline-command.sh" ~/.claude/statusline-command.sh
+  ensure_symlink "$DOTFILES/config/claude/settings.json" ~/.claude/settings.json
+  ensure_symlink "$DOTFILES/config/claude/statusline-command.sh" ~/.claude/statusline-command.sh
 }
 
 setup_alfred() {
@@ -182,6 +188,18 @@ setup_alfred() {
   run ln -s "$dotfiles_prefs" "$alfred_prefs"
 
   log "Alfred preferences symlinked"
+}
+
+download() {
+  local url="$1"
+
+  if [[ "$DRY_RUN" == "1" ]]; then
+    run curl -LOJ "$url"
+    echo "dry-run.dmg"
+    return 0
+  fi
+
+  run curl -LOJ -w "%{filename_effective}" "$url"
 }
 
 install_mac_app_from_dmg() {
@@ -246,6 +264,13 @@ install_mac_app_from_zip() {
   run rm -rf "$extract_dir"
 }
 
+app_is_installed() {
+  local app="$1"
+  local found
+  found=$(find /Applications "$HOME/Applications" -maxdepth 2 -name "${app}*.app" 2>/dev/null | head -n 1)
+  [[ -n "$found" ]]
+}
+
 install_mac_app_from_url() {
   local app="$1"
   local url="$2"
@@ -256,11 +281,16 @@ install_mac_app_from_url() {
     return 1
   fi
 
+  if app_is_installed "$app"; then
+    log "$app already installed, skipping"
+    return 0
+  fi
+
   run cd "$APP_INSTALLERS_DIR"
 
   log "Downloading $app from $url..."
 
-  local filename="$(run curl -LOJ -w "%{filename_effective}" $url)"
+  local filename="$(download "$url")"
   local extension="${filename##*.}"
 
   case $extension in
@@ -293,12 +323,23 @@ install_mac_app_from_gh_releases() {
     return 1
   fi
 
+  if app_is_installed "$app"; then
+    log "$app already installed, skipping"
+    return 0
+  fi
+
   # Normalize to GitHub Releases API
   local api_url="${repo_url/github.com/api.github.com/repos}/releases/latest"
 
   log "Searching latest release for $app at $api_url..."
 
-  release_json="$(run curl -fsSL "$api_url")"
+  if [[ "$DRY_RUN" == "1" ]]; then
+    run curl -fsSL "$api_url"
+    install_mac_app_from_url "$app" "https://github.com/dry-run/$app.dmg"
+    return 0
+  fi
+
+  release_json="$(curl -fsSL "$api_url")"
 
   download_url="$(
     printf '%s' "$release_json" |
@@ -327,6 +368,24 @@ install_mac_app_from_gh_releases() {
   local filename="${download_url##*/}"
   log "Found macOS installer for $app: $filename"
   install_mac_app_from_url "$app" "$download_url"
+}
+
+setup_dock() {
+  log "Configuring Dock..."
+
+  local dock_changed=0
+  if [[ "$(defaults read com.apple.dock autohide-delay 2>/dev/null)" != "0" ]]; then
+    defaults write com.apple.dock autohide-delay -float 0
+    dock_changed=1
+  fi
+  if [[ "$(defaults read com.apple.dock autohide-time-modifier 2>/dev/null)" != "0" ]]; then
+    defaults write com.apple.dock autohide-time-modifier -int 0
+    dock_changed=1
+  fi
+  if [[ "$dock_changed" == "1" ]]; then
+    killall Dock
+    log "Dock settings updated"
+  fi
 }
 
 main() {
@@ -369,7 +428,7 @@ main() {
   install_mac_app_from_url "Alfred" "https://cachefly.alfredapp.com/Alfred_5.7.1_2307.dmg"
   install_mac_app_from_url "ChatGPT" "https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg"
   install_mac_app_from_url "ProtonVPN" "https://vpn.protondownload.com/download/macos/6.0.0/ProtonVPN_mac_v6.0.0.dmg"
-  install_mac_app_from_url "qBittorent" "https://sourceforge.net/projects/qbittorrent/files/qbittorrent-mac/qbittorrent-5.0.5/qbittorrent-5.0.5.dmg/download"
+  install_mac_app_from_url "qBittorrent" "https://sourceforge.net/projects/qbittorrent/files/qbittorrent-mac/qbittorrent-5.0.5/qbittorrent-5.0.5.dmg/download"
   install_mac_app_from_url "WhatsApp" "https://web.whatsapp.com/desktop/mac_native/release/?configuration=Release&src=whatsapp_downloads_page"
 
   install_mac_app_from_gh_releases "Wezterm" "https://github.com/wezterm/wezterm"
@@ -377,14 +436,7 @@ main() {
   install_mac_app_from_gh_releases "Hammerspoon" "https://github.com/Hammerspoon/hammerspoon"
   install_mac_app_from_gh_releases "IINA" "https://github.com/iina/iina"
 
-  # Remove dock hide/show animation
-  defaults write com.apple.dock autohide-delay -float 0
-  defaults write com.apple.dock autohide-time-modifier -int 0
-  killall Dock
-
-  # Restore dock hide/show animation
-  # defaults write com.apple.dock autohide-time-modifier -float 0.5
-  # killall Dock
+  setup_dock
 }
 
 main
