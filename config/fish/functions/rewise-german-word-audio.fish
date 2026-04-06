@@ -1,4 +1,8 @@
 function rewise-german-word-audio --description 'Play audio for the sentence'
+    if not test -d ~/Projects/anki/generated
+        return 0
+    end
+
     if test (count $argv) -gt 0
         set word_id $argv[1]
     else if test -n "$ANKI_WORD_ID"

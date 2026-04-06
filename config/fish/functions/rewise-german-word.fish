@@ -1,4 +1,8 @@
 function rewise-german-word --description 'Show a random (or chosen) German word to revise'
+    if not test -d ~/Projects/anki/generated
+        return 0
+    end
+
     # Increase this number to increase the pool size
     set cap 20
 

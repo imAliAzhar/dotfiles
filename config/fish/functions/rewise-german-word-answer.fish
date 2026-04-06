@@ -1,4 +1,8 @@
 function rewise-german-word-answer --description 'Show answer to ANKI_WORD_ID'
+    if not test -d ~/Projects/anki/generated
+        return 0
+    end
+
     if test (count $argv) -gt 0
         set word_id $argv[1]
     else if test -n "$ANKI_WORD_ID"
