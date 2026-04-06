@@ -110,7 +110,15 @@ install_homebrew() {
   fi
 
   if command -v brew &>/dev/null; then
-    log "Homebrew already installed"
+    local cellar="$(brew --cellar 2>/dev/null)"
+    if [[ -n "$cellar" && -w "$cellar" ]]; then
+      log "Homebrew already installed"
+      return 0
+    fi
+
+    log "Homebrew found but not writable by $(whoami), fixing permissions..."
+    run sudo chown -R "$(whoami)" "$(brew --prefix)"/*
+    log "Homebrew permissions fixed"
     return 0
   fi
 
@@ -193,6 +201,20 @@ setup_alfred() {
 download() {
   local url="$1"
 
+  # SourceForge URLs end in /download which breaks -LOJ filename detection
+  if [[ "$url" == *sourceforge.net*/download ]]; then
+    local clean_url="${url%/download}"
+    local filename="${clean_url##*/}"
+
+    if [[ "$DRY_RUN" == "1" ]]; then
+      run curl -L -o "$filename" "$url"
+    else
+      run curl -L -o "$filename" "$url"
+    fi
+    echo "$filename"
+    return 0
+  fi
+
   if [[ "$DRY_RUN" == "1" ]]; then
     run curl -LOJ "$url"
     echo "dry-run.dmg"
@@ -267,7 +289,7 @@ install_mac_app_from_zip() {
 app_is_installed() {
   local app="$1"
   local found
-  found=$(find /Applications "$HOME/Applications" -maxdepth 2 -name "${app}*.app" 2>/dev/null | head -n 1)
+  found=$(find /Applications /Users/*/Applications -maxdepth 2 -iname "${app}*.app" 2>/dev/null | head -n 1)
   [[ -n "$found" ]]
 }
 
@@ -342,22 +364,15 @@ install_mac_app_from_gh_releases() {
   release_json="$(curl -fsSL "$api_url")"
 
   download_url="$(
-    printf '%s' "$release_json" |
-      jq -r '
-      .assets
-      | map({name: .name, url: .browser_download_url})
-      | map(select(.name | test("macos|darwin"; "i") and (.name | test("\\.(dmg|zip)$"; "i"))))
+    jq -r '
+      [.assets[] | select(.name | test("macos|darwin"; "i") and test("\\.(dmg|zip)$"; "i"))]
       | sort_by(
-          # Primary: dmg (0 is higher priority than 1)
           (if .name | test("\\.dmg$"; "i") then 0 else 1 end),
-          # Secondary: macos/darwin match specificity (already filtered, but we still include)
           (if .name | test("macos"; "i") then 0
-           elif .name | test("darwin"; "i") then 1 else 2 end),
-          # Tertiary: zip fallback
-          (if .name | test("\\.zip$"; "i") then 1 else 0 end)
+           elif .name | test("darwin"; "i") then 1 else 2 end)
         )
-      | .[0].url
-    '
+      | .[0].browser_download_url
+    ' <<<"$release_json"
   )"
 
   if [[ -z "$download_url" ]]; then
@@ -374,6 +389,15 @@ setup_dock() {
   log "Configuring Dock..."
 
   local dock_changed=0
+  if [[ -n "$(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -v '^\s*($' | grep -v '^\s*)$' | head -1)" ]]; then
+    defaults write com.apple.dock persistent-apps -array
+    defaults write com.apple.dock persistent-others -array
+    dock_changed=1
+  fi
+  if [[ "$(defaults read com.apple.dock autohide 2>/dev/null)" != "1" ]]; then
+    defaults write com.apple.dock autohide -bool true
+    dock_changed=1
+  fi
   if [[ "$(defaults read com.apple.dock autohide-delay 2>/dev/null)" != "0" ]]; then
     defaults write com.apple.dock autohide-delay -float 0
     dock_changed=1
@@ -388,8 +412,22 @@ setup_dock() {
   fi
 }
 
+check_app_management_permission() {
+  local test_file="/Applications/.bootstrap_permission_check"
+  if touch "$test_file" 2>/dev/null; then
+    rm -f "$test_file"
+    return 0
+  fi
+
+  echo "Error: Terminal does not have App Management permission."
+  echo "Grant it in: System Settings → Privacy & Security → App Management → Terminal"
+  return 1
+}
+
 main() {
   log "Bootstrapping macOS environment..."
+
+  check_app_management_permission
 
   setup_dirs
   install_mac_cli_tools
