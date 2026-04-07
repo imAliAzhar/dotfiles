@@ -35,7 +35,7 @@ default-root-container-layout = 'accordion'
 # Possible values: horizontal|vertical|auto
 # 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
 #               tall monitor (anything higher than wide) gets vertical orientation
-default-root-container-orientation = 'vertical'
+default-root-container-orientation = 'horizontal'
 
 # Mouse follows focus when focused monitor changes
 # Drop it from your config, if you don't like this behavior
@@ -171,11 +171,11 @@ cmd-alt-h = [] # Disable "hide others"
 
 [workspace-to-monitor-force-assignment]
 # @monitor-toggle:built-in
-0 = 'built-in'
-2 = 'built-in'
+# 0 = 'built-in'
+# 2 = 'built-in'
 # @monitor-toggle:external
-# 0 = [1, 'main']
-# 2 = [1, 'main']
+0 = [1, 'main']
+2 = [1, 'main']
 1 = [1, 'main']
 4 = [1, 'main']
 5 = [1, 'main']
@@ -189,6 +189,7 @@ cmd-alt-h = [] # Disable "hide others"
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
+shift-r = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
@@ -228,3 +229,6 @@ run = 'move-node-to-workspace 0'
 if.window-title-regex-substring = 'WhatsApp'
 run = 'move-node-to-workspace 9'
 
+[[on-window-detected]]
+if.window-title-regex-substring = 'Claude'
+run = 'move-node-to-workspace 10'
