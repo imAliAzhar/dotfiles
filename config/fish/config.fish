@@ -41,37 +41,9 @@ if status is-interactive
     # # SDKs and toolchains
     # --------------------------------------------------------------------------
 
-    set -l WORK_MACHINE Omio-C933BE43
-    set -l is_work_system (test (scutil --get ComputerName 2>/dev/null) = "$WORK_MACHINE"; and echo 1; or echo 0)
-
-    # Google Cloud SDK
-    if test "$is_work_system" = 1; and test -d /opt/homebrew/share/google-cloud-sdk
-        fish_add_path /opt/homebrew/share/google-cloud-sdk/bin
-    end
-    if test "$is_work_system" = 1; and test -f /opt/homebrew/bin/python3.13
-        set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.13
-    end
-
     # Node
     if command -q fnm
         fnm env --use-on-cd --shell fish | source
-    end
-
-    # Maestro
-    if test "$is_work_system" = 1; and test -d ~/.maestro/bin
-        export MAESTRO_CLI_AI_MODEL=gpt-4.1
-        export MAESTRO_DRIVER_STARTUP_TIMEOUT=30000
-        fish_add_path ~/.maestro/bin
-    end
-
-    # Android SDK / Java
-    if test "$is_work_system" = 1; and test -d /Library/Java/JavaVirtualMachines/zulu-17.jdk
-        set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-    end
-    if test "$is_work_system" = 1; and test -d $HOME/Library/Android/sdk
-        set -gx ANDROID_HOME $HOME/Library/Android/sdk
-        fish_add_path $ANDROID_HOME/emulator
-        fish_add_path $ANDROID_HOME/platform-tools
     end
 
     # Rust
@@ -79,11 +51,29 @@ if status is-interactive
         fish_add_path $HOME/.cargo/bin
     end
 
-    # PostgreSQL
-    fish_add_path /opt/homebrew/opt/postgresql@17/bin
+    # Work-only SDKs
+    if test (scutil --get ComputerName 2>/dev/null) = Omio-C933BE43
+        # Google Cloud SDK
+        fish_add_path /opt/homebrew/share/google-cloud-sdk/bin
+        set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.13
 
-    # Ruby
-    chruby ruby-3.3.5
+        # Maestro
+        export MAESTRO_CLI_AI_MODEL=gpt-4.1
+        export MAESTRO_DRIVER_STARTUP_TIMEOUT=30000
+        fish_add_path ~/.maestro/bin
+
+        # Android SDK / Java
+        set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+        set -gx ANDROID_HOME $HOME/Library/Android/sdk
+        fish_add_path $ANDROID_HOME/emulator
+        fish_add_path $ANDROID_HOME/platform-tools
+
+        # PostgreSQL
+        fish_add_path /opt/homebrew/opt/postgresql@17/bin
+
+        # Ruby
+        chruby ruby-3.3.5
+    end
 
     # Shell plugins
     # --------------------------------------------------------------------------
