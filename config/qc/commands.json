@@ -1,0 +1,19 @@
+{
+  "commands": [
+    {
+      "key": "b",
+      "description": "Move bar to second monitor",
+      "command": "sketchybar --bar display=2"
+    },
+    {
+      "key": "B",
+      "description": "Move bar to first monitor",
+      "command": "sketchybar --bar display=1"
+    },
+    {
+      "key": "k",
+      "description": "Setup App Native Kit",
+      "command": "rm -fr node_modules/@goeuro/app-rn-bundles/app-native-kit && ln -s $HOME/Projects/app/packages/app-native-kit/ node_modules/@goeuro/app-rn-bundles/app-native-kit"
+    }
+  ]
+}
