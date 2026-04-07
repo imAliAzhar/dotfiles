@@ -70,7 +70,7 @@ install_mac_cli_tools() {
     # Clean up the flag and fall back to GUI prompt
     run sudo rm -f "$flag"
     log "Command Line Tools not listed by softwareupdate; falling back to GUI prompt..."
-    xcode-select --install >/dev/null 2>&1 || true
+    run xcode-select --install >/dev/null 2>&1 || true
     return 0
   fi
 
@@ -385,43 +385,123 @@ install_mac_app_from_gh_releases() {
   install_mac_app_from_url "$app" "$download_url"
 }
 
+install_font() {
+  local name="$1"
+  local url="$2"
+
+  if find ~/Library/Fonts -iname "${name// /}*" 2>/dev/null | grep -q .; then
+    log "$name font already installed, skipping"
+    return 0
+  fi
+
+  log "Installing $name font..."
+
+  local zip_path="$DIR/${name}.zip"
+  local extract_dir="$DIR/${name}_fonts"
+
+  run curl -L -o "$zip_path" "$url"
+  run mkdir -p "$extract_dir"
+  run unzip -q "$zip_path" -d "$extract_dir"
+  run mkdir -p ~/Library/Fonts
+  find "$extract_dir" -iname "*.otf" -o -iname "*.ttf" | while read -r font; do
+    run cp "$font" ~/Library/Fonts/
+  done
+  run rm -rf "$zip_path" "$extract_dir"
+
+  log "$name font installed"
+}
+
 setup_dock() {
   log "Configuring Dock..."
 
   local dock_changed=0
   if [[ -n "$(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -v '^\s*($' | grep -v '^\s*)$' | head -1)" ]]; then
-    defaults write com.apple.dock persistent-apps -array
-    defaults write com.apple.dock persistent-others -array
+    run defaults write com.apple.dock persistent-apps -array
+    run defaults write com.apple.dock persistent-others -array
     dock_changed=1
   fi
   if [[ "$(defaults read com.apple.dock autohide 2>/dev/null)" != "1" ]]; then
-    defaults write com.apple.dock autohide -bool true
+    run defaults write com.apple.dock autohide -bool true
     dock_changed=1
   fi
   if [[ "$(defaults read com.apple.dock autohide-delay 2>/dev/null)" != "0" ]]; then
-    defaults write com.apple.dock autohide-delay -float 0
+    run defaults write com.apple.dock autohide-delay -float 0
     dock_changed=1
   fi
   if [[ "$(defaults read com.apple.dock autohide-time-modifier 2>/dev/null)" != "0" ]]; then
-    defaults write com.apple.dock autohide-time-modifier -int 0
+    run defaults write com.apple.dock autohide-time-modifier -int 0
     dock_changed=1
   fi
   if [[ "$dock_changed" == "1" ]]; then
-    killall Dock
+    run killall Dock
     log "Dock settings updated"
   fi
+
+  if [[ "$(defaults read .GlobalPreferences _HIHideMenuBar 2>/dev/null)" != "1" ]] ||
+    [[ "$(defaults read .GlobalPreferences AppleMenuBarVisibleInFullscreen 2>/dev/null)" != "0" ]]; then
+    run defaults write .GlobalPreferences _HIHideMenuBar -bool true
+    run defaults write .GlobalPreferences AppleMenuBarVisibleInFullscreen -bool false
+    log "Menu bar set to auto-hide"
+  fi
+}
+
+set_hotkey() {
+  local id="$1" enabled="$2" p1="$3" p2="$4" p3="$5"
+  run defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$id" \
+    "<dict><key>enabled</key><$([ "$enabled" = 1 ] && echo true || echo false)/><key>value</key><dict><key>parameters</key><array><integer>$p1</integer><integer>$p2</integer><integer>$p3</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+
+setup_keyboard_shortcuts() {
+  log "Configuring keyboard shortcuts..."
+
+  # Screenshots: clipboard = 3, file = 4, full screen adds Shift
+  set_hotkey 28  1  52 21 1703936  # Save screen as file       ⌥⇧⌘4
+  set_hotkey 29  1  51 20 1703936  # Copy screen to clipboard  ⌥⇧⌘3
+  set_hotkey 30  1  52 21 1572864  # Save area as file         ⌥⌘4
+  set_hotkey 31  1  51 20 1572864  # Copy area to clipboard    ⌥⌘3
+  set_hotkey 184 1  53 23 1572864  # Screenshot options        ⌥⌘5
+
+  # Spotlight
+  set_hotkey 64  1  32 49 1572864  # Show Spotlight search     ⌥⌘Space
+  set_hotkey 65  0  32 49 1572864  # Show Finder search        (disabled)
+
+  log "Keyboard shortcuts configured"
+}
+
+setup_default_shell() {
+  local fish_path="/opt/homebrew/bin/fish"
+
+  if [[ "$SHELL" == "$fish_path" ]]; then
+    log "Fish is already the default shell"
+    return 0
+  fi
+
+  if ! grep -q "$fish_path" /etc/shells; then
+    log "Adding fish to /etc/shells..."
+    echo "$fish_path" | run sudo tee -a /etc/shells >/dev/null
+  fi
+
+  log "Setting fish as default shell..."
+  run sudo chsh -s "$fish_path" "$(whoami)"
 }
 
 check_app_management_permission() {
   local test_file="/Applications/.bootstrap_permission_check"
-  if touch "$test_file" 2>/dev/null; then
-    rm -f "$test_file"
+  if run touch "$test_file" 2>/dev/null; then
+    run rm -f "$test_file"
     return 0
   fi
 
   echo "Error: Terminal does not have App Management permission."
   echo "Grant it in: System Settings → Privacy & Security → App Management → Terminal"
   return 1
+}
+
+open_apps() {
+  log "Opening apps..."
+  for app in "$@"; do
+    run open -a "$app"
+  done
 }
 
 main() {
@@ -440,11 +520,13 @@ main() {
     atuin \
     bat \
     btop \
+    rust \
     difftastic \
     dust \
     eza \
     fd \
     felixkratz/formulae/sketchybar \
+    fish \
     figlet \
     fzf \
     gh \
@@ -462,6 +544,10 @@ main() {
     trash \
     yazi
 
+  setup_default_shell
+
+  install_font "Victor Mono" "https://rubjo.github.io/victor-mono/VictorMonoAll.zip"
+
   install_mac_app_from_url "Arc" "https://releases.arc.net/release/Arc-latest.dmg"
   install_mac_app_from_url "Alfred" "https://cachefly.alfredapp.com/Alfred_5.7.1_2307.dmg"
   install_mac_app_from_url "ChatGPT" "https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg"
@@ -475,6 +561,15 @@ main() {
   install_mac_app_from_gh_releases "IINA" "https://github.com/iina/iina"
 
   setup_dock
+  setup_keyboard_shortcuts
+
+  open_apps \
+    "Karabiner-Elements" \
+    "Alfred 5" \
+    "Hammerspoon" \
+    "AeroSpace"
+
+  log "Bootstrap complete. Log out and log back in for all changes to take effect."
 }
 
 main
