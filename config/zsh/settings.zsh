@@ -14,7 +14,6 @@ source $ZDOTDIR/prompt.zsh
 # source $ZDOTDIR/tmux.zsh
 source $ZDOTDIR/perf.zsh
 # source $ZDOTDIR/secrets.zsh
-source $ZDOTDIR/chruby.sh
 
 
 HISTFILE=$HOME/.cache/zsh/histfile             # Defauts to $ZDOTDIR

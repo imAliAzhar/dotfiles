@@ -3,7 +3,6 @@
 # ln -s $HOME/.config/lazygit/config.yml $HOME/Library/Application\ Support/lazygit
 promptToReturnFromSubprocess: false
 quitOnTopLevelReturn: true
-
 gui:
   showFileTree: false
   enlargedSideViewLocation: top
@@ -16,16 +15,13 @@ gui:
   showRandomTip: false
   nerdFontsVersion: "3"
   showFileIcons: false
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --paging=never -s
-    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
-
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never -s
+      externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
 os:
   editPreset: "nvim"
   edit: '$HOME/.local/bin/nvr {{filename}}'
   editAtLine: '$HOME/.local/bin/nvr {{filename}} +{{line}}'
   editAtLineAndWait: 'nvim {{filename}} +{{line}}'
-
