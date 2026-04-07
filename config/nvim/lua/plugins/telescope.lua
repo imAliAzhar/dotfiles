@@ -60,7 +60,8 @@ return {
 		local telescope = require("telescope")
 
 		local actions = require("telescope.actions")
-		local layout_actions = require("telescope.actions.layout")
+
+		local themes = require("telescope.themes")
 
 		telescope.setup({
 			extensions = {
@@ -72,7 +73,7 @@ return {
 					},
 				},
 			},
-			defaults = {
+			defaults = themes.get_ivy({
 				initial_mode = "insert",
 				disable_devicons = true,
 				mappings = {
@@ -104,7 +105,7 @@ return {
 				-- 	prompt_position = "top",
 				-- 	-- preview_height = 0.6,
 				-- },
-			},
+			}),
 			pickers = {
 				live_grep = {
 					mappings = {
@@ -112,6 +113,20 @@ return {
 							["<c-o>"] = actions.send_to_qflist + actions.open_qflist,
 						},
 					},
+				},
+				quickfixhistory = {
+					attach_mappings = function(prompt_bufnr, map)
+						local action_state = require("telescope.actions.state")
+						actions.select_default:replace(function()
+							local selection = action_state.get_selected_entry()
+							actions.close(prompt_bufnr)
+							if selection then
+								vim.cmd("silent " .. selection.nr .. "chistory")
+								vim.cmd("copen")
+							end
+						end)
+						return true
+					end,
 				},
 			},
 		})
