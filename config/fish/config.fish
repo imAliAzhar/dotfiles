@@ -41,22 +41,46 @@ if status is-interactive
     # # SDKs and toolchains
     # --------------------------------------------------------------------------
 
+    # Google Cloud SDK
+    if test -d /opt/homebrew/share/google-cloud-sdk
+        fish_add_path /opt/homebrew/share/google-cloud-sdk/bin
+    end
+    if test -f /opt/homebrew/bin/python3.13
+        set -gx CLOUDSDK_PYTHON /opt/homebrew/bin/python3.13
+    end
+
     # Node
-    fnm env --use-on-cd --shell fish | source
+    if command -q fnm
+        fnm env --use-on-cd --shell fish | source
+    end
 
     # Maestro
-    export MAESTRO_CLI_AI_MODEL=gpt-4.1
-    export MAESTRO_DRIVER_STARTUP_TIMEOUT=30000
-    fish_add_path ~/.maestro/bin
+    if test -d ~/.maestro/bin
+        export MAESTRO_CLI_AI_MODEL=gpt-4.1
+        export MAESTRO_DRIVER_STARTUP_TIMEOUT=30000
+        fish_add_path ~/.maestro/bin
+    end
 
     # Android SDK / Java
-    set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-    set -gx ANDROID_HOME $HOME/Library/Android/sdk
-    fish_add_path $ANDROID_HOME/emulator
-    fish_add_path $ANDROID_HOME/platform-tools
+    if test -d /Library/Java/JavaVirtualMachines/zulu-17.jdk
+        set -gx JAVA_HOME /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    end
+    if test -d $HOME/Library/Android/sdk
+        set -gx ANDROID_HOME $HOME/Library/Android/sdk
+        fish_add_path $ANDROID_HOME/emulator
+        fish_add_path $ANDROID_HOME/platform-tools
+    end
 
     # Rust
-    fish_add_path $HOME/.cargo/bin
+    if test -d $HOME/.cargo/bin
+        fish_add_path $HOME/.cargo/bin
+    end
+
+    # PostgreSQL
+    fish_add_path /opt/homebrew/opt/postgresql@17/bin
+
+    # Ruby
+    chruby ruby-3.3.5
 
     # Shell plugins
     # --------------------------------------------------------------------------
@@ -72,7 +96,8 @@ if status is-interactive
         "--padding=5%" \
         "--prompt='  '\$' '" \
         "--pointer=▸" \
-        "--color=pointer:bright-yellow,gutter:-1,bg+:-1,fg+:bright-yellow:bold"
+        "--color=pointer:bright-yellow,gutter:-1,bg+:-1,fg+:bright-yellow:bold" \
+        "--gutter=' '"
 
     # Lazygit
     set -gx LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml,$HOME/.config/lazygit/theme.yml"
@@ -84,7 +109,6 @@ if status is-interactive
     # bind to ctrl-r in normal and insert mode, add any other bindings you want here too
     bind \cr _atuin_search
     bind -M insert \cr _atuin_search
-    bind -M insert down _atuin_bind_up
 
     # Notifications
     source ~/.config/fish/functions/notify_command_completion.fish
