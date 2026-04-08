@@ -1,9 +1,6 @@
--- ~/.hammerspoon/init.lua
-hs.alert.show("Hammerspoon config reloaded", 1)
-
 -- Iinstall the Hammerspoon CLI
 require("hs.ipc")
-local result = hs.ipc.cliInstall("/Users/aliazhar.khan/.local/bin", true)
+local result = hs.ipc.cliInstall("/opt/homebrew", true)
 hs.alert.show("Hammerspoon CLI installed: " .. tostring(result), 1)
 
 local function sh(cmd)

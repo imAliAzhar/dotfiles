@@ -487,7 +487,6 @@ local tmux_emulated = {
 		mods = "LEADER|CTRL|SUPER",
 		action = action.PromptInputLine({
 			description = "Enter new name for tab",
-			initial_value = "Tab",
 			action = wezterm.action_callback(function(window, _, line)
 				-- line will be `nil` if they hit escape without entering anything
 				-- An empty string if they just hit enter

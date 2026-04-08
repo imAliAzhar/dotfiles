@@ -160,6 +160,12 @@ setup_dotfiles() {
   ensure_symlink "$DOTFILES/zsh/zshenv" ~/.zshenv
   ensure_symlink "$DOTFILES/emacs/config.el" ~/.emacs
 
+  log "Configuring Hammerspoon to use dotfiles config..."
+  run defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
+  log "Setting default theme..."
+  run "$DOTFILES/config/theme/scripts/set-theme.sh" rose-pine dark
+
   run mkdir -p ~/.claude
   ensure_symlink "$DOTFILES/config/claude/settings.json" ~/.claude/settings.json
   ensure_symlink "$DOTFILES/config/claude/statusline-command.sh" ~/.claude/statusline-command.sh

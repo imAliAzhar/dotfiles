@@ -83,7 +83,7 @@ setup_dirs() {
 
 start_jellyfin() {
   log "Starting Jellyfin..."
-  run docker compose -f "$JELLYFIN_DIR/docker-compose.yml" up -d
+  run docker-compose -f "$JELLYFIN_DIR/docker-compose.yml" up -d
 
   log "Jellyfin is running on port $JELLYFIN_PORT"
   log "Initial setup: http://<server-ip>:$JELLYFIN_PORT"
