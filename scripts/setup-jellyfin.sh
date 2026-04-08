@@ -67,7 +67,7 @@ start_colima() {
   fi
 
   log "Starting Colima..."
-  run colima start
+  run colima start --cpu 4 --memory 4
 }
 
 setup_dirs() {
@@ -75,9 +75,14 @@ setup_dirs() {
   run mkdir -p "$JELLYFIN_DIR/cache"
   run mkdir -p "$JELLYFIN_DIR/seerr"
   run mkdir -p "$JELLYFIN_DIR/radarr"
+  run mkdir -p "$JELLYFIN_DIR/sonarr"
+  run mkdir -p "$JELLYFIN_DIR/bazarr"
   run mkdir -p "$JELLYFIN_DIR/qbittorrent"
   run mkdir -p "$JELLYFIN_DIR/prowlarr"
+  run mkdir -p "$JELLYFIN_DIR/caddy_data"
+  run mkdir -p "$JELLYFIN_DIR/caddy_config"
   run mkdir -p "$JELLYFIN_MEDIA_DIR/movies"
+  run mkdir -p "$JELLYFIN_MEDIA_DIR/shows"
   run mkdir -p "$JELLYFIN_MEDIA_DIR/downloads"
 }
 

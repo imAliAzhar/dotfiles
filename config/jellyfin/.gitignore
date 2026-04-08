@@ -1,3 +1,5 @@
 *
 !.gitignore
 !docker-compose.yml
+!Caddyfile
+!README.md

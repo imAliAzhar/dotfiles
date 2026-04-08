@@ -1,0 +1,27 @@
+jellyfin.biakino.com:80 {
+	reverse_proxy jellyfin:8096
+}
+
+seerr.biakino.com:80 {
+	reverse_proxy seerr:5055
+}
+
+radarr.biakino.com:80 {
+	reverse_proxy radarr:7878
+}
+
+sonarr.biakino.com:80 {
+	reverse_proxy sonarr:8989
+}
+
+prowlarr.biakino.com:80 {
+	reverse_proxy prowlarr:9696
+}
+
+bazarr.biakino.com:80 {
+	reverse_proxy bazarr:6767
+}
+
+qbt.biakino.com:80 {
+	reverse_proxy gluetun:8080
+}
