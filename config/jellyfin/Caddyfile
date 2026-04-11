@@ -1,4 +1,4 @@
-jellyfin.biakino.com:80 {
+biakino.com:80, jellyfin.biakino.com:80 {
 	reverse_proxy jellyfin:8096
 }
 
@@ -24,4 +24,8 @@ bazarr.biakino.com:80 {
 
 qbt.biakino.com:80 {
 	reverse_proxy gluetun:8080
+}
+
+ntfy.biakino.com:80 {
+	reverse_proxy ntfy:80
 }

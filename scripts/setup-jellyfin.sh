@@ -81,9 +81,34 @@ setup_dirs() {
   run mkdir -p "$JELLYFIN_DIR/prowlarr"
   run mkdir -p "$JELLYFIN_DIR/caddy_data"
   run mkdir -p "$JELLYFIN_DIR/caddy_config"
+  run mkdir -p "$JELLYFIN_DIR/ntfy/cache"
+  run mkdir -p "$JELLYFIN_DIR/ntfy/etc"
   run mkdir -p "$JELLYFIN_MEDIA_DIR/movies"
   run mkdir -p "$JELLYFIN_MEDIA_DIR/shows"
   run mkdir -p "$JELLYFIN_MEDIA_DIR/downloads"
+}
+
+setup_battery_monitor() {
+  local plist_name="com.biakino.battery-monitor.plist"
+  local plist_src="$JELLYFIN_DIR/ntfy/$plist_name"
+  local plist_dst="$HOME/Library/LaunchAgents/$plist_name"
+
+  if [[ ! -f "$JELLYFIN_DIR/ntfy/battery-monitor.sh" ]]; then
+    log "battery-monitor.sh not found in $JELLYFIN_DIR/ntfy, skipping"
+    return 0
+  fi
+
+  log "Setting up battery monitor..."
+  run chmod +x "$JELLYFIN_DIR/ntfy/battery-monitor.sh"
+  launchctl unload "$plist_dst" 2>/dev/null || true
+  run ln -sf "$plist_src" "$plist_dst"
+  run launchctl load "$plist_dst"
+  log "Battery monitor installed and running"
+}
+
+enable_low_power_mode() {
+  log "Enabling Low Power Mode..."
+  run sudo pmset -a lowpowermode 1
 }
 
 start_jellyfin() {
@@ -102,6 +127,8 @@ main() {
   install_deps
   start_colima
   setup_dirs
+  setup_battery_monitor
+  enable_low_power_mode
   start_jellyfin
 
   log "Jellyfin setup complete."

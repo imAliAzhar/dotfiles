@@ -16,6 +16,7 @@ All services run in Docker (via Colima), behind a Caddy reverse proxy, exposed t
 | Gluetun      | --                                | VPN container (ProtonVPN)        |
 | FlareSolverr | --                                | Captcha solver for indexers      |
 | Cloudflared  | --                                | Cloudflare Tunnel connector      |
+| ntfy         | https://ntfy.biakino.com          | Battery push notifications       |
 | Caddy        | --                                | Reverse proxy                    |
 
 ## Architecture
@@ -40,7 +41,7 @@ Seerr (request) → Sonarr/Radarr (search & manage) → Prowlarr (indexers) → 
 
 ### 2. Cloudflare Tunnel token
 
-- Go to [Cloudflare Zero Trust](https://one.dash.cloudflare.com) → Networks → Tunnels
+- Go to the [tunnel public hostnames](https://dash.cloudflare.com/cdc7848f97387f9bec4891fdf1e8a404/one/networks/connectors/cloudflare-tunnels/cfd_tunnel/b67f25e0-3ca2-46e3-bdc5-b99f79960b97/edit?tab=publicHostname) page
 - Create a tunnel named `biakino`, choose **Cloudflared** connector
 - Copy the tunnel token
 - Under **Published application routes**, add a route for each service:
@@ -55,6 +56,7 @@ Seerr (request) → Sonarr/Radarr (search & manage) → Prowlarr (indexers) → 
 | prowlarr   | biakino.com | HTTP | caddy:80  |
 | bazarr     | biakino.com | HTTP | caddy:80  |
 | qbt        | biakino.com | HTTP | caddy:80  |
+| ntfy       | biakino.com | HTTP | caddy:80  |
 
 Cloudflare handles HTTPS automatically — the tunnel to Caddy is HTTP since it's already encrypted.
 
@@ -178,6 +180,12 @@ Dashboard > Users > Add User. Set username, password, and library access permiss
 Users > Create Local User, or share the Seerr URL and let users sign in via Jellyfin (configure under Settings > Jellyfin > Enable Sign-In).
 
 To manage request permissions per user, go to Users > click a user > edit their permissions.
+
+## Battery Monitor
+
+A launchd agent checks battery level every 10 minutes. When the laptop is unplugged and drops below 50%, it sends push notifications via a self-hosted [ntfy](https://ntfy.sh) instance at `https://ntfy.biakino.com`. Notifications fire at decreasing thresholds from 50% down to 5%.
+
+To receive notifications, install the ntfy app on your phone, set the server to `https://ntfy.biakino.com`, and subscribe to the topic `biakino-batt-k9x2f`.
 
 ## Verify VPN
 

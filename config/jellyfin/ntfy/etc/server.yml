@@ -1,0 +1,3 @@
+base-url: "https://ntfy.biakino.com"
+upstream-base-url: "https://ntfy.sh"
+behind-proxy: true
