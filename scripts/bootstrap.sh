@@ -548,7 +548,10 @@ main() {
     stylua \
     tmux \
     trash \
-    yazi
+    yazi \
+    zig
+
+  run npm install -g tree-sitter-cli
 
   setup_default_shell
 
