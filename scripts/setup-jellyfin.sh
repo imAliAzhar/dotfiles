@@ -12,7 +12,7 @@ set -euo pipefail
 DRY_RUN="${DRY_RUN:-0}"
 
 JELLYFIN_PORT="${JELLYFIN_PORT:-8096}"
-JELLYFIN_MEDIA_DIR="${JELLYFIN_MEDIA_DIR:-/Volumes/biakino/jellyfin}"
+export JELLYFIN_MEDIA_DIR="${JELLYFIN_MEDIA_DIR:-/Volumes/biakino/jellyfin}"
 JELLYFIN_DIR="$HOME/.config/jellyfin"
 
 ANSI_GRAY="\033[90m"
@@ -60,12 +60,17 @@ install_deps() {
   fi
 }
 
-start_colima() {
-  if colima status 2>/dev/null | grep -q "Running"; then
-    log "Colima already running"
+stop_services() {
+  if ! colima status 2>&1 | grep -qi "running"; then
     return 0
   fi
 
+  log "Stopping existing services..."
+  run docker-compose -f "$JELLYFIN_DIR/docker-compose.yml" down 2>/dev/null || true
+  run colima stop
+}
+
+start_colima() {
   log "Starting Colima..."
   run colima start --cpu 4 --memory 4 --mount $HOME:w --mount /Volumes/biakino:w
 }
@@ -106,6 +111,24 @@ setup_battery_monitor() {
   log "Battery monitor installed and running"
 }
 
+setup_drive_monitor() {
+  local plist_name="com.biakino.drive-monitor.plist"
+  local plist_src="$JELLYFIN_DIR/ntfy/$plist_name"
+  local plist_dst="$HOME/Library/LaunchAgents/$plist_name"
+
+  if [[ ! -f "$JELLYFIN_DIR/ntfy/drive-monitor.sh" ]]; then
+    log "drive-monitor.sh not found in $JELLYFIN_DIR/ntfy, skipping"
+    return 0
+  fi
+
+  log "Setting up drive monitor..."
+  run chmod +x "$JELLYFIN_DIR/ntfy/drive-monitor.sh"
+  launchctl unload "$plist_dst" 2>/dev/null || true
+  run ln -sf "$plist_src" "$plist_dst"
+  run launchctl load "$plist_dst"
+  log "Drive monitor installed and running"
+}
+
 enable_low_power_mode() {
   log "Enabling Low Power Mode..."
   run sudo pmset -a lowpowermode 1
@@ -125,9 +148,11 @@ main() {
   log "Setting up Jellyfin Media Server..."
 
   install_deps
+  stop_services
   start_colima
   setup_dirs
   setup_battery_monitor
+  setup_drive_monitor
   enable_low_power_mode
   start_jellyfin
 
