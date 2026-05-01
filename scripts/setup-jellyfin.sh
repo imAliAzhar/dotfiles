@@ -12,7 +12,7 @@ set -euo pipefail
 DRY_RUN="${DRY_RUN:-0}"
 
 JELLYFIN_PORT="${JELLYFIN_PORT:-8096}"
-JELLYFIN_MEDIA_DIR="${JELLYFIN_MEDIA_DIR:-$HOME/media}"
+JELLYFIN_MEDIA_DIR="${JELLYFIN_MEDIA_DIR:-/Volumes/biakino/jellyfin}"
 JELLYFIN_DIR="$HOME/.config/jellyfin"
 
 ANSI_GRAY="\033[90m"
@@ -67,7 +67,7 @@ start_colima() {
   fi
 
   log "Starting Colima..."
-  run colima start --cpu 4 --memory 4
+  run colima start --cpu 4 --memory 4 --mount $HOME:w --mount /Volumes/biakino:w
 }
 
 setup_dirs() {
