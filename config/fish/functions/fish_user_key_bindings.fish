@@ -1,3 +1,22 @@
+function bind_bang
+    switch (commandline -t)[-1]
+        case "!"
+            commandline -t -- $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
+end
+
+function bind_dollar
+    switch (commandline -t)[-1]
+        case "!"
+            commandline -f backward-delete-char history-token-search-backward
+        case "*"
+            commandline -i '$'
+    end
+end
+
 function fish_user_key_bindings
     # Map `H` to move to beginning of line (equivalent to 0)
     bind -M default H beginning-of-line
@@ -19,4 +38,7 @@ function fish_user_key_bindings
         bind -M $mode \ct fuzzy_git_commit
         bind -M $mode \ck rewise-german-word-explain
     end
+
+    bind -M insert ! bind_bang
+    bind -M insert '$' bind_dollar
 end

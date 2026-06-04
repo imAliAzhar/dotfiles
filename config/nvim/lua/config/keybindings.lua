@@ -57,6 +57,8 @@ map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 map({ "n", "v" }, "<Leader>p", '"+p', { desc = "Paste from system clipboard after cursor" })
 map({ "n", "v" }, "<Leader>P", '"+P', { desc = "Paste from system clipboard before cursor" })
 
+map("v", "<CR>", '"+y', { desc = "Copy selection to clipboard" })
+
 -- Line Navigation
 map({ "n", "v", "x", "o" }, "H", "^", { desc = "Go to beginning of line" })
 map({ "n", "v", "x", "o" }, "L", "$", { desc = "Go to end of line" })

@@ -4,6 +4,7 @@ local node22_base = home .. "/Library/Application Support/fnm/node-versions/v22.
 local node22 = node22_base .. "/bin/node"
 local vtsls_js = node22_base .. "/lib/node_modules/@vtsls/language-server/bin/vtsls.js"
 
+---@type vim.lsp.Config
 return {
 	cmd = { node22, vtsls_js, "--stdio" },
 	root_markers = { "tsconfig.json" },

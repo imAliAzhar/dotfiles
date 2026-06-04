@@ -1,27 +1,30 @@
 # tmux-leap
 
-[leap.nvim](https://github.com/ggandor/leap.nvim)-style motion jumping for tmux.
+[leap.nvim](https://codeberg.org/andyg/leap.nvim)-style motion jumping for tmux.
 
-Jump to any visible text in your tmux pane using a 2-character search. All matches are labelled — press a label key to land there in copy mode.
+Jump to visible text in the current tmux pane with Leap's 2-character search,
+preview labels, grouped labels, target ordering, smartcase, and whitespace/EOL
+aliases ported from `leap.nvim`.
 
-## Demo
+## Usage
 
-```
-$ git log --oneline
-a1b2c3d (HEAD) add feature
-d4e5f6a fix bug          ← press prefix+/ → type "fi" → press label → cursor jumps here
-7g8h9i0 refactor
-```
+1. Press the configured tmux key (default: `prefix + /`, set in these dotfiles to `prefix + s`).
+2. Type the first search character; preview labels appear after candidate pairs.
+3. Type the second character.
+4. Press the active label to enter copy mode with the cursor on that target and a selection started there.
 
-1. Press `prefix + /`
-2. Type 2 characters (e.g. `fi`)
-3. Every match gets a bold orange label (`a`, `s`, `d`, …)
-4. Press the label key → copy mode opens with cursor at that word
+Leap-compatible details:
+
+- Labels use leap.nvim's default order: `sfnjklhod...`.
+- Matches are ranked from the current tmux/copy-mode cursor, prioritizing the current line and forward targets.
+- `<space>` is equivalent to whitespace/newline, so `x<space>` targets `x` at EOL and `<space><space>` targets empty lines.
+- Repeated same-character pairs (for example `aa` in `aaaa`) only target the start of the run, like leap.nvim.
+- More matches than labels are split into groups; use `<space>` / `<backspace>` to move groups.
 
 ## Requirements
 
 - tmux ≥ 3.2 (`display-popup` with `-b none`)
-- Python 3.6+
+- LuaJIT
 
 ## Installation
 
@@ -45,10 +48,20 @@ run '~/.config/tmux/plugins/tmux-leap/leap.tmux'
 ```tmux
 # Change trigger key (default: /)
 set -g @leap-key "s"
+
+# Trigger directly from copy mode / scrollback (default: s)
+set -g @leap-copy-key "s"
+
+# Optional leap.nvim-style options
+set -g @leap-labels "sfnjklhodweimbuyvrgtaqpcxz/SFNJKLHODWEIMBUYVRGTAQPCXZ?"
+set -g @leap-safe-labels ""     # empty matches this repo's Neovim config (no autojump)
+set -g @leap-ignorecase "1"
+set -g @leap-smartcase "1"
+set -g @leap-case-sensitive "" # set to 1/0 to force either mode
 ```
 
 ## How it works
 
-1. `leap.tmux` — sets up the keybinding on load
-2. `scripts/leap.sh` — captures the visible pane, opens a borderless popup overlaid exactly on top of it, then positions the copy-mode cursor at the chosen location
-3. `scripts/leap_popup.py` — renders the captured content inside the popup, reads 2 chars, finds all matches, overlays single-char labels, reads the selection, and writes `row:col` to a temp file
+1. `leap.tmux` sets up key bindings.
+2. `scripts/leap.sh` captures the visible pane, passes cursor/options to a borderless popup, then moves the copy-mode cursor to the chosen `row:col`.
+3. `scripts/leap_popup.lua` is the Leap port: it renders the pane in the popup, runs the two-phase search/label selection, and writes the selected target.
