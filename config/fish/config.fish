@@ -9,7 +9,7 @@ if status is-interactive
     abbr --add gs git status -sb
     abbr --add gcan git commit --amend --no-edit
     abbr --add ls eza
-    abbr --add venv source venv/bin/activate
+    abbr --add venv source .venv/bin/activate.fish
     abbr --add y yarn
     abbr --add lf yazi
     abbr --add dot GIT_WORK_TREE=~ GIT_DIR=~/.dotfiles
@@ -19,7 +19,6 @@ if status is-interactive
     abbr --add ga git add
     abbr --add gc git commit -m
     abbr --add gl git "log --pretty=format:'%C(yellow)%h%Creset %C(white)%s %C(dim #6e738d)%an %ar %Creset' --date=format:\"%b %d, '%y\""
-    abbr --add gco git checkout
     abbr --add gac git commit -am
     abbr --add gcan git commit --amend --no-edit
     abbr --add gbr git branch
@@ -37,6 +36,8 @@ if status is-interactive
     abbr --add aa rewise-german-word-audio
     abbr --add at rewise-german-word-answer
     abbr --add ai rewise-german-word-explain
+
+    abbr --add gg lazygit
 
     # # SDKs and toolchains
     # --------------------------------------------------------------------------
@@ -106,6 +107,13 @@ if status is-interactive
     # Notifications
     source ~/.config/fish/functions/notify_command_completion.fish
 
+    # CLI tools
+    # --------------------------------------------------------------------------
+
+    # Pi
+    set -gx PI_SKIP_VERSION_CHECK 1
+    set -gx PI_OFFLINE 1
+
     # Environment variables
     # --------------------------------------------------------------------------
 
@@ -119,6 +127,10 @@ if status is-interactive
     # PATH overrides
     # --------------------------------------------------------------------------
     fish_add_path -m ~/.local/bin
+    fish_add_path ~/.config/emacs/bin
+
+    # Emacs: doom CLI tools use brew's emacs (emacs-mac hangs in batch mode)
+    set -gx EMACS /opt/homebrew/opt/emacs/bin/emacs
 
     # Initialize TMUX
     # --------------------------------------------------------------------------
