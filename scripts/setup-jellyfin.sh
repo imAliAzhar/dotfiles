@@ -136,7 +136,7 @@ enable_low_power_mode() {
 
 start_jellyfin() {
   log "Starting Jellyfin..."
-  run docker-compose -f "$JELLYFIN_DIR/docker-compose.yml" up -d
+  run docker-compose -f "$JELLYFIN_DIR/docker-compose.yml" up -d --force-recreate
 
   log "Jellyfin is running on port $JELLYFIN_PORT"
   log "Initial setup: http://<server-ip>:$JELLYFIN_PORT"
